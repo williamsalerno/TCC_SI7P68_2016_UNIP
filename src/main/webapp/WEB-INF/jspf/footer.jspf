@@ -1,0 +1,26 @@
+<script src="<c:url value="/js/formAnimation.js"/>"></script>
+<script src="https://apis.google.com/js/platform.js"></script>
+<footer>
+	<div class="containerFooter">
+		<div class="footer-row row-items">
+			<div class="footer-row-item">
+				<div class="about-us"></div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+		<div class="footer-row copyright">
+			<p>Copyright &copy;2016 TimeTrial Factory. All rights reserved.</p>
+		</div>
+	</div>
+</footer>
+<script>
+	$('.list-group>.list-group-item').click(function(e) {
+		e.preventDefault();
+		$(".list-group-item").removeClass("active");
+		$(this).addClass('active');
+		$('#updateImg').attr('src', $(this).attr('href'));
+	});
+</script>
+
+</body>
+</html>
