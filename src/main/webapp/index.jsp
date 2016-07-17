@@ -1,5 +1,6 @@
+
+<%@ include file="/WEB-INF/jspf/header.jspf"%>
 <div id="wrapper">
-	<%@ include file="/WEB-INF/jspf/header.jspf"%>
 	<section id="games-section">
 		<div class="container">
 			<div class="row">

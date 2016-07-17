@@ -1,29 +1,28 @@
 package br.com.springmvc.timetrialfactory.daos;
 
-import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 
 import br.com.springmvc.timetrialfactory.interfaces.dao.DAO;
-import br.com.springmvc.timetrialfactory.models.Game;
+import br.com.springmvc.timetrialfactory.models.Purchase;
 
 @Repository
-public class GameDAO implements DAO {
+public class PurchaseDAO implements DAO {
 
 	@PersistenceContext
 	private EntityManager manager;
 
 	@Override
 	public void save(Object obj) {
-		manager.persist((Game) obj);
+		manager.persist((Purchase) obj);
+
 	}
 
 	@Override
 	public Object load(Long id) {
-		return manager.createQuery("select g from Game g", Game.class).equals(id);
+		return manager.createQuery("select p from Purchase p", Purchase.class).equals(id);
 	}
 
 	@Override
@@ -36,10 +35,6 @@ public class GameDAO implements DAO {
 	public void delete(Object obj) {
 		// TODO Auto-generated method stub
 
-	}
-
-	public List<Game> list() {
-		return manager.createQuery("select g from Game g", Game.class).getResultList();
 	}
 
 }
