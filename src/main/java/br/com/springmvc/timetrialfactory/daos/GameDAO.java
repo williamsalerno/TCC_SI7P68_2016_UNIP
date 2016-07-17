@@ -41,7 +41,7 @@ public class GameDAO implements DAO {
 	}
 
 	public List<Game> list() {
-		return manager.createQuery("select distinct(p) from game join fetch p.price", Game.class).getResultList();
+		return manager.createQuery("select g from Game g", Game.class).getResultList();
 	}
 
 }

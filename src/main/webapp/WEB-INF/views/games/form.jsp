@@ -18,8 +18,7 @@
 				</c:forEach>
 			</ul>
 		</spring:hasBindErrors>
-		<form:form action="${spring:mvcUrl('newGame')}" method="post"
-			commandName="game">
+		<form:form action="newGame" method="post" commandName="game">
 			<div>
 				<label for="title">Título:</label>
 				<form:input minlength="5" path="title" />

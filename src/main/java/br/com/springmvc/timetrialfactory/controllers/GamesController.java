@@ -32,14 +32,14 @@ public class GamesController {
 //		binder.setValidator(new GameValidator());
 //	}
 
-	@RequestMapping(method=POST, name="newGame")
+	@RequestMapping(method=POST, value="/newGame")
 	public ModelAndView save(@Valid Game game, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 		if(bindingResult.hasErrors()){
 			return gamesForm(game);
 		}
 		gameDao.save(game);
 		redirectAttributes.addFlashAttribute("sucesso", "Produto cadastrado com sucesso!");
-		return new ModelAndView("redirect:games");
+		return new ModelAndView("redirect:list");
 	}
 
 	@RequestMapping("/form")
@@ -48,7 +48,7 @@ public class GamesController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(method=RequestMethod.GET)
+	@RequestMapping(method=RequestMethod.GET, value="/list")
 	public ModelAndView list(){
 		ModelAndView modelAndView = new ModelAndView("games/list");
 		modelAndView.addObject("games", gameDao.list());
