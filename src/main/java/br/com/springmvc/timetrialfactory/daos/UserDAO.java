@@ -10,7 +10,7 @@ import br.com.springmvc.timetrialfactory.models.User;
 
 @Repository
 public class UserDAO implements DAO {
-	
+
 	@PersistenceContext
 	private EntityManager manager;
 
@@ -20,21 +20,21 @@ public class UserDAO implements DAO {
 	}
 
 	@Override
-	public void load(Object obj) {
+	public Object load(Long id) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 	@Override
 	public void update(Object obj) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void delete(Object obj) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

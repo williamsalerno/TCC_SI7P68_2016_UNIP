@@ -12,32 +12,31 @@ import br.com.springmvc.timetrialfactory.models.Game;
 
 @Repository
 public class GameDAO implements DAO {
-	
+
 	@PersistenceContext
 	private EntityManager manager;
-	
+
 	@Override
 	public void save(Object obj) {
-		manager.persist((Game)obj);
-		
+		manager.persist((Game) obj);
+
 	}
 
 	@Override
-	public void load(Object obj) {
-		// TODO Auto-generated method stub
-		
+	public Object load(Long id) {
+		return id;
 	}
 
 	@Override
 	public void update(Object obj) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void delete(Object obj) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public List<Game> list() {

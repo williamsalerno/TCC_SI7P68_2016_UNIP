@@ -35,11 +35,7 @@
 			</div>
 			<button type="submit">Enviar</button>
 		</form:form>
-
 	</div>
-</div>
-<div>
-
 	<%@ include file="/WEB-INF/jspf/footer.jspf"%>
 </div>
 <script type="text/javascript">

@@ -1,6 +1,7 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <div id="wrapper">
 	<%@ include file="/WEB-INF/jspf/header.jspf"%>
-	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 	<div class="container">
 		<div class="games">
 			<c:forEach items="${games}" var="game" varStatus="g">
@@ -68,6 +69,9 @@
 							<p>${game.description }Loremipsumdolorsitamet,cunamexpetenda
 								ocurreret. Vis graeci delicatissimi no, putant noluisse mea ut.
 								Fuisset scribentur sea ne. Vix ad quod iisque fuisset.</p>
+						</div>
+						<div>
+							<a href="<c:url value="details/${game.id}"/>">Detalhes</a>
 						</div>
 					</div>
 				</section>

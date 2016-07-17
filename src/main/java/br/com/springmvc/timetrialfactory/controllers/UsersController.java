@@ -17,7 +17,7 @@ public class UsersController {
 	
 	@RequestMapping("/login")
 	public void login(User user){
-		userDao.load(user);
+		userDao.load(user.getId());
 	}
 
 }

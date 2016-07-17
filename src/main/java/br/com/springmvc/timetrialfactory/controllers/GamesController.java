@@ -8,8 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,24 +16,19 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.springmvc.timetrialfactory.daos.GameDAO;
 import br.com.springmvc.timetrialfactory.models.Game;
-import br.com.springmvc.timetrialfactory.validation.GameValidator;
 
 @Controller
 @Transactional
 @RequestMapping("/games")
 public class GamesController {
-	
+
 	@Autowired
 	private GameDAO gameDao;
-	
-//	@InitBinder
-//	protected void initBinder(WebDataBinder binder){
-//		binder.setValidator(new GameValidator());
-//	}
 
-	@RequestMapping(method=POST, value="/newGame")
+	// Método POST para salvar um novo jogo no bd.
+	@RequestMapping(method = POST, value = "/newGame")
 	public ModelAndView save(@Valid Game game, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-		if(bindingResult.hasErrors()){
+		if (bindingResult.hasErrors()) {
 			return gamesForm(game);
 		}
 		gameDao.save(game);
@@ -42,17 +36,28 @@ public class GamesController {
 		return new ModelAndView("redirect:list");
 	}
 
-	@RequestMapping("/form")
+	// Método GET para carregar a página de form de novo jogo.
+	@RequestMapping(method = RequestMethod.GET, value = "/form")
 	public ModelAndView gamesForm(Game game) {
 		ModelAndView modelAndView = new ModelAndView("games/form");
 		return modelAndView;
 	}
-	
-	@RequestMapping(method=RequestMethod.GET, value="/list")
-	public ModelAndView list(){
+
+	// Método GET para carregar a lista de jogos do bd.
+	@RequestMapping(method = RequestMethod.GET, value = "/list")
+	public ModelAndView list() {
 		ModelAndView modelAndView = new ModelAndView("games/list");
 		modelAndView.addObject("games", gameDao.list());
 		return modelAndView;
+	}
+
+	@RequestMapping(method = RequestMethod.GET, value = "/details/{id}")
+	public ModelAndView show(Long id) {
+		ModelAndView modelAndView = new ModelAndView("games/details");
+		Game game = (Game) gameDao.load(id);
+		modelAndView.addObject("game", game);
+		return modelAndView;
+
 	}
 
 }
