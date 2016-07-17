@@ -9,21 +9,35 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
-@Table(name="games", catalog="names")
+@Table(name = "games", catalog = "names")
 public class Game {
-	
+
 	@Id
-	@GeneratedValue (strategy = GenerationType.IDENTITY)
-	@Column(name="id", updatable=false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", updatable = false)
 	private Long id;
-	
+
+	@NotNull
+	@NotBlank
+	@Length(min = 5, message = "Título do jogo é obrigatório e deve ter, no mínimo, 5 caracteres.")
+	@Column(name = "title", nullable = false, unique = true)
 	private String title;
-	
+
+	@NotNull
+	@Min(value = 1, message = "O preço do jogo deve ser maior que ou igual a 1.")
+	@Column(name = "price", nullable = false)
 	private BigDecimal price;
-	
+
 	@Lob
+	@NotBlank
+	@Column(name = "description")
 	private String description;
 
 	public Long getId() {
@@ -57,7 +71,5 @@ public class Game {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	
 
 }
