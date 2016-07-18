@@ -10,7 +10,9 @@
 	<fieldset>
 		<legend>Editar Produto</legend>
 		<form action="<c:url value="/games/${game.id }"/>" method="post">
-			<img src="<c:url value="/games/${game.id }/image"/>" width="100"
+			<input type="hidden" name="${_csrf.parameterName }"
+				value="${_csrf.token }" /> <img
+				src="<c:url value="/games/${game.id }/image"/>" width="100"
 				height="100"></img> <label for="title">Título:</label> <input
 				id="title" type="text" name="game.title" value="${game.title }" />
 			<label for="price">Preço:</label> <input id="price" type="text"
@@ -20,6 +22,8 @@
 		</form>
 		<form action="<c:url value="/games/${game.id }/image"/>" method="post"
 			enctype="multipart/form-data">
+			<input type="hidden" name="${_csrf.parameterName }"
+				value="${_csrf.token }" />
 			<fieldset>
 				<legend>Upload de imagem</legend>
 				<input type="file" name="image">

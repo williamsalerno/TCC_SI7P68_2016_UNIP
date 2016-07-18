@@ -1,23 +1,37 @@
 package br.com.springmvc.timetrialfactory.controllers;
 
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import br.com.springmvc.timetrialfactory.daos.UserDAO;
+import br.com.springmvc.timetrialfactory.models.Game;
 import br.com.springmvc.timetrialfactory.models.User;
 
 @Controller
 @Transactional
 public class UsersController {
-	
+
 	@Autowired
 	private UserDAO userDao;
-	
-	@RequestMapping("/login")
-	public void login(User user){
+
+	@RequestMapping(method = POST, value = "/login")
+	public ModelAndView login(User user) {
 		userDao.load(user.getId());
+		ModelAndView modelAndView = new ModelAndView("games/list");
+		return modelAndView;
+	}
+
+	@RequestMapping(method = GET, value = "/login")
+	public ModelAndView loginForm() {
+		ModelAndView modelAndView = new ModelAndView("users/login");
+		return modelAndView;
 	}
 
 }

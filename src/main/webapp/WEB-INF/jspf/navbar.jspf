@@ -1,5 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
 <nav class="navbar navbar-inverse">
 	<div class="container-fluid">
 		<div class="navbar-header">
@@ -20,7 +23,8 @@
 				<li><a href="#"><fmt:message key="support" /></a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<c:if test="${userWeb.logged}">
+				<security:authorize access="isAuthenticated()">
+					<security:authentication property="main" var="user" />
 					<li style="padding-top: 14.5px; margin-right: 20px;"><span
 						class="userWeb-logged"><fmt:message key="welcome" />
 							${userWeb.name }!</span></li>
@@ -29,13 +33,13 @@
 								key="cart" /></a></li>
 					<li><a href="<c:url value="/logout"/>"><span
 							class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-				</c:if>
+				</security:authorize>
 				<c:if test="${empty userWeb or !userWeb.logged}">
 					<li><a id="newUser"
 						href="<c:url value="/users/selectCountry"/>"><span
 							class="glyphicon glyphicon-user"></span> <fmt:message
 								key="register" /></a></li>
-					<li><a id="log-in" href="<c:url value="/login"/>"><span
+					<li><a id="log-in" href="login"><span
 							class="glyphicon glyphicon-log-in"></span> Login</a></li>
 				</c:if>
 			</ul>

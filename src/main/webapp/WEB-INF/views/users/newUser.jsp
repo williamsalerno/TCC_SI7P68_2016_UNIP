@@ -12,9 +12,11 @@
 			<div class="login">
 				<form class="escondido form-horizontal" role="form" id="usersForm"
 					action="<c:url value="/users"/>" method="post">
-					<br>
+					<input type="hidden" name="${_csrf.parameterName }"
+						value="${_csrf.token }" /> <br>
 					<h2 id="h2Form" style="text-align: center; color: #FFC277">
-						<fmt:message key="h2.completeRegister"/><br> <small style="font-size: 15px"></small>
+						<fmt:message key="h2.completeRegister" />
+						<br> <small style="font-size: 15px"></small>
 					</h2>
 					<div class="input-group">
 						<span class="input-group-addon" id="basic-addon1"><span

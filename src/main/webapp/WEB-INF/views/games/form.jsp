@@ -19,6 +19,8 @@
 			</ul>
 		</spring:hasBindErrors>
 		<form:form action="newGame" method="post" commandName="game">
+			<input type="hidden" name="${_csrf.parameterName }"
+				value="${_csrf.token }" />
 			<div>
 				<label for="title">Título:</label>
 				<form:input minlength="5" path="title" />

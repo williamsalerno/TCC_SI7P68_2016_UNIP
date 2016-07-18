@@ -5,6 +5,8 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
@@ -26,6 +28,7 @@ public class GamesController {
 
 	// Método POST para salvar um novo jogo no bd.
 	@RequestMapping(method = POST, value = "/newGame")
+	@CacheEvict(value = "games", allEntries = true)
 	public ModelAndView save(@Valid Game game, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 		if (bindingResult.hasErrors()) {
 			return gamesForm(game);
@@ -44,6 +47,7 @@ public class GamesController {
 
 	// Método GET para carregar a lista de jogos do bd.
 	@RequestMapping(method = RequestMethod.GET, value = "/list")
+	@Cacheable(value = "games")
 	public ModelAndView list() {
 		ModelAndView modelAndView = new ModelAndView("games/list");
 		modelAndView.addObject("games", gameDao.list());
@@ -56,7 +60,6 @@ public class GamesController {
 		Game game = (Game) gameDao.load(id);
 		modelAndView.addObject("game", game);
 		return modelAndView;
-
 	}
 
 }

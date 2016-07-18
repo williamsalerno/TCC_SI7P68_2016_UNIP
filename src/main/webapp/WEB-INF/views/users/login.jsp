@@ -1,33 +1,34 @@
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <div id="wrapper">
 	<%@ include file="/WEB-INF/jspf/header.jspf"%>
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 	<div class="containerLogin">
 		<div class="content">
 			<section class="login">
 				<div class="escondido">
 					<h2>Login</h2>
-					<form class="form-horizontal" action="<c:url value="/login"/>"
-						method="POST">
+					<form:form servletRelativeAction="login" class="form-horizontal">
+						<input type="hidden" name="${_csrf.parameterName }"
+							value="${_csrf.token }" />
 						<div class="input-group">
 							<span class="input-group-addon" id="basic-addon1"><span
 								class="glyphicon glyphicon-log-in" aria-hidden="true"></span></span><input
-								type="text" class="form-control" id="login" name="user.login"
-								value="${user.login }"
-								placeholder=<fmt:message key="placeholder.username"/>
+								type="text" class="form-control" id="login" name="username"
+								value='' placeholder=<fmt:message key="placeholder.username"/>
 								required="required">
 						</div>
 						<div class="input-group">
 							<span class="input-group-addon" id="basic-addon1"><span
 								class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></span>
 							<input type="password" class="form-control" id="password"
-								name="user.password" value="${user.password }"
+								name="password"
 								placeholder=<fmt:message key="placeholder.password"/>
 								required="required">
 						</div>
 						<div class="btnForm" style="padding-bottom: 30px;">
-							<button type="submit" class="btn btn-default">
-								<fmt:message key="btn.enter" />
-							</button>
+							<input name="submit" type="submit" class="btn btn-default"
+								value="<fmt:message key="btn.enter" />" />
 						</div>
 						<hr style="margin-bottom: 40px;">
 						<c:forEach items="${errors}" var="error">
@@ -42,7 +43,7 @@
 								</div>
 							</c:if>
 						</c:forEach>
-					</form>
+					</form:form>
 					<div class=bLogin>
 						<a id="newAcc" href="<c:url value= "/users/selectCountry"/>"><fmt:message
 								key="a.register1" /> <br> <fmt:message key="a.register2" />

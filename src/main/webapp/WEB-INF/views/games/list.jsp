@@ -1,4 +1,5 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <div id="wrapper">
 	<%@ include file="/WEB-INF/jspf/header.jspf"%>
@@ -33,11 +34,13 @@
 								</c:forEach>
 								<c:choose>
 									<c:when test="${!contains}">
-										<form action="<c:url value="/cart"/>" method="post">
+										<form:form servletRelativeAction="shopping">
+											<input type="hidden" name="${_csrf.parameterName }"
+												value="${_csrf.token }" />
 											<input type="hidden" name="item.game.id" value="${game.id }" />
 											<button id="exibe" type="submit" class="btn btn-default">Adicionar
 												ao carrinho</button>
-										</form>
+										</form:form>
 									</c:when>
 									<c:otherwise>
 										<c:forEach items="${cart.items }" var="item">
