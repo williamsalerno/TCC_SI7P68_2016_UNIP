@@ -1,9 +1,14 @@
-
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <footer>
 	<div class="containerFooter">
 		<div class="footer-row row-items">
 			<div class="footer-row-item">
 				<div class="about-us"></div>
+				<div class="lang">
+				<p><spring:message code="choose_lang"/></p>
+				<a href="?locale=pt"><spring:message code="lang_pt"/></a>
+				<a href="?locale=en_US"><spring:message code="lang_en"/></a>
+				</div>
 			</div>
 			<div class="clearfix"></div>
 		</div>
