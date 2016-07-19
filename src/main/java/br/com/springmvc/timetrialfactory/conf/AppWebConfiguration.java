@@ -68,6 +68,7 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
 		registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
 		registry.addResourceHandler("/css/**").addResourceLocations("/css/");
+		registry.addResourceHandler("/js/**").addResourceLocations("/js/");
 		registry.addResourceHandler("/fonts/**").addResourceLocations("/fonts/");
 	}
 

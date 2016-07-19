@@ -104,22 +104,4 @@
 	</div>
 	<%@ include file="/WEB-INF/jspf/footer.jspf"%>
 </div>
-<script>
-	$(document).ready(function() {
-		var first;
-		var last;
-		$(".thumbnailGame").click(function() {
-
-			first = $(this).attr('id');
-
-			$('#' + last).hide();
-			$('#' + first).fadeIn();
-
-			$(".thumbnailGame").removeClass('clickedThumb');
-			$(this).addClass('clickedThumb');
-
-			last = $('#' + first).attr('id');
-
-		});
-	});
-</script>
+<%@ include file="/WEB-INF/jspf/end.jspf"%>

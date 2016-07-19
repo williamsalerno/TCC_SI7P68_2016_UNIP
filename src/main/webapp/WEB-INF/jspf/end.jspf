@@ -1,0 +1,18 @@
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script>
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://apis.google.com/js/platform.js"></script>
+<script src="<c:url value="/js/jquery.puts.js"/>"></script>
+<script src="<c:url value="/js/formAnimation.js"/>"></script>
+<script src="<c:url value="/js/gamesListAnimation.js"/>"></script>
+<script>
+	$('.list-group>.list-group-item').click(function(e) {
+		e.preventDefault();
+		$(".list-group-item").removeClass("active");
+		$(this).addClass('active');
+		$('#updateImg').attr('src', $(this).attr('href'));
+	});
+</script>
+</body>
+</html>

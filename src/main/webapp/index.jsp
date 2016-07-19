@@ -1,4 +1,3 @@
-
 <%@ include file="/WEB-INF/jspf/header.jspf"%>
 <div id="wrapper">
 	<section id="games-section">
@@ -104,3 +103,4 @@
 	</section>
 	<%@ include file="/WEB-INF/jspf/footer.jspf"%>
 </div>
+<%@ include file="/WEB-INF/jspf/end.jspf"%>

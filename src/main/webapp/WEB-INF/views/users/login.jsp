@@ -59,7 +59,4 @@
 	</div>
 	<%@ include file="/WEB-INF/jspf/footer.jspf"%>
 </div>
-<script>
-	var teste = "${userOk }"
-	console.log(teste);
-</script>
+<%@ include file="/WEB-INF/jspf/end.jspf"%>

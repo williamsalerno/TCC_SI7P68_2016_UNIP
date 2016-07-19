@@ -1,5 +1,4 @@
-<script src="<c:url value="/js/formAnimation.js"/>"></script>
-<script src="https://apis.google.com/js/platform.js"></script>
+
 <footer>
 	<div class="containerFooter">
 		<div class="footer-row row-items">
@@ -13,14 +12,4 @@
 		</div>
 	</div>
 </footer>
-<script>
-	$('.list-group>.list-group-item').click(function(e) {
-		e.preventDefault();
-		$(".list-group-item").removeClass("active");
-		$(this).addClass('active');
-		$('#updateImg').attr('src', $(this).attr('href'));
-	});
-</script>
 
-</body>
-</html>
