@@ -32,5 +32,11 @@ public class UsersController {
 		ModelAndView modelAndView = new ModelAndView("users/login");
 		return modelAndView;
 	}
+	
+	@RequestMapping(method = GET, value = "/newUser/selectCountry")
+	public ModelAndView selectCountry() {
+		ModelAndView modelAndView = new ModelAndView("users/selectCountry");
+		return modelAndView;
+	}
 
 }

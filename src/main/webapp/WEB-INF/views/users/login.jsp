@@ -9,8 +9,6 @@
 				<div class="escondido">
 					<h2>Login</h2>
 					<form:form servletRelativeAction="login" class="form-horizontal">
-						<input type="hidden" name="${_csrf.parameterName }"
-							value="${_csrf.token }" />
 						<div class="input-group">
 							<span class="input-group-addon" id="basic-addon1"><span
 								class="glyphicon glyphicon-log-in" aria-hidden="true"></span></span><input
@@ -39,7 +37,7 @@
 							</c:if>
 							<c:if test="${error.category ne messageId }">
 								<div class="alert alert-danger" style="text-align: center;">
-									<strong>${error.category } </strong>${error.message }
+									<strong><fmt:message key="message.error"/></strong><fmt:message key="message.invalidCredential"/>
 								</div>
 							</c:if>
 						</c:forEach>

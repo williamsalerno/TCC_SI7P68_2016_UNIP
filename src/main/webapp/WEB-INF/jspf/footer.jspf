@@ -1,4 +1,5 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <footer>
 	<div class="containerFooter">
 		<div class="footer-row row-items">
@@ -6,7 +7,7 @@
 				<div class="about-us"></div>
 				<div class="lang">
 				<p><spring:message code="choose_lang"/></p>
-				<a href="?locale=pt"><spring:message code="lang_pt"/></a>
+				<a href="?locale=pt"><fmt:message key="lang_pt" /></a>
 				<a href="?locale=en_US"><spring:message code="lang_en"/></a>
 				</div>
 			</div>

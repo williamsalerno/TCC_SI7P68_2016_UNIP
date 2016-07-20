@@ -18,7 +18,7 @@
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav">
 				<li><a href="#"><fmt:message key="about" /></a></li>
-				<li><a href="<c:url value="/games/list"/>"><fmt:message
+				<li><a href="games/list"><fmt:message
 							key="listGames" /></a></li>
 				<li><a href="#"><fmt:message key="contact" /></a></li>
 				<li><a href="#"><fmt:message key="support" /></a></li>
@@ -37,10 +37,10 @@
 				</security:authorize>
 				<c:if test="${empty userWeb or !userWeb.logged}">
 					<li><a id="newUser"
-						href="<c:url value="/users/selectCountry"/>"><span
+						href="<c:url value="/newUser/selectCountry"/>"><span
 							class="glyphicon glyphicon-user"></span> <fmt:message
 								key="register" /></a></li>
-					<li><a id="log-in" href="login"><span
+					<li><a href="<c:url value="/login"/>"><span
 							class="glyphicon glyphicon-log-in"></span> Login</a></li>
 				</c:if>
 			</ul>

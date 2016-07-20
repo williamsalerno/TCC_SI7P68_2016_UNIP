@@ -48,7 +48,7 @@ public class UserDAO implements DAO, UserDetailsService {
 		List<User> users = manager.createQuery(jpql, User.class).setParameter("login", username).getResultList();
 
 		if (users.isEmpty()) {
-			throw new UsernameNotFoundException("O usuário " + username + " não existe.");
+			throw new UsernameNotFoundException("Login e/ou senha inválidos.");
 		}
 		return users.get(0);
 	}

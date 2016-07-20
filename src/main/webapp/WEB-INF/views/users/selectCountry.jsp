@@ -33,3 +33,4 @@
 	</div>
 	<%@ include file="/WEB-INF/jspf/footer.jspf"%>
 </div>
+<%@ include file="/WEB-INF/jspf/end.jspf"%>

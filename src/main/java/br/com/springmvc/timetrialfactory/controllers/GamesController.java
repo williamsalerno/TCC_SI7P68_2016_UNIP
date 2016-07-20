@@ -29,8 +29,8 @@ public class GamesController {
 	// Método POST para salvar um novo jogo no bd.
 	@RequestMapping(method = POST, value = "/newGame")
 	@CacheEvict(value = "games", allEntries = true)
-	public ModelAndView save(@Valid Game game, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-		if (bindingResult.hasErrors()) {
+	public ModelAndView save(@Valid Game game, BindingResult result, RedirectAttributes redirectAttributes) {
+		if (result.hasErrors()) {
 			return gamesForm(game);
 		}
 		gameDao.save(game);
