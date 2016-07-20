@@ -20,7 +20,6 @@
 						</div>
 						<div class="priceGame">
 							<h1 style="margin-right: 20px;">
-								<fmt:setLocale value="en_US" />
 								<fmt:formatNumber type="currency" value="${game.price }" />
 							</h1>
 						</div>

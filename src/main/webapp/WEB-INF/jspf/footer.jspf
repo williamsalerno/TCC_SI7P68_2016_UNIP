@@ -7,7 +7,7 @@
 				<div class="about-us"></div>
 				<div class="lang">
 				<p><spring:message code="choose_lang"/></p>
-				<a href="?locale=pt"><fmt:message key="lang_pt" /></a>
+				<a href="?locale=pt_BR"><fmt:message key="lang_pt" /></a>
 				<a href="?locale=en_US"><spring:message code="lang_en"/></a>
 				</div>
 			</div>
