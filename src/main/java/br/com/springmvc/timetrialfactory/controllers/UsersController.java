@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.springmvc.timetrialfactory.daos.UserDAO;
 import br.com.springmvc.timetrialfactory.models.User;
+import br.com.springmvc.timetrialfactory.models.enums.Country;
 
 @Controller
 @Transactional
@@ -32,10 +33,17 @@ public class UsersController {
 		ModelAndView modelAndView = new ModelAndView("users/login");
 		return modelAndView;
 	}
-	
+
 	@RequestMapping(method = GET, value = "/newUser/selectCountry")
 	public ModelAndView selectCountry() {
 		ModelAndView modelAndView = new ModelAndView("users/selectCountry");
+		return modelAndView;
+	}
+
+	@RequestMapping(method = GET, value = "/newUser/form")
+	public ModelAndView newUserForm(String country) {
+		ModelAndView modelAndView = new ModelAndView("users/newUser");
+		modelAndView.addObject("country", country);
 		return modelAndView;
 	}
 

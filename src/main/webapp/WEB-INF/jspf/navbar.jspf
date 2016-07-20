@@ -18,7 +18,7 @@
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav">
 				<li><a href="#"><fmt:message key="about" /></a></li>
-				<li><a href="games/list"><fmt:message
+				<li><a href="<c:url value="/games/list"/>"><fmt:message
 							key="listGames" /></a></li>
 				<li><a href="#"><fmt:message key="contact" /></a></li>
 				<li><a href="#"><fmt:message key="support" /></a></li>
