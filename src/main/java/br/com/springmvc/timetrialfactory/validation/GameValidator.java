@@ -9,8 +9,8 @@ import org.springframework.validation.Validator;
 
 import br.com.springmvc.timetrialfactory.models.Game;
 
-public class GameValidator implements Validator{
-	
+public class GameValidator implements Validator {
+
 	private static final BigDecimal MINIMUM_PRICE = new BigDecimal("1");
 
 	@Override
@@ -20,12 +20,11 @@ public class GameValidator implements Validator{
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		rejectIfEmptyOrWhitespace(errors, "title", "field.required");
-		rejectIfEmptyOrWhitespace(errors, "price", "field.required");
-		
+		rejectIfEmptyOrWhitespace(errors, "title", "message.notnull_field");
+		rejectIfEmptyOrWhitespace(errors, "price", "message.notnull_field");
+
 		Game game = (Game) target;
-		
-		if(game.getPrice().compareTo(MINIMUM_PRICE) > 1){
+		if (game.getPrice().compareTo(MINIMUM_PRICE) > 1) {
 			errors.rejectValue("price", "field.denied");
 		}
 	}

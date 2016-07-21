@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.validation.constraints.NotNull;
 
 import br.com.springmvc.timetrialfactory.models.enums.Country;
 
@@ -11,6 +12,7 @@ import br.com.springmvc.timetrialfactory.models.enums.Country;
 public class Address {
 	
 	@Enumerated(EnumType.STRING)
+	@NotNull(message="{message.notnull_field}")
 	@Column(name = "address_Country", nullable = false)
 	private Country country;
 

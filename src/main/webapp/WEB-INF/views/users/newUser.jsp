@@ -46,7 +46,7 @@
 							class="glyphicon glyphicon-globe" aria-hidden="true"></span></span><input
 							type="text" class="form-control" id="country"
 							name="user.address.country.name"
-							value="${user.address.country.name}" readonly />
+							value="<c:out value="${param.country}"/>" readonly />
 					</div>
 					<c:set var="c" value="BRAZIL" />
 					<c:if test="${user.address.country.name eq c}">
