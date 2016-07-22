@@ -32,7 +32,7 @@ public class UsersController {
 		binder.setValidator(new UserValidator());
 	}
 
-	@RequestMapping(method = POST, value = "/login")
+	@RequestMapping(method = POST, value = "/success")
 	public ModelAndView newUser(@Valid User user, BindingResult result, RedirectAttributes redirectAttributes) {
 		if (result.hasErrors()) {
 			return new ModelAndView("users/newUser");

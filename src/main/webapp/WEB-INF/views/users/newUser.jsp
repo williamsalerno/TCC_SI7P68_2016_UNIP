@@ -10,7 +10,7 @@
 	<div class="containerLogin">
 		<div class="content">
 			<div class="login">
-				<c:url var="login_url" value="/login" />
+				<c:url var="login_url" value="/success" />
 				<form:form class="escondido form-horizontal" role="form"
 					id="usersForm" action="${login_url }" method="post"
 					commandName="user">
@@ -24,7 +24,7 @@
 					<div class="input-group">
 						<span class="input-group-addon" id="basic-addon1"><span
 							class="glyphicon glyphicon-user" aria-hidden="true"></span></span> <input
-							type="text" class="form-control" id="firstName"
+							type="text" class="form-control" id="user"
 							name="user.firstName" value="${user.firstName }"
 							placeholder="Primeiro nome" aria-describedby="basic-addon1"
 							required="required">
@@ -34,7 +34,7 @@
 						<span class="input-group-addon" id="basic-addon1"><span
 							class="glyphicon glyphicon-user" aria-hidden="true"></span></span> <input
 							type="text" class="form-control" id="lastName"
-							name="user.lastName" value="${user.lastName }"
+							name="user" value="${user.lastName }"
 							placeholder="Último nome" aria-describedby="basic-addon1"
 							required="required">
 						<form:errors path="lastName" />
