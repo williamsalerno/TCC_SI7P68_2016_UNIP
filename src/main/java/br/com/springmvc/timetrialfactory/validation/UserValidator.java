@@ -23,8 +23,7 @@ public class UserValidator implements Validator {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "login", "message.notnull_field");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "message.notnull_field");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "message.notnull_field");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "address", "message.notnull_field");
-
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "address.country", "message.notnull_field");
 	}
 
 }

@@ -10,10 +10,13 @@
 	<div class="containerLogin">
 		<div class="content">
 			<div class="login">
-				<form class="escondido form-horizontal" role="form" id="usersForm"
-					action="<c:url value="/login"/>" method="post">
+				<c:url var="login_url" value="/login" />
+				<form:form class="escondido form-horizontal" role="form"
+					id="usersForm" action="${login_url }" method="post"
+					commandName="user">
 					<input type="hidden" name="${_csrf.parameterName }"
-						value="${_csrf.token }" /> <br>
+						value="${_csrf.token }" />
+					<br>
 					<h2 id="h2Form" style="text-align: center; color: #FFC277">
 						<fmt:message key="h2.completeRegister" />
 						<br> <small style="font-size: 15px"></small>
@@ -25,6 +28,7 @@
 							name="user.firstName" value="${user.firstName }"
 							placeholder="Primeiro nome" aria-describedby="basic-addon1"
 							required="required">
+						<form:errors path="firstName" />
 					</div>
 					<div class="input-group">
 						<span class="input-group-addon" id="basic-addon1"><span
@@ -33,12 +37,14 @@
 							name="user.lastName" value="${user.lastName }"
 							placeholder="Último nome" aria-describedby="basic-addon1"
 							required="required">
+						<form:errors path="lastName" />
 					</div>
 					<div class="input-group">
 						<span class="input-group-addon" id="basic-addon1">@</span><input
 							type="email" class="form-control" id="email" name="user.email"
 							value="${user.email }" placeholder="email válido"
 							required="required">
+						<form:errors path="email" />
 					</div>
 					<br>
 					<div class="input-group">
@@ -47,6 +53,7 @@
 							type="text" class="form-control" id="country"
 							name="user.address.country.name"
 							value="<c:out value="${param.country}"/>" readonly />
+						<form:errors path="address.country" />
 					</div>
 					<c:set var="selectedCountry" value="BRAZIL" />
 					<c:if test="${param.country eq selectedCountry}">
@@ -56,6 +63,7 @@
 								type="text" class="form-control" id="cep"
 								name="user.address.cep" value="${user.address.cep }"
 								placeholder="CEP" required="required">
+							<form:errors path="address.cep" />
 						</div>
 						<div class="input-group">
 							<span class="input-group-addon" id="basic-addon1"><span
@@ -63,6 +71,7 @@
 								type="text" class="form-control" id="city"
 								name="user.address.city" value="${user.address.city }"
 								placeholder="Cidade" required="required">
+							<form:errors path="address.city" />
 						</div>
 						<div class="input-group">
 							<span class="input-group-addon" id="basic-addon1"><span
@@ -70,6 +79,7 @@
 								type="text" class="form-control" id="state"
 								name="user.address.state" value="${user.address.state }"
 								placeholder="Estado" required="required">
+							<form:errors path="address.state" />
 						</div>
 						<br>
 					</c:if>
@@ -79,6 +89,7 @@
 							type="text" class="form-control" id="login" name="user.login"
 							value="${user.login }" placeholder="Nome de usuário"
 							required="required">
+						<form:errors path="login" />
 					</div>
 					<div class="input-group">
 						<span class="input-group-addon" id="basic-addon1"><span
@@ -87,6 +98,7 @@
 							name="user.password" value="${user.password }"
 							placeholder="Senha (entre 6 e 10 dígitos alfanuméricos)"
 							required="required">
+						<form:errors path="password" />
 					</div>
 					<div class="input-group">
 						<span class="input-group-addon" id="basic-addon1"><span
@@ -94,6 +106,7 @@
 							type="password" class="form-control" id="confirm"
 							equalTo="#password" placeholder="Confirme a senha"
 							required="required">
+						<form:errors path="password" />
 					</div>
 					<hr style="margin: 40px;">
 					<div class="btnForm">
@@ -101,7 +114,7 @@
 					</div>
 					<br>
 					<div class="clearfix"></div>
-				</form>
+				</form:form>
 			</div>
 		</div>
 	</div>

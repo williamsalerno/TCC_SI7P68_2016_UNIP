@@ -34,9 +34,14 @@ public class UsersController {
 
 	@RequestMapping(method = POST, value = "/login")
 	public ModelAndView newUser(@Valid User user, BindingResult result, RedirectAttributes redirectAttributes) {
-		userDao.save(user);
-		redirectAttributes.addFlashAttribute("success", "message.success");
-		return new ModelAndView("redirect:login");
+		if (result.hasErrors()) {
+			return new ModelAndView("users/newUser");
+		} else {
+			userDao.save(user);
+			redirectAttributes.addFlashAttribute("success", "message.success");
+			return new ModelAndView("redirect:login");
+		}
+
 	}
 
 	@RequestMapping(method = GET, value = "/user")
@@ -49,12 +54,6 @@ public class UsersController {
 	@RequestMapping(method = GET, value = "/login")
 	public ModelAndView loginForm() {
 		ModelAndView modelAndView = new ModelAndView("users/login");
-		return modelAndView;
-	}
-
-	@RequestMapping(method = GET, value = "/newUser/selectCountry")
-	public ModelAndView selectCountry() {
-		ModelAndView modelAndView = new ModelAndView("users/selectCountry");
 		return modelAndView;
 	}
 

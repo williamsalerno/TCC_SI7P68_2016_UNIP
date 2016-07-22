@@ -33,4 +33,10 @@ public class AddressController {
 			return modelAndView;
 		}
 	}
+
+	@RequestMapping(method = GET, value = "/newUser/selectCountry")
+	public ModelAndView selectCountry() {
+		ModelAndView modelAndView = new ModelAndView("users/selectCountry");
+		return modelAndView;
+	}
 }
