@@ -7,7 +7,6 @@ import org.springframework.validation.Validator;
 import com.google.common.base.Preconditions;
 
 import br.com.springmvc.timetrialfactory.models.User;
-import br.com.springmvc.timetrialfactory.models.enums.Country;
 
 public class UserValidator implements Validator {
 
@@ -25,11 +24,7 @@ public class UserValidator implements Validator {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "message.notnull_field");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "message.notnull_field");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "address", "message.notnull_field");
-		User user = (User) target;
-		if (!user.getAddress().getCountry().equals(Country.BRAZIL)
-				|| !user.getAddress().getCountry().equals(Country.OTHER)) {
-			errors.rejectValue("address", "message.denied_value");
-		}
+
 	}
 
 }

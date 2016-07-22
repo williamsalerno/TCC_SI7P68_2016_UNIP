@@ -11,7 +11,7 @@
 		<div class="content">
 			<div class="login">
 				<form class="escondido form-horizontal" role="form" id="usersForm"
-					action="<c:url value="/users"/>" method="post">
+					action="<c:url value="/login"/>" method="post">
 					<input type="hidden" name="${_csrf.parameterName }"
 						value="${_csrf.token }" /> <br>
 					<h2 id="h2Form" style="text-align: center; color: #FFC277">
@@ -48,8 +48,8 @@
 							name="user.address.country.name"
 							value="<c:out value="${param.country}"/>" readonly />
 					</div>
-					<c:set var="c" value="BRAZIL" />
-					<c:if test="${user.address.country.name eq c}">
+					<c:set var="selectedCountry" value="BRAZIL" />
+					<c:if test="${param.country eq selectedCountry}">
 						<div class="input-group">
 							<span class="input-group-addon" id="basic-addon1"><span
 								class="glyphicon glyphicon-home" aria-hidden="true"></span></span><input

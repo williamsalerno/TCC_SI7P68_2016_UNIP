@@ -13,10 +13,10 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.springmvc.timetrialfactory.daos.UserDAO;
 import br.com.springmvc.timetrialfactory.models.User;
-import br.com.springmvc.timetrialfactory.models.embeddables.Address;
 import br.com.springmvc.timetrialfactory.validation.UserValidator;
 
 @Controller
@@ -26,14 +26,21 @@ public class UsersController {
 
 	@Autowired
 	private UserDAO userDao;
-	
+
 	@InitBinder
-	protected void initBinder(WebDataBinder binder){
+	protected void initBinder(WebDataBinder binder) {
 		binder.setValidator(new UserValidator());
 	}
 
 	@RequestMapping(method = POST, value = "/login")
-	public ModelAndView login(User user) {
+	public ModelAndView newUser(@Valid User user, BindingResult result, RedirectAttributes redirectAttributes) {
+		userDao.save(user);
+		redirectAttributes.addFlashAttribute("success", "message.success");
+		return new ModelAndView("redirect:login");
+	}
+
+	@RequestMapping(method = GET, value = "/user")
+	public ModelAndView login(@Valid User user) {
 		userDao.load(user.getId());
 		ModelAndView modelAndView = new ModelAndView("games/list");
 		return modelAndView;
@@ -48,17 +55,6 @@ public class UsersController {
 	@RequestMapping(method = GET, value = "/newUser/selectCountry")
 	public ModelAndView selectCountry() {
 		ModelAndView modelAndView = new ModelAndView("users/selectCountry");
-		return modelAndView;
-	}
-
-	@RequestMapping(method = GET, value = "/newUser/form")
-	public ModelAndView newUserForm(@Valid User country, BindingResult result) {
-		//verify(country, result, selectCountry());
-		if (result.hasErrors()) {
-			return selectCountry();
-		}
-		ModelAndView modelAndView = new ModelAndView("users/newUser");
-		modelAndView.addObject("country", country);
 		return modelAndView;
 	}
 

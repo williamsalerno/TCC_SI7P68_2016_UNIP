@@ -1,11 +1,10 @@
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <div id="wrapper">
 	<%@ include file="/WEB-INF/jspf/header.jspf"%>
 	<div class="containerLogin">
 		<div class="content">
 			<div class="login">
 				<form class="escondido form-horizontal" role="form" id="countryForm"
-					action="<c:url value="/newUser/form"/>" method="get">
+					action='<c:url value="/newUser/form"/>' method="get">
 					<br>
 					<h2 id="h2Form" style="text-align: center; color: #FFC277">
 						<fmt:message key="h2.selectCountry" />
@@ -29,13 +28,13 @@
 					<br>
 				</form>
 				<div>
-					<spring:hasBindErrors name="country">
-						<ul>
-							<c:forEach var="error" items="${errors.allErrors }">
-								<li><spring:message code="${error.code }"
-										text="${error.defaultMessage}" /></li>
-							</c:forEach>
-						</ul>
+					<spring:hasBindErrors name="address">
+						<c:forEach var="error" items="${errors.allErrors }">
+							<div class="alert alert-danger" style="text-align: center;">
+								<spring:message code="${error.code }"
+									text="${error.defaultMessage}" />
+							</div>
+						</c:forEach>
 					</spring:hasBindErrors>
 				</div>
 			</div>
