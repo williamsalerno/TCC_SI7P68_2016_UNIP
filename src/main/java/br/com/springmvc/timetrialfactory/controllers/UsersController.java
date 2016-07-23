@@ -1,5 +1,6 @@
 package br.com.springmvc.timetrialfactory.controllers;
 
+import static br.com.springmvc.timetrialfactory.models.enums.Country.BRAZIL;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
@@ -8,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
@@ -21,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.com.springmvc.timetrialfactory.daos.UserDAO;
 import br.com.springmvc.timetrialfactory.models.User;
 import br.com.springmvc.timetrialfactory.models.embeddables.Address;
+import br.com.springmvc.timetrialfactory.models.enums.Country;
 import br.com.springmvc.timetrialfactory.validation.AddressValidator;
 import br.com.springmvc.timetrialfactory.validation.UserValidator;
 
@@ -47,18 +48,17 @@ public class UsersController {
 		binder.setValidator(userValidator);
 	}
 
-	@RequestMapping(method = POST, value = "/success", name = "user")
-	public ModelAndView newUser(@ModelAttribute("user") @Validated final User user, final BindingResult result,
-			RedirectAttributes attr) {
+	@RequestMapping(method = POST, value = "/newUser/form", name = "user")
+	public String newUser(@ModelAttribute("user") @Validated User user, BindingResult result, RedirectAttributes attr) {
 		if (result.hasErrors()) {
 			attr.addFlashAttribute("org.springframework.validation.BindingResult.user", result);
-			attr.addAttribute("country", user.getAddress().getCountry());
 			attr.addFlashAttribute("user", user);
-			return new ModelAndView("redirect:/newUser/form");
+			attr.addFlashAttribute("country", user.getAddress().getCountry().getName());
+			return "users/newUser";
 		} else {
 			userDao.save(user);
 			attr.addFlashAttribute("success", "message.success");
-			return new ModelAndView("redirect:login");
+			return "redirect:login";
 		}
 
 	}

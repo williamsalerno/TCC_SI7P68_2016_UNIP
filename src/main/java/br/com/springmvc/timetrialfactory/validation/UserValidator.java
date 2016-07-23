@@ -6,7 +6,6 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-
 import com.google.common.base.Preconditions;
 
 import br.com.springmvc.timetrialfactory.models.User;
@@ -39,16 +38,33 @@ public class UserValidator implements Validator {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "address.country", "message.notnull_field");
 
 		User user = (User) target;
-		if (!(user.getFirstName().matches(REGEX_NAMES) && user.getLastName().matches(REGEX_NAMES)
-				&& (user.getLogin().length() >= MIN_LOGIN_LENGTH && user.getLogin().length() <= MAX_LENGTH)
-				&& (user.getPassword().length() >= MIN_PASSWORD_LENGTH && user.getPassword().length() <= MAX_LENGTH)
-				&& user.getEmail().matches(REGEX_EMAIL)
-				&& (user.getAddress().getCountry().equals(Country.BRAZIL)
-						|| user.getAddress().getCountry().equals(Country.OTHER))
-				&& user.getAddress().getState().matches(REGEX_CITY_OR_STATE)
-				&& user.getAddress().getCity().matches(REGEX_CITY_OR_STATE)
-				&& user.getAddress().getCep().matches(REGEX_CEP))) {
+		if (!(user.getFirstName().matches(REGEX_NAMES))) {
+			errors.rejectValue("firstName", "message.denied_value");
+		}
+		if (!user.getLastName().matches(REGEX_NAMES)) {
+			errors.rejectValue("lastName", "message.denied_value");
+		}
+		if (!(user.getLogin().length() >= MIN_LOGIN_LENGTH && user.getLogin().length() <= MAX_LENGTH)) {
+			errors.rejectValue("login", "message.denied_value");
+		}
+		if (!(user.getPassword().length() >= MIN_PASSWORD_LENGTH && user.getPassword().length() <= MAX_LENGTH)) {
 			errors.rejectValue("password", "message.denied_value");
+		}
+		if (!(user.getEmail().matches(REGEX_EMAIL))) {
+			errors.rejectValue("email", "message.denied_value");
+		}
+		if (!(user.getAddress().getCountry().equals(Country.BRAZIL)
+				|| user.getAddress().getCountry().equals(Country.OTHER))) {
+			errors.rejectValue("address.country", "message.denied_value");
+		}
+		if (!(user.getAddress().getState().matches(REGEX_CITY_OR_STATE))) {
+			errors.rejectValue("address.state", "message.denied_value");
+		}
+		if (!(user.getAddress().getCity().matches(REGEX_CITY_OR_STATE))) {
+			errors.rejectValue("address.city", "message.denied_value");
+		}
+		if (!(user.getAddress().getCep().matches(REGEX_CEP))) {
+			errors.rejectValue("address.cep", "message.denied_value");
 		}
 	}
 

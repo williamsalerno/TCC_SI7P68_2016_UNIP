@@ -22,7 +22,6 @@ input {
 	color: #FFC277 !important;
 }
 
-
 legend {
 	color: white;
 }
@@ -583,6 +582,10 @@ input:focus, select:focus {
 	border: 2px solid #64AB65 !important;
 	background-color: rgba(255, 187, 187, 0) !important;
 	color: #64AB65 !important;
+}
+
+.message-error {
+	color: #a94442;
 }
 
 .imageHome {

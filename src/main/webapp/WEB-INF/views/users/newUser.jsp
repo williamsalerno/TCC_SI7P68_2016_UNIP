@@ -10,7 +10,7 @@
 	<div class="containerLogin">
 		<div class="content">
 			<div class="login">
-				<c:url var="login_url" value="/success" />
+				<c:url var="login_url" value="/newUser/form" />
 				<form:form class="escondido form-horizontal" role="form"
 					id="usersForm" action="${login_url }" method="post"
 					commandName="user">
@@ -27,8 +27,8 @@
 						<form:input type="text" class="form-control" path="firstName"
 							placeholder="Primeiro nome" aria-describedby="basic-addon1"
 							required="required" />
-						<form:errors path="firstName" />
-						
+						<form:errors path="firstName" cssClass="message-error" />
+
 					</div>
 					<div class="input-group">
 						<span class="input-group-addon" id="basic-addon1"><span
@@ -36,44 +36,45 @@
 						<form:input type="text" class="form-control" path="lastName"
 							placeholder="Último nome" aria-describedby="basic-addon1"
 							required="required" />
-						<form:errors path="lastName" />
+						<form:errors path="lastName" cssClass="message-error" />
 					</div>
 					<div class="input-group">
 						<span class="input-group-addon" id="basic-addon1">@</span>
 						<form:input type="email" class="form-control" path="email"
 							placeholder="email válido" required="required" />
-						<form:errors path="email" />
+						<form:errors path="email" cssClass="message-error" />
 					</div>
 					<br>
 					<div class="input-group">
 						<span class="input-group-addon" id="basic-addon1"><span
 							class="glyphicon glyphicon-globe" aria-hidden="true"></span></span>
-						<form:input type="text" class="form-control" path="address.country"
-							value="${param.country}" readonly="true" />
-						<form:errors path="address.country" />
+						<form:input type="text" class="form-control"
+							path="address.country" value="${param.country}" readonly="true" />
+						<form:errors path="address.country" cssClass="message-error" />
 					</div>
-					<c:set var="selectedCountry" value="BRAZIL" />
-					<c:if test="${param.country eq selectedCountry}">
+					<c:set var="selectedCountry" value="${param.country}" />
+					<c:if
+						test="${address.country eq selectedCountry or selectedCountry eq BRAZIL}">
 						<div class="input-group">
 							<span class="input-group-addon" id="basic-addon1"><span
 								class="glyphicon glyphicon-home" aria-hidden="true"></span></span>
 							<form:input type="text" class="form-control" path="address.cep"
 								placeholder="CEP" required="required" />
-							<form:errors path="address.cep" />
+							<form:errors path="address.cep" cssClass="message-error" />
 						</div>
 						<div class="input-group">
 							<span class="input-group-addon" id="basic-addon1"><span
 								class="glyphicon glyphicon-home" aria-hidden="true"></span></span>
 							<form:input type="text" class="form-control" path="address.city"
 								placeholder="Cidade" required="required" />
-							<form:errors path="address.city" />
+							<form:errors path="address.city" cssClass="message-error" />
 						</div>
 						<div class="input-group">
 							<span class="input-group-addon" id="basic-addon1"><span
 								class="glyphicon glyphicon-home" aria-hidden="true"></span></span>
 							<form:input type="text" class="form-control" path="address.state"
 								placeholder="Estado" required="required" />
-							<form:errors path="address.state" />
+							<form:errors path="address.state" cssClass="message-error" />
 						</div>
 						<br>
 					</c:if>
@@ -82,7 +83,7 @@
 							class="glyphicon glyphicon-log-in" aria-hidden="true"></span></span>
 						<form:input type="text" class="form-control" path="login"
 							placeholder="Nome de usuário" required="required" />
-						<form:errors path="login" />
+						<form:errors path="login" cssClass="message-error" />
 					</div>
 					<div class="input-group">
 						<span class="input-group-addon" id="basic-addon1"><span
@@ -90,7 +91,7 @@
 						<form:input type="password" class="form-control" path="password"
 							placeholder="Senha (entre 6 e 10 dígitos alfanuméricos)"
 							required="required" />
-						<form:errors path="password" />
+						<form:errors path="password" cssClass="message-error" />
 					</div>
 					<div class="input-group">
 						<span class="input-group-addon" id="basic-addon1"><span
@@ -98,7 +99,6 @@
 							type="password" class="form-control" id="confirm"
 							equalTo="#password" placeholder="Confirme a senha"
 							required="required">
-						<form:errors path="password" />
 					</div>
 					<hr style="margin: 40px;">
 					<div class="btnForm">
