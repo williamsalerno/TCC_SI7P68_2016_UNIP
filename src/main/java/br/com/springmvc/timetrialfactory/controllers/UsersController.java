@@ -3,19 +3,18 @@ package br.com.springmvc.timetrialfactory.controllers;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
-import javax.validation.Valid;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -25,8 +24,7 @@ import br.com.springmvc.timetrialfactory.models.embeddables.Address;
 import br.com.springmvc.timetrialfactory.validation.AddressValidator;
 import br.com.springmvc.timetrialfactory.validation.UserValidator;
 
-
-@RestController
+@Controller
 @Transactional
 @RequestMapping("/")
 public class UsersController {
@@ -50,21 +48,23 @@ public class UsersController {
 	}
 
 	@RequestMapping(method = POST, value = "/success", name = "user")
-	public ModelAndView newUser(@Valid User user, BindingResult result, RedirectAttributes redirectAttributes) {
+	public ModelAndView newUser(@ModelAttribute("user") @Validated final User user, final BindingResult result,
+			RedirectAttributes attr) {
 		if (result.hasErrors()) {
-			return newUserForm(user.getAddress(), result);
+			attr.addFlashAttribute("org.springframework.validation.BindingResult.user", result);
+			attr.addAttribute("country", user.getAddress().getCountry());
+			attr.addFlashAttribute("user", user);
+			return new ModelAndView("redirect:/newUser/form");
 		} else {
-			ModelAndView modelAndView = new ModelAndView("redirect:login");
-			modelAndView.addObject("user", user);
 			userDao.save(user);
-			redirectAttributes.addFlashAttribute("success", "message.success");
-			return modelAndView;
+			attr.addFlashAttribute("success", "message.success");
+			return new ModelAndView("redirect:login");
 		}
 
 	}
 
 	@RequestMapping(method = GET, value = "/user")
-	public ModelAndView login(@Valid User user) {
+	public ModelAndView login(@Validated User user) {
 		userDao.load(user.getId());
 		ModelAndView modelAndView = new ModelAndView("games/list");
 		return modelAndView;
@@ -77,9 +77,10 @@ public class UsersController {
 	}
 
 	@RequestMapping(method = GET, value = "/newUser/form")
-	public ModelAndView newUserForm(@Valid Address address, BindingResult result) {
+	public ModelAndView newUserForm(@Validated Address address, BindingResult result, RedirectAttributes attr) {
 		if (result.hasErrors()) {
-			return new ModelAndView("users/selectCountry");
+			attr.addFlashAttribute("org.springframework.validation.BindingResult.address", result);
+			return new ModelAndView("redirect:/newUser/selectCountry");
 		} else {
 			ModelAndView modelAndView = new ModelAndView("users/newUser");
 			modelAndView.addObject("country", address);

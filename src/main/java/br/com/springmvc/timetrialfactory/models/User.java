@@ -18,6 +18,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.validator.constraints.Email;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -36,7 +37,6 @@ public class User implements UserDetails {
 	private static final int MIN_LOGIN_LENGTH = 3;
 	private static final int MIN_PASSWORD_LENGTH = 6;
 	private static final int MAX_LENGTH = 12;
-	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -160,6 +160,11 @@ public class User implements UserDetails {
 	@Override
 	public boolean isEnabled() {
 		return true;
+	}
+
+	public String toString() {
+		return new ToStringBuilder(this).append("firstName", this.firstName).append("lastName", this.lastName)
+				.append("email", this.email).append("login", this.login).append("password", this.password).build();
 	}
 
 }
