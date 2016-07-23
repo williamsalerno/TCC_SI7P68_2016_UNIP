@@ -9,10 +9,11 @@ import org.springframework.stereotype.Component;
 @Component
 @Scope(value = SCOPE_SESSION, proxyMode = TARGET_CLASS)
 public class UserWeb {
-
+	
 	public User getLoggedUser() {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
 
 }

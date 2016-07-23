@@ -30,15 +30,17 @@ import com.google.common.cache.CacheBuilder;
 import br.com.springmvc.timetrialfactory.apis.paypal.PayPalCall;
 import br.com.springmvc.timetrialfactory.controllers.HomeController;
 import br.com.springmvc.timetrialfactory.controllers.PaymentController;
+import br.com.springmvc.timetrialfactory.controllers.UsersController;
 import br.com.springmvc.timetrialfactory.daos.GameDAO;
 import br.com.springmvc.timetrialfactory.daos.PurchaseDAO;
 import br.com.springmvc.timetrialfactory.models.ShoppingCart;
 import br.com.springmvc.timetrialfactory.models.UserWeb;
+import br.com.springmvc.timetrialfactory.validation.UserValidator;
 import br.com.springmvc.timetrialfactory.viewresolver.JsonViewResolver;
 
 @EnableWebMvc
 @ComponentScan(basePackageClasses = { HomeController.class, GameDAO.class, PurchaseDAO.class, ShoppingCart.class,
-		PaymentController.class, PayPalCall.class, UserWeb.class })
+		PaymentController.class, PayPalCall.class, UserWeb.class, UsersController.class, UserValidator.class })
 @EnableCaching
 public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 

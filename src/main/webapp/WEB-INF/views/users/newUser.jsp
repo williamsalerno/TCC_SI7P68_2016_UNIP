@@ -23,81 +23,72 @@
 					</h2>
 					<div class="input-group">
 						<span class="input-group-addon" id="basic-addon1"><span
-							class="glyphicon glyphicon-user" aria-hidden="true"></span></span> <input
-							type="text" class="form-control" id="user"
-							name="user.firstName" value="${user.firstName }"
+							class="glyphicon glyphicon-user" aria-hidden="true"></span></span>
+						<form:input type="text" class="form-control" path="firstName"
 							placeholder="Primeiro nome" aria-describedby="basic-addon1"
-							required="required">
+							required="required" />
 						<form:errors path="firstName" />
 					</div>
 					<div class="input-group">
 						<span class="input-group-addon" id="basic-addon1"><span
-							class="glyphicon glyphicon-user" aria-hidden="true"></span></span> <input
-							type="text" class="form-control" id="lastName"
-							name="user" value="${user.lastName }"
+							class="glyphicon glyphicon-user" aria-hidden="true"></span></span>
+						<form:input type="text" class="form-control" path="lastName"
 							placeholder="Último nome" aria-describedby="basic-addon1"
-							required="required">
+							required="required" />
 						<form:errors path="lastName" />
 					</div>
 					<div class="input-group">
-						<span class="input-group-addon" id="basic-addon1">@</span><input
-							type="email" class="form-control" id="email" name="user.email"
-							value="${user.email }" placeholder="email válido"
-							required="required">
+						<span class="input-group-addon" id="basic-addon1">@</span>
+						<form:input type="email" class="form-control" path="email"
+							placeholder="email válido" required="required" />
 						<form:errors path="email" />
 					</div>
 					<br>
 					<div class="input-group">
 						<span class="input-group-addon" id="basic-addon1"><span
-							class="glyphicon glyphicon-globe" aria-hidden="true"></span></span><input
-							type="text" class="form-control" id="country"
-							name="user.address.country.name"
-							value="<c:out value="${param.country}"/>" readonly />
+							class="glyphicon glyphicon-globe" aria-hidden="true"></span></span>
+						<form:input type="text" class="form-control" path="address.country"
+							value="${param.country}" readonly="true" />
 						<form:errors path="address.country" />
 					</div>
 					<c:set var="selectedCountry" value="BRAZIL" />
 					<c:if test="${param.country eq selectedCountry}">
 						<div class="input-group">
 							<span class="input-group-addon" id="basic-addon1"><span
-								class="glyphicon glyphicon-home" aria-hidden="true"></span></span><input
-								type="text" class="form-control" id="cep"
-								name="user.address.cep" value="${user.address.cep }"
-								placeholder="CEP" required="required">
+								class="glyphicon glyphicon-home" aria-hidden="true"></span></span>
+							<form:input type="text" class="form-control" path="address.cep"
+								placeholder="CEP" required="required" />
 							<form:errors path="address.cep" />
 						</div>
 						<div class="input-group">
 							<span class="input-group-addon" id="basic-addon1"><span
-								class="glyphicon glyphicon-home" aria-hidden="true"></span></span><input
-								type="text" class="form-control" id="city"
-								name="user.address.city" value="${user.address.city }"
-								placeholder="Cidade" required="required">
+								class="glyphicon glyphicon-home" aria-hidden="true"></span></span>
+							<form:input type="text" class="form-control" path="address.city"
+								placeholder="Cidade" required="required" />
 							<form:errors path="address.city" />
 						</div>
 						<div class="input-group">
 							<span class="input-group-addon" id="basic-addon1"><span
-								class="glyphicon glyphicon-home" aria-hidden="true"></span></span><input
-								type="text" class="form-control" id="state"
-								name="user.address.state" value="${user.address.state }"
-								placeholder="Estado" required="required">
+								class="glyphicon glyphicon-home" aria-hidden="true"></span></span>
+							<form:input type="text" class="form-control" path="address.state"
+								placeholder="Estado" required="required" />
 							<form:errors path="address.state" />
 						</div>
 						<br>
 					</c:if>
 					<div class="input-group">
 						<span class="input-group-addon" id="basic-addon1"><span
-							class="glyphicon glyphicon-log-in" aria-hidden="true"></span></span><input
-							type="text" class="form-control" id="login" name="user.login"
-							value="${user.login }" placeholder="Nome de usuário"
-							required="required">
+							class="glyphicon glyphicon-log-in" aria-hidden="true"></span></span>
+						<form:input type="text" class="form-control" path="login"
+							placeholder="Nome de usuário" required="required" />
 						<form:errors path="login" />
 					</div>
 					<div class="input-group">
 						<span class="input-group-addon" id="basic-addon1"><span
-							class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></span> <input
-							type="password" class="form-control" id="password"
-							name="user.password" value="${user.password }"
+							class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></span>
+						<form:input type="password" class="form-control" path="password"
 							placeholder="Senha (entre 6 e 10 dígitos alfanuméricos)"
-							required="required">
+							required="required" />
 						<form:errors path="password" />
 					</div>
 					<div class="input-group">

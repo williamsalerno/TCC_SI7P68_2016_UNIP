@@ -33,6 +33,10 @@ public class User implements UserDetails {
 	 */
 	private static final long serialVersionUID = 5342752026258113015L;
 
+	private static final int MIN_LOGIN_LENGTH = 3;
+	private static final int MIN_PASSWORD_LENGTH = 6;
+	private static final int MAX_LENGTH = 12;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", updatable = false)
@@ -49,17 +53,17 @@ public class User implements UserDetails {
 	private String lastName;
 
 	@NotNull
-	@Size(min = 3, max = 12, message = "")
+	@Size(min = MIN_LOGIN_LENGTH, max = MAX_LENGTH, message = "mensagem erro username")
 	@Column(name = "username", nullable = false, unique = true)
 	private String login;
 
 	@NotNull
-	@Size(min = 6, max = 12, message = "")
+	@Size(min = MIN_PASSWORD_LENGTH, max = MAX_LENGTH, message = "mensagem erro senha")
 	@Column(name = "password", nullable = false)
 	private String password;
 
 	@NotNull
-	@Email(regexp = "[a-z]+@{1}\\w+\\.com{1}(\\.br)*", message = "O email informado é inválido.")
+	@Email(regexp = "^((?!_)(?!\\.))[a-z0-9._]+[a-z0-9]+@{1}\\w+\\.com{1}(\\.br)*$", message = "O email informado é inválido.")
 	@Column(name = "email", nullable = false, unique = true)
 	private String email;
 
