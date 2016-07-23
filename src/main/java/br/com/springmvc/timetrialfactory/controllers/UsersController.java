@@ -25,6 +25,7 @@ import br.com.springmvc.timetrialfactory.models.embeddables.Address;
 import br.com.springmvc.timetrialfactory.validation.AddressValidator;
 import br.com.springmvc.timetrialfactory.validation.UserValidator;
 
+
 @RestController
 @Transactional
 @RequestMapping("/")

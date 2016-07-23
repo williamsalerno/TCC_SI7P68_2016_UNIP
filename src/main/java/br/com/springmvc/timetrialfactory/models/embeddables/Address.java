@@ -9,6 +9,7 @@ import javax.validation.constraints.Pattern;
 
 import br.com.springmvc.timetrialfactory.models.enums.Country;
 
+
 @Embeddable
 public class Address {
 

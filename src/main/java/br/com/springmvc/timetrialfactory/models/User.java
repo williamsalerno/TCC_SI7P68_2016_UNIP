@@ -36,6 +36,7 @@ public class User implements UserDetails {
 	private static final int MIN_LOGIN_LENGTH = 3;
 	private static final int MIN_PASSWORD_LENGTH = 6;
 	private static final int MAX_LENGTH = 12;
+	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

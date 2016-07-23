@@ -1,6 +1,7 @@
 package br.com.springmvc.timetrialfactory.models.enums;
 
 public enum Country {
+	
 
 	BRAZIL("BRAZIL"), OTHER("OTHER");
 

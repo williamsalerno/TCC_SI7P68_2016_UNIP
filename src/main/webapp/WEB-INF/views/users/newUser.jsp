@@ -28,6 +28,7 @@
 							placeholder="Primeiro nome" aria-describedby="basic-addon1"
 							required="required" />
 						<form:errors path="firstName" />
+						
 					</div>
 					<div class="input-group">
 						<span class="input-group-addon" id="basic-addon1"><span

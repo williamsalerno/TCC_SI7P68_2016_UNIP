@@ -6,6 +6,7 @@ import static org.springframework.web.context.WebApplicationContext.SCOPE_SESSIO
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+
 @Component
 @Scope(value = SCOPE_SESSION, proxyMode = TARGET_CLASS)
 public class UserWeb {
