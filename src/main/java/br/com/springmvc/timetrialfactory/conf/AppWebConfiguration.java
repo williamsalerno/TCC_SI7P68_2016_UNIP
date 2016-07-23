@@ -38,6 +38,7 @@ import br.com.springmvc.timetrialfactory.models.UserWeb;
 import br.com.springmvc.timetrialfactory.validation.UserValidator;
 import br.com.springmvc.timetrialfactory.viewresolver.JsonViewResolver;
 
+
 @EnableWebMvc
 @ComponentScan(basePackageClasses = { HomeController.class, GameDAO.class, PurchaseDAO.class, ShoppingCart.class,
 		PaymentController.class, PayPalCall.class, UserWeb.class, UsersController.class, UserValidator.class })
