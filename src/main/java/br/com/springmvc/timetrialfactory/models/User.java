@@ -18,6 +18,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.validator.constraints.Email;
 import org.springframework.security.core.GrantedAuthority;
@@ -162,9 +164,22 @@ public class User implements UserDetails {
 		return true;
 	}
 
+	public int hashCode() {
+		return new HashCodeBuilder().append(this.id).append(this.login).append(this.email).toHashCode();
+	}
+
+	public boolean equals(Object obj) {
+		if (!(obj instanceof User)) {
+			return false;
+		}
+		User other = (User) obj;
+		return new EqualsBuilder().append(this.id, other.id).append(this.login, other.login)
+				.append(this.email, other.email).isEquals();
+	}
+
 	public String toString() {
 		return new ToStringBuilder(this).append("firstName", this.firstName).append("lastName", this.lastName)
-				.append("email", this.email).append("login", this.login).append("password", this.password).build();
+				.append("email", this.email).append("address", this.address).append("login", this.login).append("password", this.password).build();
 	}
 
 }

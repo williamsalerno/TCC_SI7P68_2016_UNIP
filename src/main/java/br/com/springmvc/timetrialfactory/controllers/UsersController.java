@@ -19,9 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.com.springmvc.timetrialfactory.daos.UserDAO;
 import br.com.springmvc.timetrialfactory.models.User;
 import br.com.springmvc.timetrialfactory.models.embeddables.Address;
+import br.com.springmvc.timetrialfactory.services.UserService;
 import br.com.springmvc.timetrialfactory.validation.AddressValidator;
 
 @Controller
@@ -32,7 +32,7 @@ public class UsersController {
 	private final Logger logger = LoggerFactory.getLogger(UsersController.class);
 
 	@Autowired
-	private UserDAO userDao;
+	private UserService service;
 
 	@InitBinder("address")
 	protected void initAddressBinder(WebDataBinder binder) {
@@ -46,17 +46,18 @@ public class UsersController {
 			attr.addFlashAttribute("user", user);
 			attr.addFlashAttribute("country", user.getAddress().getCountry().getName());
 			return "users/newUser";
+		} else if (!service.saveUser(user)) {
+			attr.addFlashAttribute("userLogin", user.getLogin());
+			return "users/newUser";
 		} else {
-			userDao.save(user);
-			attr.addFlashAttribute("success", "message.success");
-			return "redirect:login";
+			attr.addFlashAttribute("success", true);
+			return "redirect:/login";
 		}
-
 	}
 
 	@RequestMapping(method = GET, value = "/user")
 	public ModelAndView login(@Valid User user) {
-		userDao.load(user.getId());
+		service.findById(user.getId());
 		ModelAndView modelAndView = new ModelAndView("games/list");
 		return modelAndView;
 	}

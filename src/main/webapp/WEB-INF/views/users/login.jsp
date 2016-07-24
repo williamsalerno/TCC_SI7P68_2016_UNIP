@@ -29,8 +29,14 @@
 								value="<fmt:message key="btn.enter" />" />
 						</div>
 						<hr style="margin-bottom: 40px;">
-						<div class="alert alert-success" style="text-align: center;">
-							${success }</div>
+						<c:if test="${success }">
+							<div class="alert alert-success" style="text-align: center;">
+								<fmt:message var="messageNewUser" key="message.success" />
+								<c:set var="messageSuccess"
+									value="${success } - ${messageNewUser }" />
+								${messageSuccess }
+							</div>
+						</c:if>
 						<c:if test="${error.category ne messageId }">
 							<div class="alert alert-danger" style="text-align: center;">
 								<strong><fmt:message key="message.error" /></strong>

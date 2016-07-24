@@ -18,11 +18,11 @@ public class Address {
 	private Country country;
 
 	@Column(name = "address_State")
-	@Pattern(regexp = "[a-zA-Z ]+")
+	@Pattern(regexp = "[\\x00-\\x7F]+")
 	private String state;
 
 	@Column(name = "address_City")
-	@Pattern(regexp = "[a-zA-Z ]+")
+	@Pattern(regexp = "[\\x00-\\x7F]+")
 	private String city;
 
 	@Column(name = "address_Cep")

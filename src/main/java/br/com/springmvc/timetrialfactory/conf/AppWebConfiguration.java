@@ -12,6 +12,7 @@ import org.springframework.cache.guava.GuavaCacheManager;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.web.accept.ContentNegotiationManager;
 import org.springframework.web.servlet.LocaleResolver;
@@ -33,13 +34,16 @@ import br.com.springmvc.timetrialfactory.controllers.PaymentController;
 import br.com.springmvc.timetrialfactory.controllers.UsersController;
 import br.com.springmvc.timetrialfactory.daos.GameDAO;
 import br.com.springmvc.timetrialfactory.daos.PurchaseDAO;
+import br.com.springmvc.timetrialfactory.daos.impl.UserDAOImpl;
 import br.com.springmvc.timetrialfactory.models.ShoppingCart;
 import br.com.springmvc.timetrialfactory.models.UserWeb;
+import br.com.springmvc.timetrialfactory.services.UserServiceImpl;
 import br.com.springmvc.timetrialfactory.validation.UserValidator;
 import br.com.springmvc.timetrialfactory.viewresolver.JsonViewResolver;
 
+@Configuration
 @EnableWebMvc
-@ComponentScan(basePackageClasses = { HomeController.class, GameDAO.class, PurchaseDAO.class, ShoppingCart.class,
+@ComponentScan(basePackageClasses = { HomeController.class, GameDAO.class, UserServiceImpl.class, UserDAOImpl.class, PurchaseDAO.class, ShoppingCart.class,
 		PaymentController.class, PayPalCall.class, UserWeb.class, UsersController.class, UserValidator.class })
 @EnableCaching
 public class AppWebConfiguration extends WebMvcConfigurerAdapter {
@@ -66,7 +70,7 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 		ReloadableResourceBundleMessageSource bundle = new ReloadableResourceBundleMessageSource();
 		bundle.setBasename("/WEB-INF/messages");
 		bundle.setDefaultEncoding("UTF-8");
-		bundle.setCacheSeconds(1);
+		bundle.setCacheSeconds(-1);
 		return bundle;
 	}
 
