@@ -27,31 +27,38 @@
 						<form:input type="text" class="form-control" path="firstName"
 							placeholder="Primeiro nome" aria-describedby="basic-addon1"
 							required="required" />
-						<form:errors path="firstName" cssClass="message-error" />
-
+						<strong><form:errors path="firstName"
+								cssClass="message-error" /></strong>
 					</div>
+					<br>
 					<div class="input-group">
 						<span class="input-group-addon" id="basic-addon1"><span
 							class="glyphicon glyphicon-user" aria-hidden="true"></span></span>
 						<form:input type="text" class="form-control" path="lastName"
 							placeholder="Último nome" aria-describedby="basic-addon1"
 							required="required" />
-						<form:errors path="lastName" cssClass="message-error" />
+						<strong><form:errors path="lastName"
+								cssClass="message-error" /></strong>
 					</div>
+					<br>
 					<div class="input-group">
 						<span class="input-group-addon" id="basic-addon1">@</span>
 						<form:input type="email" class="form-control" path="email"
 							placeholder="email válido" required="required" />
-						<form:errors path="email" cssClass="message-error" />
+						<strong><form:errors path="email"
+								cssClass="message-error" /> </strong>
 					</div>
+					<br>
 					<br>
 					<div class="input-group">
 						<span class="input-group-addon" id="basic-addon1"><span
 							class="glyphicon glyphicon-globe" aria-hidden="true"></span></span>
 						<form:input type="text" class="form-control"
 							path="address.country" value="${param.country}" readonly="true" />
-						<form:errors path="address.country" cssClass="message-error" />
+						<strong><form:errors path="address.country"
+								cssClass="message-error" /> </strong>
 					</div>
+					<br>
 					<c:set var="selectedCountry" value="${param.country}" />
 					<c:if
 						test="${address.country eq selectedCountry or selectedCountry eq BRAZIL}">
@@ -60,22 +67,28 @@
 								class="glyphicon glyphicon-home" aria-hidden="true"></span></span>
 							<form:input type="text" class="form-control" path="address.cep"
 								placeholder="CEP" required="required" />
-							<form:errors path="address.cep" cssClass="message-error" />
+							<strong><form:errors path="address.cep"
+									cssClass="message-error" /> </strong>
 						</div>
+						<br>
 						<div class="input-group">
 							<span class="input-group-addon" id="basic-addon1"><span
 								class="glyphicon glyphicon-home" aria-hidden="true"></span></span>
 							<form:input type="text" class="form-control" path="address.city"
 								placeholder="Cidade" required="required" />
-							<form:errors path="address.city" cssClass="message-error" />
+							<strong><form:errors path="address.city"
+									cssClass="message-error" /> </strong>
 						</div>
+						<br>
 						<div class="input-group">
 							<span class="input-group-addon" id="basic-addon1"><span
 								class="glyphicon glyphicon-home" aria-hidden="true"></span></span>
 							<form:input type="text" class="form-control" path="address.state"
 								placeholder="Estado" required="required" />
-							<form:errors path="address.state" cssClass="message-error" />
+							<strong><form:errors path="address.state"
+									cssClass="message-error" /> </strong>
 						</div>
+						<br>
 						<br>
 					</c:if>
 					<div class="input-group">
@@ -83,16 +96,20 @@
 							class="glyphicon glyphicon-log-in" aria-hidden="true"></span></span>
 						<form:input type="text" class="form-control" path="login"
 							placeholder="Nome de usuário" required="required" />
-						<form:errors path="login" cssClass="message-error" />
+						<strong><form:errors path="login"
+								cssClass="message-error" /> </strong>
 					</div>
+					<br>
 					<div class="input-group">
 						<span class="input-group-addon" id="basic-addon1"><span
 							class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></span>
 						<form:input type="password" class="form-control" path="password"
 							placeholder="Senha (entre 6 e 10 dígitos alfanuméricos)"
 							required="required" />
-						<form:errors path="password" cssClass="message-error" />
+						<strong><form:errors path="password"
+								cssClass="message-error" /> </strong>
 					</div>
+					<br>
 					<div class="input-group">
 						<span class="input-group-addon" id="basic-addon1"><span
 							class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></span><input

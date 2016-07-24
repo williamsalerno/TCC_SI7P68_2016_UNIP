@@ -19,7 +19,7 @@ public class AddressValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		Preconditions.checkNotNull(target, "message.denied_value");
 		Address address = (Address) target;
-		if (address.getCountry() == null || (!address.getCountry().equals(Country.BRAZIL) && !address.getCountry().equals(Country.OTHER))) {
+		if (address.getCountry() == null || (!address.getCountry().getName().equals(Country.BRAZIL.getName()) && !address.getCountry().getName().equals(Country.OTHER.getName()))) {
 			errors.rejectValue("country", "message.denied_value");
 		}
 	}

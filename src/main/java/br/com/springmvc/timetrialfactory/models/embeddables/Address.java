@@ -9,12 +9,11 @@ import javax.validation.constraints.Pattern;
 
 import br.com.springmvc.timetrialfactory.models.enums.Country;
 
-
 @Embeddable
 public class Address {
 
 	@Enumerated(EnumType.STRING)
-	@NotNull(message = "{message.notnull_field}")
+	@NotNull
 	@Column(name = "address_Country", nullable = false)
 	private Country country;
 
@@ -27,7 +26,7 @@ public class Address {
 	private String city;
 
 	@Column(name = "address_Cep")
-	@Pattern(regexp = "\\d{8,8}", message = "mensagem erro cep")
+	@Pattern(regexp = "\\d{8,8}")
 	private String cep;
 
 	public Country getCountry() {

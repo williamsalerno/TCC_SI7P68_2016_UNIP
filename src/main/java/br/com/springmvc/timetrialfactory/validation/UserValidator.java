@@ -39,23 +39,23 @@ public class UserValidator implements Validator {
 
 		User user = (User) target;
 		if (!(user.getFirstName().matches(REGEX_NAMES))) {
-			errors.rejectValue("firstName", "message.denied_value");
+			errors.rejectValue("firstName", "message.firstName.denied_value");
 		}
 		if (!user.getLastName().matches(REGEX_NAMES)) {
-			errors.rejectValue("lastName", "message.denied_value");
+			errors.rejectValue("lastName", "message.lastName.denied_value");
 		}
 		if (!(user.getLogin().length() >= MIN_LOGIN_LENGTH && user.getLogin().length() <= MAX_LENGTH)) {
-			errors.rejectValue("login", "message.denied_value");
+			errors.rejectValue("login", "message.login.denied_value");
 		}
 		if (!(user.getPassword().length() >= MIN_PASSWORD_LENGTH && user.getPassword().length() <= MAX_LENGTH)) {
-			errors.rejectValue("password", "message.denied_value");
+			errors.rejectValue("password", "message.password.denied_value");
 		}
 		if (!(user.getEmail().matches(REGEX_EMAIL))) {
-			errors.rejectValue("email", "message.denied_value");
+			errors.rejectValue("email", "message.email.denied_value");
 		}
 		if (!(user.getAddress().getCountry().equals(Country.BRAZIL)
 				|| user.getAddress().getCountry().equals(Country.OTHER))) {
-			errors.rejectValue("address.country", "message.denied_value");
+			errors.rejectValue("address.country", "message.country.denied_value");
 		}
 		if (!(user.getAddress().getState().matches(REGEX_CITY_OR_STATE))) {
 			errors.rejectValue("address.state", "message.denied_value");
@@ -64,7 +64,7 @@ public class UserValidator implements Validator {
 			errors.rejectValue("address.city", "message.denied_value");
 		}
 		if (!(user.getAddress().getCep().matches(REGEX_CEP))) {
-			errors.rejectValue("address.cep", "message.denied_value");
+			errors.rejectValue("address.cep", "message.cep.denied_value");
 		}
 	}
 

@@ -45,26 +45,26 @@ public class User implements UserDetails {
 
 	@NotNull
 	@Column(name = "first_name", nullable = false)
-	@Pattern(regexp = "[a-zA-Z]+", message = "O nome deve conter apenas letras.")
+	@Pattern(regexp = "[a-zA-Z]+")
 	private String firstName;
 
 	@NotNull
 	@Column(name = "last_name", nullable = false)
-	@Pattern(regexp = "[a-zA-Z]+", message = "O nome deve conter apenas letras.")
+	@Pattern(regexp = "[a-zA-Z]+")
 	private String lastName;
 
 	@NotNull
-	@Size(min = MIN_LOGIN_LENGTH, max = MAX_LENGTH, message = "mensagem erro username")
+	@Size(min = MIN_LOGIN_LENGTH, max = MAX_LENGTH)
 	@Column(name = "username", nullable = false, unique = true)
 	private String login;
 
 	@NotNull
-	@Size(min = MIN_PASSWORD_LENGTH, max = MAX_LENGTH, message = "mensagem erro senha")
+	@Size(min = MIN_PASSWORD_LENGTH, max = MAX_LENGTH)
 	@Column(name = "password", nullable = false)
 	private String password;
 
 	@NotNull
-	@Email(regexp = "^((?!_)(?!\\.))[a-z0-9._]+[a-z0-9]+@{1}\\w+\\.com{1}(\\.br)*$", message = "O email informado é inválido.")
+	@Email(regexp = "^((?!_)(?!\\.))[a-z0-9._]+[a-z0-9]+@{1}\\w+\\.com{1}(\\.br)*$")
 	@Column(name = "email", nullable = false, unique = true)
 	private String email;
 

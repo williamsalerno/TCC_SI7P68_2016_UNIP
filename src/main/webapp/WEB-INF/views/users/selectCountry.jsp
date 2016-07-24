@@ -19,6 +19,14 @@
 							<option value="OTHER">OTHER</option>
 						</select>
 					</div>
+					<spring:hasBindErrors name="address">
+						<c:forEach var="error" items="${errors.allErrors }">
+							<div class="message-error" style="text-align: center;">
+								<strong><spring:message code="${error.code }"
+										text="${error.defaultMessage}" /></strong>
+							</div>
+						</c:forEach>
+					</spring:hasBindErrors>
 					<hr style="margin: 40px;">
 					<div class="btnForm">
 						<button type="submit" class="btn btn-default" id="countryButton">
@@ -27,16 +35,6 @@
 					</div>
 					<br>
 				</form>
-				<div>
-					<spring:hasBindErrors name="address">
-						<c:forEach var="error" items="${errors.allErrors }">
-							<div class="alert alert-danger" style="text-align: center;">
-								<spring:message code="${error.code }"
-									text="${error.defaultMessage}" />
-							</div>
-						</c:forEach>
-					</spring:hasBindErrors>
-				</div>
 			</div>
 		</div>
 	</div>

@@ -1,8 +1,9 @@
 package br.com.springmvc.timetrialfactory.controllers;
 
-import static br.com.springmvc.timetrialfactory.models.enums.Country.BRAZIL;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,9 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.com.springmvc.timetrialfactory.daos.UserDAO;
 import br.com.springmvc.timetrialfactory.models.User;
 import br.com.springmvc.timetrialfactory.models.embeddables.Address;
-import br.com.springmvc.timetrialfactory.models.enums.Country;
 import br.com.springmvc.timetrialfactory.validation.AddressValidator;
-import br.com.springmvc.timetrialfactory.validation.UserValidator;
 
 @Controller
 @Transactional
@@ -35,21 +34,13 @@ public class UsersController {
 	@Autowired
 	private UserDAO userDao;
 
-	@Autowired
-	private UserValidator userValidator;
-
 	@InitBinder("address")
 	protected void initAddressBinder(WebDataBinder binder) {
 		binder.setValidator(new AddressValidator());
 	}
 
-	@InitBinder("user")
-	protected void initUserBinder(WebDataBinder binder) {
-		binder.setValidator(userValidator);
-	}
-
 	@RequestMapping(method = POST, value = "/newUser/form", name = "user")
-	public String newUser(@ModelAttribute("user") @Validated User user, BindingResult result, RedirectAttributes attr) {
+	public String newUser(@ModelAttribute("user") @Valid User user, BindingResult result, RedirectAttributes attr) {
 		if (result.hasErrors()) {
 			attr.addFlashAttribute("org.springframework.validation.BindingResult.user", result);
 			attr.addFlashAttribute("user", user);
@@ -64,7 +55,7 @@ public class UsersController {
 	}
 
 	@RequestMapping(method = GET, value = "/user")
-	public ModelAndView login(@Validated User user) {
+	public ModelAndView login(@Valid User user) {
 		userDao.load(user.getId());
 		ModelAndView modelAndView = new ModelAndView("games/list");
 		return modelAndView;
