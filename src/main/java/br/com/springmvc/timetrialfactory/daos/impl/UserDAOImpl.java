@@ -2,6 +2,7 @@ package br.com.springmvc.timetrialfactory.daos.impl;
 
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
 import br.com.springmvc.timetrialfactory.daos.AbstractDAO;
@@ -9,6 +10,7 @@ import br.com.springmvc.timetrialfactory.daos.UserDAO;
 import br.com.springmvc.timetrialfactory.models.User;
 
 @Repository("userDao")
+@Scope("prototype")
 public class UserDAOImpl extends AbstractDAO<Long, User> implements UserDAO {
 
 	@Override

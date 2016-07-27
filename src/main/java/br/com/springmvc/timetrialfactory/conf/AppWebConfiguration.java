@@ -29,9 +29,11 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import com.google.common.cache.CacheBuilder;
 
 import br.com.springmvc.timetrialfactory.apis.paypal.PayPalCall;
+import br.com.springmvc.timetrialfactory.controllers.AuthenticationController;
 import br.com.springmvc.timetrialfactory.controllers.HomeController;
 import br.com.springmvc.timetrialfactory.controllers.PaymentController;
-import br.com.springmvc.timetrialfactory.controllers.UsersController;
+import br.com.springmvc.timetrialfactory.controllers.UserController;
+import br.com.springmvc.timetrialfactory.controllers.VisitorController;
 import br.com.springmvc.timetrialfactory.daos.GameDAO;
 import br.com.springmvc.timetrialfactory.daos.PurchaseDAO;
 import br.com.springmvc.timetrialfactory.daos.impl.UserDAOImpl;
@@ -43,9 +45,10 @@ import br.com.springmvc.timetrialfactory.viewresolver.JsonViewResolver;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackageClasses = { HomeController.class, GameDAO.class, UserServiceImpl.class, UserDAOImpl.class, PurchaseDAO.class, ShoppingCart.class,
-		PaymentController.class, PayPalCall.class, UserWeb.class, UsersController.class, UserValidator.class })
 @EnableCaching
+@ComponentScan(basePackageClasses = { HomeController.class, GameDAO.class, UserServiceImpl.class, UserDAOImpl.class,
+		PurchaseDAO.class, ShoppingCart.class, PaymentController.class, PayPalCall.class, UserWeb.class,
+		VisitorController.class, UserValidator.class, AuthenticationController.class, UserController.class })
 public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 
 	@Bean

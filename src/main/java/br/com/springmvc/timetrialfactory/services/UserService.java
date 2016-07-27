@@ -10,4 +10,6 @@ public interface UserService {
 	
 	void updateUser(User user);
 	
+	User load(String login);
+	
 }

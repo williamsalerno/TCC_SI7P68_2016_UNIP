@@ -8,7 +8,8 @@
 			<section class="login">
 				<div class="escondido">
 					<h2>Login</h2>
-					<form:form servletRelativeAction="user" class="form-horizontal">
+					<form:form modelAttribute="user" servletRelativeAction="login"
+						method="post" class="form-horizontal">
 						<div class="input-group">
 							<span class="input-group-addon" id="basic-addon1"><span
 								class="glyphicon glyphicon-log-in" aria-hidden="true"></span></span><input
@@ -32,12 +33,11 @@
 						<c:if test="${success }">
 							<div class="alert alert-success" style="text-align: center;">
 								<fmt:message var="messageNewUser" key="message.success" />
-								<c:set var="messageSuccess"
-									value="${messageNewUser }" />
+								<c:set var="messageSuccess" value="${messageNewUser }" />
 								${messageSuccess }
 							</div>
 						</c:if>
-						<c:if test="${error.category ne messageId }">
+						<c:if test="${loginError }">
 							<div class="alert alert-danger" style="text-align: center;">
 								<strong><fmt:message key="message.error" /></strong>
 								<fmt:message key="message.invalidCredential" />

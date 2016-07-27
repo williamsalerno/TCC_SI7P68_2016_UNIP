@@ -59,4 +59,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		return user;
 	}
 
+	@Override
+	public User load(String login) {
+		return (User) loadUserByUsername(login);
+	}
+
 }

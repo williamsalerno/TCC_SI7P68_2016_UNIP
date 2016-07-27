@@ -5,8 +5,6 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 import javax.validation.Valid;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,7 +12,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -26,10 +23,8 @@ import br.com.springmvc.timetrialfactory.validation.AddressValidator;
 
 @Controller
 @Transactional
-@RequestMapping("/")
-public class UsersController {
-
-	private final Logger logger = LoggerFactory.getLogger(UsersController.class);
+@RequestMapping("/newUser")
+public class VisitorController {
 
 	@Autowired
 	private UserService service;
@@ -39,8 +34,8 @@ public class UsersController {
 		binder.setValidator(new AddressValidator());
 	}
 
-	@RequestMapping(method = POST, value = "/newUser/form", name = "user")
-	public ModelAndView newUser(@ModelAttribute("user") @Valid User user, BindingResult result, RedirectAttributes attr) {
+	@RequestMapping(method = POST, value = "/form", name = "user")
+	public ModelAndView newUser(@Valid User user, BindingResult result, RedirectAttributes attr) {
 		if (result.hasErrors()) {
 			attr.addFlashAttribute("org.springframework.validation.BindingResult.user", result);
 			ModelAndView modelAndView = new ModelAndView("users/newUser");
@@ -57,24 +52,11 @@ public class UsersController {
 		}
 	}
 
-	@RequestMapping(method = GET, value = "/user")
-	public ModelAndView login(@Valid User user) {
-		service.findById(user.getId());
-		ModelAndView modelAndView = new ModelAndView("games/list");
-		return modelAndView;
-	}
-
-	@RequestMapping(method = GET, value = "/login")
-	public ModelAndView loginForm() {
-		ModelAndView modelAndView = new ModelAndView("users/login");
-		return modelAndView;
-	}
-
-	@RequestMapping(method = GET, value = "/newUser/form")
+	@RequestMapping(method = GET, value = "/form")
 	public ModelAndView newUserForm(@Validated Address address, BindingResult result, RedirectAttributes attr) {
 		if (result.hasErrors()) {
 			attr.addFlashAttribute("org.springframework.validation.BindingResult.address", result);
-			return new ModelAndView("redirect:/newUser/selectCountry");
+			return new ModelAndView("redirect:/selectCountry");
 		} else {
 			ModelAndView modelAndView = new ModelAndView("users/newUser");
 			modelAndView.addObject("country", address);
@@ -83,7 +65,7 @@ public class UsersController {
 		}
 	}
 
-	@RequestMapping(method = GET, value = "/newUser/selectCountry")
+	@RequestMapping(method = GET, value = "/selectCountry")
 	public ModelAndView selectCountry() {
 		ModelAndView modelAndView = new ModelAndView("users/selectCountry");
 		return modelAndView;
