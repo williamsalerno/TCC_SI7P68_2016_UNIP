@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	@Override
 	public boolean saveUser(User user) {
-		if (!dao.checkUser(user)) {
+		if (dao.checkUser(user)) {
 			dao.saveUser(user);
 			return true;
 		} else {
