@@ -23,9 +23,11 @@ public class UserDAOImpl extends AbstractDAO<Long, User> implements UserDAO {
 
 	@Override
 	public boolean checkUser(User user) {
-		Criteria criteria = createEntityCriteria();
-		criteria.add(Restrictions.eq("login", user.getLogin())).add(Restrictions.eq("email", user.getEmail()));
-		return (User) criteria.uniqueResult() != null;
+		Criteria criteriaLogin = createEntityCriteria();
+		Criteria criteriaEmail = createEntityCriteria();
+		criteriaLogin.add(Restrictions.eq("login", user.getLogin()));
+		criteriaEmail.add(Restrictions.eq("email", user.getEmail()));
+		return criteriaLogin.uniqueResult() == null && criteriaEmail.uniqueResult() == null;
 	}
 
 	@Override

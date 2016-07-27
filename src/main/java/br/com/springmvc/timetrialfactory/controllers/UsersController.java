@@ -40,18 +40,20 @@ public class UsersController {
 	}
 
 	@RequestMapping(method = POST, value = "/newUser/form", name = "user")
-	public String newUser(@ModelAttribute("user") @Valid User user, BindingResult result, RedirectAttributes attr) {
+	public ModelAndView newUser(@ModelAttribute("user") @Valid User user, BindingResult result, RedirectAttributes attr) {
 		if (result.hasErrors()) {
 			attr.addFlashAttribute("org.springframework.validation.BindingResult.user", result);
-			attr.addFlashAttribute("user", user);
-			attr.addFlashAttribute("country", user.getAddress().getCountry().getName());
-			return "users/newUser";
+			ModelAndView modelAndView = new ModelAndView("users/newUser");
+			modelAndView.addObject("settedCountry", user.getAddress().getCountry().getName());
+			return modelAndView;
 		} else if (!service.saveUser(user)) {
-			attr.addFlashAttribute("userLogin", user.getLogin());
-			return "users/newUser";
+			ModelAndView modelAndView = new ModelAndView("users/newUser");
+			modelAndView.addObject("error", true);
+			modelAndView.addObject("settedCountry", user.getAddress().getCountry().getName());
+			return modelAndView;
 		} else {
 			attr.addFlashAttribute("success", true);
-			return "redirect:/login";
+			return new ModelAndView("redirect:/login");
 		}
 	}
 

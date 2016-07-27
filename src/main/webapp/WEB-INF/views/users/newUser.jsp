@@ -28,10 +28,10 @@
 						<form:input type="text" class="form-control" path="firstName"
 							placeholder="${phFirstName }" aria-describedby="basic-addon1"
 							required="required" />
-						<strong><form:errors path="firstName"
+						<br> <strong><form:errors path="firstName"
 								cssClass="message-error" /></strong>
 					</div>
-					<br>
+
 					<div class="input-group">
 						<fmt:message var="phLastName" key="placeholder.lastName" />
 						<span class="input-group-addon" id="basic-addon1"><span
@@ -39,19 +39,17 @@
 						<form:input type="text" class="form-control" path="lastName"
 							placeholder="${phLastName }" aria-describedby="basic-addon1"
 							required="required" />
-						<strong><form:errors path="lastName"
+						<br> <strong><form:errors path="lastName"
 								cssClass="message-error" /></strong>
 					</div>
-					<br>
 					<div class="input-group">
 						<fmt:message var="phEmail" key="placeholder.email" />
 						<span class="input-group-addon" id="basic-addon1">@</span>
 						<form:input type="email" class="form-control" path="email"
 							placeholder="${phEmail }" required="required" />
-						<strong><form:errors path="email"
+						<strong><br> <form:errors path="email"
 								cssClass="message-error" /> </strong>
 					</div>
-					<br>
 					<br>
 					<div class="input-group">
 						<span class="input-group-addon" id="basic-addon1"><span
@@ -61,40 +59,37 @@
 						<strong><form:errors path="address.country"
 								cssClass="message-error" /> </strong>
 					</div>
-					<br>
-					<c:set var="selectedCountry" value="${param.country}" />
+					<c:set var="brazil" value="BRAZIL" />
 					<c:if
-						test="${address.country eq selectedCountry or selectedCountry eq BRAZIL}">
+						test="${brazil eq param.country or brazil eq settedCountry}">
 						<div class="input-group">
 							<fmt:message var="phCep" key="placeholder.cep" />
 							<span class="input-group-addon" id="basic-addon1"><span
 								class="glyphicon glyphicon-home" aria-hidden="true"></span></span>
 							<form:input type="text" class="form-control" path="address.cep"
 								placeholder="${phCep }" required="required" />
-							<strong><form:errors path="address.cep"
-									cssClass="message-error" /> </strong>
+							<br> <strong> <form:errors path="address.cep"
+									cssClass="message-error" />
+							</strong>
 						</div>
-						<br>
 						<div class="input-group">
 							<fmt:message var="phCity" key="placeholder.city" />
 							<span class="input-group-addon" id="basic-addon1"><span
 								class="glyphicon glyphicon-home" aria-hidden="true"></span></span>
 							<form:input type="text" class="form-control" path="address.city"
 								placeholder="${phCity }" required="required" />
-							<strong><form:errors path="address.city"
+							<strong><br> <form:errors path="address.city"
 									cssClass="message-error" /> </strong>
 						</div>
-						<br>
 						<div class="input-group">
 							<fmt:message var="phState" key="placeholder.state" />
 							<span class="input-group-addon" id="basic-addon1"><span
 								class="glyphicon glyphicon-home" aria-hidden="true"></span></span>
 							<form:input type="text" class="form-control" path="address.state"
 								placeholder="${phState }" required="required" />
-							<strong><form:errors path="address.state"
+							<strong><br> <form:errors path="address.state"
 									cssClass="message-error" /> </strong>
 						</div>
-						<br>
 						<br>
 					</c:if>
 					<div class="input-group">
@@ -103,20 +98,19 @@
 							class="glyphicon glyphicon-log-in" aria-hidden="true"></span></span>
 						<form:input type="text" class="form-control" path="login"
 							placeholder="${phUsername }" required="required" />
-						<strong><form:errors path="login"
-								cssClass="message-error" /> </strong>
+						<strong> <br> <form:errors path="login"
+								cssClass="message-error" />
+						</strong>
 					</div>
-					<br>
 					<div class="input-group">
 						<fmt:message var="phPassword" key="placeholder.password" />
 						<span class="input-group-addon" id="basic-addon1"><span
 							class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></span>
 						<form:input type="password" class="form-control" id="password"
 							path="password" placeholder="${phPassword }" required="required" />
-						<strong><form:errors path="password"
+						<strong><br> <form:errors path="password"
 								cssClass="message-error" /> </strong>
 					</div>
-					<br>
 					<div class="input-group">
 						<span class="input-group-addon" id="basic-addon1"><span
 							class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></span><input
@@ -126,11 +120,13 @@
 							required="required">
 					</div>
 					<hr style="margin: 40px;">
-					<c:set var="errorNewUser" value="${newUserMessageError}" />
-					<div class="alert alert-danger" style="text-align: center;">
-						<fmt:message key="message.invalidValue" />
-						<strong>${userLogin }</strong>
-					</div>
+					<c:if test="${error}">
+						<div class="alert alert-danger" style="text-align: center;">
+							<fmt:message key="message.invalidValue" />
+							<strong>${userLogin }</strong>
+						</div>
+					</c:if>
+					<input type="text" value="${loginError }" />
 					<div class="btnForm">
 						<button type="submit" class="btn btn-default">Confirmar</button>
 					</div>

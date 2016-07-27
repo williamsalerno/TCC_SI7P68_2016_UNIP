@@ -11,13 +11,13 @@
 					</h2>
 					<div class="input-group">
 						<span class="input-group-addon" id="basic-addon1"><span
-							class="glyphicon glyphicon-globe" aria-hidden="true"></span></span> <select
+							class="glyphicon glyphicon-globe" aria-hidden="true"></span></span> <strong><select
 							class="form-control" id="country" name="country"
 							value="${country.name }" aria-describedby="basic-addon1"
 							required="required">
-							<option value="BRAZIL">BRAZIL</option>
-							<option value="OTHER">OTHER</option>
-						</select>
+								<option value="BRAZIL">BRAZIL</option>
+								<option value="OTHER">OTHER</option>
+						</select></strong>
 					</div>
 					<spring:hasBindErrors name="address">
 						<c:forEach var="error" items="${errors.allErrors }">

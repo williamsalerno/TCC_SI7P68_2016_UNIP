@@ -33,7 +33,7 @@
 							<div class="alert alert-success" style="text-align: center;">
 								<fmt:message var="messageNewUser" key="message.success" />
 								<c:set var="messageSuccess"
-									value="${success } - ${messageNewUser }" />
+									value="${messageNewUser }" />
 								${messageSuccess }
 							</div>
 						</c:if>
