@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.com.springmvc.timetrialfactory.daos.GameDAO;
 import br.com.springmvc.timetrialfactory.models.Game;
+import br.com.springmvc.timetrialfactory.services.GameService;
 import br.com.springmvc.timetrialfactory.validation.GameValidator;
 
 @Controller
@@ -27,7 +27,7 @@ import br.com.springmvc.timetrialfactory.validation.GameValidator;
 public class GamesController {
 
 	@Autowired
-	private GameDAO gameDao;
+	private GameService service;
 
 	@InitBinder
 	protected void initBinder(WebDataBinder binder) {
@@ -41,7 +41,7 @@ public class GamesController {
 		if (result.hasErrors()) {
 			return gamesForm(game);
 		}
-		gameDao.save(game);
+		service.saveGame(game);
 		redirectAttributes.addFlashAttribute("sucesso", "Produto cadastrado com sucesso!");
 		return new ModelAndView("redirect:list");
 	}
@@ -58,14 +58,14 @@ public class GamesController {
 	@Cacheable(value = "games")
 	public ModelAndView list() {
 		ModelAndView modelAndView = new ModelAndView("games/list");
-		modelAndView.addObject("games", gameDao.list());
+		modelAndView.addObject("games", service.listGames());
 		return modelAndView;
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/details/{id}")
 	public ModelAndView show(Long id) {
 		ModelAndView modelAndView = new ModelAndView("games/details");
-		Game game = (Game) gameDao.load(id);
+		Game game = (Game) service.findGameById(id);
 		modelAndView.addObject("game", game);
 		return modelAndView;
 	}

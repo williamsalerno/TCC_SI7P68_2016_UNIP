@@ -2,7 +2,6 @@ package br.com.springmvc.timetrialfactory.daos.impl;
 
 import java.util.List;
 
-import org.hibernate.Criteria;
 import org.springframework.stereotype.Repository;
 
 import br.com.springmvc.timetrialfactory.daos.AbstractDAO;
@@ -12,12 +11,10 @@ import br.com.springmvc.timetrialfactory.models.Game;
 @Repository("gameDao")
 public class GameDAOImpl extends AbstractDAO<Long, Game> implements GameDAO {
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "deprecation" })
 	@Override
 	public List<Game> listGames() {
-		Criteria criteria = createEntityCriteria();
-		criteria.createCriteria("select * from game").list();
-		return (List<Game>) criteria;
+		return getSession().createCriteria(Game.class).list();
 	}
 
 	@Override

@@ -30,15 +30,17 @@ import com.google.common.cache.CacheBuilder;
 
 import br.com.springmvc.timetrialfactory.apis.paypal.PayPalCall;
 import br.com.springmvc.timetrialfactory.controllers.AuthenticationController;
+import br.com.springmvc.timetrialfactory.controllers.GamesController;
 import br.com.springmvc.timetrialfactory.controllers.HomeController;
 import br.com.springmvc.timetrialfactory.controllers.PaymentController;
 import br.com.springmvc.timetrialfactory.controllers.UserController;
 import br.com.springmvc.timetrialfactory.controllers.VisitorController;
-import br.com.springmvc.timetrialfactory.daos.GameDAO;
 import br.com.springmvc.timetrialfactory.daos.PurchaseDAO;
+import br.com.springmvc.timetrialfactory.daos.impl.GameDAOImpl;
 import br.com.springmvc.timetrialfactory.daos.impl.UserDAOImpl;
 import br.com.springmvc.timetrialfactory.models.ShoppingCart;
 import br.com.springmvc.timetrialfactory.models.UserWeb;
+import br.com.springmvc.timetrialfactory.services.GameServiceImpl;
 import br.com.springmvc.timetrialfactory.services.UserServiceImpl;
 import br.com.springmvc.timetrialfactory.validation.UserValidator;
 import br.com.springmvc.timetrialfactory.viewresolver.JsonViewResolver;
@@ -46,9 +48,10 @@ import br.com.springmvc.timetrialfactory.viewresolver.JsonViewResolver;
 @Configuration
 @EnableWebMvc
 @EnableCaching
-@ComponentScan(basePackageClasses = { HomeController.class, GameDAO.class, UserServiceImpl.class, UserDAOImpl.class,
-		PurchaseDAO.class, ShoppingCart.class, PaymentController.class, PayPalCall.class, UserWeb.class,
-		VisitorController.class, UserValidator.class, AuthenticationController.class, UserController.class })
+@ComponentScan(basePackageClasses = { HomeController.class, GameDAOImpl.class, GameServiceImpl.class,
+		UserServiceImpl.class, UserDAOImpl.class, PurchaseDAO.class, ShoppingCart.class, PaymentController.class,
+		PayPalCall.class, UserWeb.class, VisitorController.class, UserValidator.class, AuthenticationController.class,
+		UserController.class, GamesController.class })
 public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 
 	@Bean

@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.com.springmvc.timetrialfactory.daos.GameDAO;
 import br.com.springmvc.timetrialfactory.models.Game;
 import br.com.springmvc.timetrialfactory.models.ShoppingCart;
 import br.com.springmvc.timetrialfactory.models.ShoppingItem;
+import br.com.springmvc.timetrialfactory.services.GameService;
 
 @Controller
 @RequestMapping("/shopping")
@@ -20,7 +20,7 @@ import br.com.springmvc.timetrialfactory.models.ShoppingItem;
 public class ShoppingCartController {
 
 	@Autowired
-	private GameDAO gameDao;
+	private GameService service;
 
 	@Autowired
 	private ShoppingCart shoppingCart;
@@ -32,14 +32,14 @@ public class ShoppingCartController {
 		return new ModelAndView("redirect:/games");
 	}
 
-	private ShoppingItem createItem(Long gameId) {
-		Game game = (Game) gameDao.load(gameId);
+	private ShoppingItem createItem(Long id) {
+		Game game = (Game) service.findGameById(id);
 		ShoppingItem item = new ShoppingItem(game);
 		return item;
 	}
-	
-	@RequestMapping(method=RequestMethod.GET)
-	public String items(){
+
+	@RequestMapping(method = RequestMethod.GET)
+	public String items() {
 		return "shoppingCart/items";
 	}
 
