@@ -22,6 +22,11 @@ public class UserDAOImpl extends AbstractDAO<Long, User> implements UserDAO {
 	public void saveUser(User user) {
 		persist(user);
 	}
+	
+	@Override
+	public void updateUser(User user) {
+		update(user);
+	}
 
 	@Override
 	public boolean checkUser(User user) {
@@ -38,5 +43,7 @@ public class UserDAOImpl extends AbstractDAO<Long, User> implements UserDAO {
 		criteria.add(Restrictions.eq("login", login));
 		return (User) criteria.uniqueResult();
 	}
+
+
 
 }

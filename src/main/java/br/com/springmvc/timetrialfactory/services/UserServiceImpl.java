@@ -47,6 +47,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 			entity.setAddress(user.getAddress());
 			entity.setEmail(user.getEmail());
 			entity.setPassword(user.getPassword());
+			dao.updateUser(user);
 		}
 	}
 

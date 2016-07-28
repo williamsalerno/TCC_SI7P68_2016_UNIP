@@ -9,18 +9,24 @@
 	</div>
 	<fieldset>
 		<legend>Editar Produto</legend>
-		<form action="<c:url value="/games/${game.id }"/>" method="post">
+		<c:url var="editGame_url" value="/games/${game.id }" />
+		<form:form modelAttribute="game" action="${editGame_url }"
+			method="post">
 			<input type="hidden" name="${_csrf.parameterName }"
-				value="${_csrf.token }" /> <img
-				src="<c:url value="/games/${game.id }/image"/>" width="100"
-				height="100"></img> <label for="title">Título:</label> <input
-				id="title" type="text" name="game.title" value="${game.title }" />
-			<label for="price">Preço:</label> <input id="price" type="text"
-				name="game.price" value="${game.price }" />
+				value="${_csrf.token }" />
+			<img src="<c:url value="/games/${game.id }/image"/>" width="100"
+				height="100"></img>
+			<label for="title">Título:</label>
+			<input id="title" type="text" name="game.title"
+				value="${game.title }" />
+			<label for="price">Preço:</label>
+			<input id="price" type="text" name="game.price"
+				value="${game.price }" />
 			<button type="submit" name="_method" value="put">Alterar</button>
 			<button type="submit" name="_method" value="delete">Apagar</button>
-		</form>
-		<form action="<c:url value="/games/${game.id }/image"/>" method="post"
+		</form:form>
+		<c:url var="editImageGame_url" value="/games/${game.id }/image" />
+		<form:form action="${editImageGame_url }" method="post"
 			enctype="multipart/form-data">
 			<input type="hidden" name="${_csrf.parameterName }"
 				value="${_csrf.token }" />
@@ -29,7 +35,7 @@
 				<input type="file" name="image">
 				<button type="submit">Enviar</button>
 			</fieldset>
-		</form>
+		</form:form>
 		<form action="<c:url value="/games"/>" method="get">
 			<button type="submit">Voltar</button>
 		</form>
