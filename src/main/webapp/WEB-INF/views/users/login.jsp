@@ -8,9 +8,8 @@
 			<section class="login">
 				<div class="escondido">
 					<h2>Login</h2>
-					<c:url var="login_url" value="/login" />
-					<form:form action="${login_url }" modelAttribute="user"
-						method="post" class="form-horizontal">
+					<form:form servletRelativeAction="/login" modelAttribute="user"
+						class="form-horizontal">
 						<div class="input-group">
 							<fmt:message var="phUsername" key="placeholder.username" />
 							<span class="input-group-addon" id="basic-addon1"><span
