@@ -13,6 +13,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.web.accept.ContentNegotiationManager;
 import org.springframework.web.servlet.LocaleResolver;
@@ -40,6 +41,7 @@ import br.com.springmvc.timetrialfactory.daos.impl.GameDAOImpl;
 import br.com.springmvc.timetrialfactory.daos.impl.UserDAOImpl;
 import br.com.springmvc.timetrialfactory.models.ShoppingCart;
 import br.com.springmvc.timetrialfactory.models.UserWeb;
+import br.com.springmvc.timetrialfactory.security.SecurityConfiguration;
 import br.com.springmvc.timetrialfactory.services.GameServiceImpl;
 import br.com.springmvc.timetrialfactory.services.UserServiceImpl;
 import br.com.springmvc.timetrialfactory.validation.UserValidator;
@@ -52,6 +54,7 @@ import br.com.springmvc.timetrialfactory.viewresolver.JsonViewResolver;
 		UserServiceImpl.class, UserDAOImpl.class, PurchaseDAO.class, ShoppingCart.class, PaymentController.class,
 		PayPalCall.class, UserWeb.class, VisitorController.class, UserValidator.class, AuthenticationController.class,
 		UserController.class, GamesController.class })
+@Import({SecurityConfiguration.class})
 public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 
 	@Bean

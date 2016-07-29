@@ -2,6 +2,8 @@ package br.com.springmvc.timetrialfactory.conf;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import br.com.springmvc.timetrialfactory.security.SecurityConfiguration;
+
 public class ServletSpringMVC extends AbstractAnnotationConfigDispatcherServletInitializer {
 
 	@Override
