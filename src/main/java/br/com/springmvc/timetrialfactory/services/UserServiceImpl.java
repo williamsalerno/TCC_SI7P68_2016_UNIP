@@ -47,7 +47,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 			entity.setAddress(user.getAddress());
 			entity.setEmail(user.getEmail());
 			entity.setPassword(user.getPassword());
-			dao.updateUser(user);
 		}
 	}
 
@@ -55,14 +54,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
 		User user = dao.getUserByLogin(login);
 		if (user == null) {
-			throw new UsernameNotFoundException("");
+			throw new UsernameNotFoundException("Credenciais inválidas.");
 		}
 		return user;
-	}
-
-	@Override
-	public User load(String login) {
-		return (User) loadUserByUsername(login);
 	}
 
 }

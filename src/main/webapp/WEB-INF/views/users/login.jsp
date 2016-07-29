@@ -1,5 +1,5 @@
 
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <div id="wrapper">
 	<%@ include file="/WEB-INF/jspf/header.jspf"%>
@@ -8,22 +8,22 @@
 			<section class="login">
 				<div class="escondido">
 					<h2>Login</h2>
-					<form:form modelAttribute="user" servletRelativeAction="login"
+					<c:url var="login_url" value="/login" />
+					<form:form action="${login_url }" modelAttribute="user"
 						method="post" class="form-horizontal">
 						<div class="input-group">
+							<fmt:message var="phUsername" key="placeholder.username" />
 							<span class="input-group-addon" id="basic-addon1"><span
-								class="glyphicon glyphicon-log-in" aria-hidden="true"></span></span><input
-								type="text" class="form-control" id="login" name="username"
-								value='' placeholder=<fmt:message key="placeholder.username"/>
-								required="required">
+								class="glyphicon glyphicon-log-in" aria-hidden="true"></span></span>
+							<form:input type="text" class="form-control" path="login"
+								placeholder="${phUsername }" required="required" />
 						</div>
 						<div class="input-group">
+							<fmt:message var="phPassword" key="placeholder.password" />
 							<span class="input-group-addon" id="basic-addon1"><span
 								class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></span>
-							<input type="password" class="form-control" id="password"
-								name="password"
-								placeholder=<fmt:message key="placeholder.password"/>
-								required="required">
+							<form:input type="password" class="form-control" path="password"
+								placeholder="${phPassword }" required="required" />
 						</div>
 						<div class="btnForm" style="padding-bottom: 30px;">
 							<input name="submit" type="submit" class="btn btn-default"
@@ -37,7 +37,7 @@
 								${messageSuccess }
 							</div>
 						</c:if>
-						<c:if test="${loginError }">
+						<c:if test="${param.error }">
 							<div class="alert alert-danger" style="text-align: center;">
 								<strong><fmt:message key="message.error" /></strong>
 								<fmt:message key="message.invalidCredential" />

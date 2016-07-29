@@ -10,9 +10,9 @@
 	<div class="containerLogin">
 		<div class="content">
 			<div class="login">
-				<c:url var="login_url" value="/newUser/form" />
+				<c:url var="newUser_url" value="/newUser/form" />
 				<form:form class="escondido form-horizontal" role="form"
-					id="usersForm" action="${login_url }" method="post"
+					id="usersForm" action="${newUser_url }" method="post"
 					commandName="user">
 					<input type="hidden" name="${_csrf.parameterName }"
 						value="${_csrf.token }" />
