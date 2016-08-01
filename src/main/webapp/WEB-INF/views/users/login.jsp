@@ -8,8 +8,9 @@
 			<section class="login">
 				<div class="escondido">
 					<h2>Login</h2>
-					<form:form servletRelativeAction="/login" modelAttribute="user"
-						class="form-horizontal">
+					<c:url var="login_url" value="/login" />
+					<form:form action="${login_url }" modelAttribute="user"
+						class="form-horizontal" method="post">
 						<div class="input-group">
 							<fmt:message var="phUsername" key="placeholder.username" />
 							<span class="input-group-addon" id="basic-addon1"><span
@@ -36,7 +37,7 @@
 								${messageSuccess }
 							</div>
 						</c:if>
-						<c:if test="${param.error }">
+						<c:if test="${param.error != null }">
 							<div class="alert alert-danger" style="text-align: center;">
 								<strong><fmt:message key="message.error" /></strong>
 								<fmt:message key="message.invalidCredential" />

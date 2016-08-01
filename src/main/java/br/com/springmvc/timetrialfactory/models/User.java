@@ -1,17 +1,11 @@
 package br.com.springmvc.timetrialfactory.models;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -22,19 +16,12 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.validator.constraints.Email;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import br.com.springmvc.timetrialfactory.models.embeddables.Address;
 
 @Entity
 @Table(name = "users", catalog = "users")
-public class User implements UserDetails {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 5342752026258113015L;
+public class User {
 
 	private static final int MIN_LOGIN_LENGTH = 3;
 	private static final int MIN_PASSWORD_LENGTH = 6;
@@ -74,9 +61,6 @@ public class User implements UserDetails {
 	@Valid
 	private Address address;
 
-	@ManyToMany(fetch = FetchType.EAGER)
-	private List<Role> roles = new ArrayList<>();
-
 	public Long getId() {
 		return id;
 	}
@@ -109,6 +93,10 @@ public class User implements UserDetails {
 		this.login = login;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
@@ -129,41 +117,6 @@ public class User implements UserDetails {
 		this.address = address;
 	}
 
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return roles;
-	}
-
-	@Override
-	public String getPassword() {
-		return password;
-	}
-
-	@Override
-	public String getUsername() {
-		return login;
-	}
-
-	@Override
-	public boolean isAccountNonExpired() {
-		return true;
-	}
-
-	@Override
-	public boolean isAccountNonLocked() {
-		return true;
-	}
-
-	@Override
-	public boolean isCredentialsNonExpired() {
-		return true;
-	}
-
-	@Override
-	public boolean isEnabled() {
-		return true;
-	}
-
 	public int hashCode() {
 		return new HashCodeBuilder().append(this.id).append(this.login).append(this.email).toHashCode();
 	}
@@ -179,7 +132,8 @@ public class User implements UserDetails {
 
 	public String toString() {
 		return new ToStringBuilder(this).append("firstName", this.firstName).append("lastName", this.lastName)
-				.append("email", this.email).append("address", this.address).append("login", this.login).append("password", this.password).build();
+				.append("email", this.email).append("address", this.address).append("login", this.login)
+				.append("password", this.password).build();
 	}
 
 }

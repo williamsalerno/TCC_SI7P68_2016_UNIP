@@ -1,9 +1,6 @@
 package br.com.springmvc.timetrialfactory.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,7 +9,7 @@ import br.com.springmvc.timetrialfactory.models.User;
 
 @Service("userService")
 @Transactional
-public class UserServiceImpl implements UserService, UserDetailsService {
+public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserDAO dao;
@@ -51,12 +48,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	}
 
 	@Override
-	public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-		User user = dao.getUserByLogin(login);
-		if (user == null) {
-			throw new UsernameNotFoundException("Credenciais inválidas.");
-		}
-		return user;
+	public User loadUserByUsername(String login) {
+		return dao.getUserByLogin(login);
 	}
 
 }

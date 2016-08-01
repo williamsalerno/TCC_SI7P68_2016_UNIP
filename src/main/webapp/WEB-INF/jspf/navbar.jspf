@@ -25,7 +25,6 @@
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<security:authorize access="isAuthenticated()">
-					<security:authentication property="main" var="user" />
 					<li style="padding-top: 14.5px; margin-right: 20px;"><span
 						class="userWeb-logged"><spring:message code="welcome"
 								arguments="${user.name }!" /></span></li>
@@ -35,14 +34,14 @@
 					<li><a href="<c:url value="/logout"/>"><span
 							class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 				</security:authorize>
-				<c:if test="${empty userWeb or !userWeb.logged}">
+				<security:authorize access="!isAuthenticated()">
 					<li><a id="newUser"
 						href="<c:url value="/newUser/selectCountry"/>"><span
 							class="glyphicon glyphicon-user"></span> <fmt:message
 								key="register" /></a></li>
 					<li><a href="<c:url value="/login"/>"><span
 							class="glyphicon glyphicon-log-in"></span> Login</a></li>
-				</c:if>
+				</security:authorize>
 			</ul>
 		</div>
 	</div>
