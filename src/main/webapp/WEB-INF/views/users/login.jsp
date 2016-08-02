@@ -37,7 +37,7 @@
 								${messageSuccess }
 							</div>
 						</c:if>
-						<c:if test="${param.error != null }">
+						<c:if test="${loginError != null }">
 							<div class="alert alert-danger" style="text-align: center;">
 								<strong><fmt:message key="message.error" /></strong>
 								<fmt:message key="message.invalidCredential" />

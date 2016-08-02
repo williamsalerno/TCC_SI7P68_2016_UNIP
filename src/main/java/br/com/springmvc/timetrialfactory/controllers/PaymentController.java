@@ -16,7 +16,7 @@ import com.paypal.api.payments.Payment;
 import br.com.springmvc.timetrialfactory.apis.paypal.PayPalCall;
 import br.com.springmvc.timetrialfactory.daos.PurchaseDAO;
 import br.com.springmvc.timetrialfactory.models.ShoppingCart;
-import br.com.springmvc.timetrialfactory.models.UserWeb;
+import br.com.springmvc.timetrialfactory.models.LoggedUser;
 import br.com.springmvc.timetrialfactory.services.PurchaseService;
 
 @Controller
@@ -34,7 +34,7 @@ public class PaymentController {
 	private PurchaseDAO purchaseDao;
 
 	@Autowired
-	private UserWeb userWeb;
+	private LoggedUser userWeb;
 
 	@RequestMapping(value = "checkout", method = RequestMethod.POST)
 	public Callable<String> checkout(String currency) {

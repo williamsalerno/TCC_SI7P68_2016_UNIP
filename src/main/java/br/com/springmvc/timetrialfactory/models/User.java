@@ -1,11 +1,17 @@
 package br.com.springmvc.timetrialfactory.models;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -16,13 +22,19 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.validator.constraints.Email;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import br.com.springmvc.timetrialfactory.models.embeddables.Address;
 
 @Entity
 @Table(name = "users", catalog = "users")
-public class User {
+public class User implements UserDetails {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6613442950079957241L;
 	private static final int MIN_LOGIN_LENGTH = 3;
 	private static final int MIN_PASSWORD_LENGTH = 6;
 	private static final int MAX_LENGTH = 12;
@@ -60,6 +72,9 @@ public class User {
 	@Embedded
 	@Valid
 	private Address address;
+
+	@ManyToMany(fetch = FetchType.EAGER)
+	private List<Role> roles = new ArrayList<Role>();
 
 	public Long getId() {
 		return id;
@@ -115,6 +130,36 @@ public class User {
 
 	public void setAddress(Address address) {
 		this.address = address;
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return roles;
+	}
+
+	@Override
+	public String getUsername() {
+		return login;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
 	}
 
 	public int hashCode() {

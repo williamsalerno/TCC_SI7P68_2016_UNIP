@@ -10,7 +10,7 @@ public interface UserDAO {
 
 	void updateUser(User user);
 
-	User getUserByLogin(String login);
+	User getUserByLoginAndPassword(String login, String password);
 
 	boolean checkUser(User user);
 

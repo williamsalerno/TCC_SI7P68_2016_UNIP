@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.springmvc.timetrialfactory.daos.RoleDAO;
 import br.com.springmvc.timetrialfactory.daos.UserDAO;
+import br.com.springmvc.timetrialfactory.models.Role;
 import br.com.springmvc.timetrialfactory.models.User;
 
 @Service("userService")
@@ -14,15 +16,19 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserDAO dao;
 
+	@Autowired
+	private RoleDAO roleDao;
+
 	@Override
 	public User findById(Long id) {
 		return dao.findById(id);
 	}
 
 	@Override
-	public boolean saveUser(User user) {
+	public boolean saveUser(User user, Role role) {
 		if (dao.checkUser(user)) {
 			dao.saveUser(user);
+			roleDao.saveRole(role);
 			return true;
 		} else {
 			return false;
@@ -48,8 +54,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User loadUserByUsername(String login) {
-		return dao.getUserByLogin(login);
+	public User loadUser(String login, String password) {
+		return dao.getUserByLoginAndPassword(login, password);
 	}
 
 }

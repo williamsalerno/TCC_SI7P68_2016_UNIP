@@ -38,9 +38,9 @@ public class UserDAOImpl extends AbstractDAO<Long, User> implements UserDAO {
 	}
 
 	@Override
-	public User getUserByLogin(String login) {
+	public User getUserByLoginAndPassword(String login, String password) {
 		Criteria criteria = createEntityCriteria();
-		criteria.add(Restrictions.eq("login", login));
+		criteria.add(Restrictions.eq("login", login)).add(Restrictions.eq("password", password));
 		return (User) criteria.uniqueResult();
 	}
 

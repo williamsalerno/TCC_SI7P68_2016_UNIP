@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.springmvc.timetrialfactory.models.Role;
 import br.com.springmvc.timetrialfactory.models.User;
 import br.com.springmvc.timetrialfactory.models.embeddables.Address;
 import br.com.springmvc.timetrialfactory.services.UserService;
@@ -41,7 +42,7 @@ public class VisitorController {
 			ModelAndView modelAndView = new ModelAndView("users/newUser");
 			modelAndView.addObject("settedCountry", user.getAddress().getCountry().getName());
 			return modelAndView;
-		} else if (!service.saveUser(user)) {
+		} else if (!service.saveUser(user, new Role("USER"))) {
 			ModelAndView modelAndView = new ModelAndView("users/newUser");
 			modelAndView.addObject("error", true);
 			modelAndView.addObject("settedCountry", user.getAddress().getCountry().getName());

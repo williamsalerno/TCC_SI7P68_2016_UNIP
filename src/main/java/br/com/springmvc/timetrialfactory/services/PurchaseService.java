@@ -6,7 +6,7 @@ import org.joda.time.LocalDateTime;
 import br.com.springmvc.timetrialfactory.daos.PurchaseDAO;
 import br.com.springmvc.timetrialfactory.models.Purchase;
 import br.com.springmvc.timetrialfactory.models.ShoppingCart;
-import br.com.springmvc.timetrialfactory.models.UserWeb;
+import br.com.springmvc.timetrialfactory.models.LoggedUser;
 import br.com.springmvc.timetrialfactory.models.enums.PurchaseSituationType;
 
 public class PurchaseService {
@@ -14,7 +14,7 @@ public class PurchaseService {
 	private PurchaseService() {
 	}
 
-	public static void registerPurchase(ShoppingCart cart, UserWeb userWeb, PurchaseDAO dao) {
+	public static void registerPurchase(ShoppingCart cart, LoggedUser userWeb, PurchaseDAO dao) {
 		Purchase purchase = new Purchase();
 		for (int i = 0; i < cart.getItems().size(); i++) {
 			purchase.setGame(cart.getItems().get(i).getGame());
