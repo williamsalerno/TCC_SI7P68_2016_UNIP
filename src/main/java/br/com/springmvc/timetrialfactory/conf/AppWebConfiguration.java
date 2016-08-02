@@ -39,8 +39,8 @@ import br.com.springmvc.timetrialfactory.controllers.VisitorController;
 import br.com.springmvc.timetrialfactory.daos.PurchaseDAO;
 import br.com.springmvc.timetrialfactory.daos.impl.GameDAOImpl;
 import br.com.springmvc.timetrialfactory.daos.impl.UserDAOImpl;
+import br.com.springmvc.timetrialfactory.models.LoggedUser;
 import br.com.springmvc.timetrialfactory.models.ShoppingCart;
-import br.com.springmvc.timetrialfactory.models.UserWeb;
 import br.com.springmvc.timetrialfactory.security.SecurityConfiguration;
 import br.com.springmvc.timetrialfactory.services.GameServiceImpl;
 import br.com.springmvc.timetrialfactory.services.UserServiceImpl;
@@ -52,9 +52,9 @@ import br.com.springmvc.timetrialfactory.viewresolver.JsonViewResolver;
 @EnableCaching
 @ComponentScan(basePackageClasses = { HomeController.class, GameDAOImpl.class, GameServiceImpl.class,
 		UserServiceImpl.class, UserDAOImpl.class, PurchaseDAO.class, ShoppingCart.class, PaymentController.class,
-		PayPalCall.class, UserWeb.class, VisitorController.class, UserValidator.class, AuthenticationController.class,
-		UserController.class, GamesController.class })
-@Import({SecurityConfiguration.class})
+		PayPalCall.class, LoggedUser.class, VisitorController.class, UserValidator.class,
+		AuthenticationController.class, UserController.class, GamesController.class })
+@Import({ SecurityConfiguration.class })
 public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 
 	@Bean
