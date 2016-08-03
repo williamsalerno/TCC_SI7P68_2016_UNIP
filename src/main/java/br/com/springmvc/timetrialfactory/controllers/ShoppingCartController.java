@@ -39,8 +39,10 @@ public class ShoppingCartController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value="/cart")
-	public String items() {
-		return "shoppingCart/items";
+	public ModelAndView items() {
+		ModelAndView modelAndView = new ModelAndView("shoppingCart/items");
+		modelAndView.addObject("listadejogos", new Game());
+		return modelAndView;
 	}
 
 }

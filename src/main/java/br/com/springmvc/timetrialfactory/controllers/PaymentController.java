@@ -1,7 +1,5 @@
 package br.com.springmvc.timetrialfactory.controllers;
 
-import static br.com.springmvc.timetrialfactory.controllers.LicenseGenerator.generateLicense;
-
 import java.util.UUID;
 import java.util.concurrent.Callable;
 
@@ -15,8 +13,8 @@ import com.paypal.api.payments.Payment;
 
 import br.com.springmvc.timetrialfactory.apis.paypal.PayPalCall;
 import br.com.springmvc.timetrialfactory.daos.PurchaseDAO;
-import br.com.springmvc.timetrialfactory.models.ShoppingCart;
 import br.com.springmvc.timetrialfactory.models.LoggedUser;
+import br.com.springmvc.timetrialfactory.models.ShoppingCart;
 import br.com.springmvc.timetrialfactory.services.PurchaseService;
 
 @Controller
@@ -46,17 +44,17 @@ public class PaymentController {
 	}
 
 	public String teste() {
-		return generateLicense();
+		return new LicenseGenerator().generateLicense();
 	}
 
-}
+	private final class LicenseGenerator {
 
-class LicenseGenerator {
+		private LicenseGenerator() {
+		}
 
-	private LicenseGenerator() {
+		private String generateLicense() {
+			return UUID.randomUUID().toString();
+		}
 	}
 
-	static String generateLicense() {
-		return UUID.randomUUID().toString();
-	}
 }
