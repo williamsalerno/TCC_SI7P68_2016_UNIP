@@ -36,11 +36,13 @@
 					<form action="<c:url value="/games/list"/>" method="get">
 						<button class="link btn btn-default">Voltar</button>
 					</form>
-					<form action="<c:url value="/payment"/>" method="post">
+					<form action="<c:url value="/shopping/checkout"/>" method="post">
 						<c:set var="currency" value="BRL" />
 						<input type="hidden" name="currency" value="BRL" />
 						<button class="link btn btn-default">Gerar pagamento
 							teste</button>
+						<input type="hidden" name="${_csrf.parameterName}"
+							value="${_csrf.token}" />
 					</form>
 					<form action="<c:url value="/confirmPayment"/>" method="post">
 						<button class="link btn btn-default">Comprovar pagamento
