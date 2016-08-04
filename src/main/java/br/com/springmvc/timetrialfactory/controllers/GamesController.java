@@ -39,7 +39,7 @@ public class GamesController {
 	@CacheEvict(value = "games", allEntries = true)
 	public ModelAndView save(@Valid Game game, BindingResult result, RedirectAttributes redirectAttributes) {
 		if (result.hasErrors()) {
-			return gamesForm(game);
+			return gamesForm();
 		}
 		service.saveGame(game);
 		redirectAttributes.addFlashAttribute("sucesso", "Produto cadastrado com sucesso!");
@@ -48,8 +48,9 @@ public class GamesController {
 
 	// Método GET para carregar a página de form de novo jogo.
 	@RequestMapping(method = RequestMethod.GET, value = "/form")
-	public ModelAndView gamesForm(Game game) {
-		ModelAndView modelAndView = new ModelAndView("games/form");
+	public ModelAndView gamesForm() {
+		ModelAndView modelAndView = new ModelAndView("games/newGame");
+		modelAndView.addObject("game", new Game());
 		return modelAndView;
 	}
 

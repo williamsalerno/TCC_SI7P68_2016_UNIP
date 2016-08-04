@@ -10,7 +10,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/games/form").hasRole("ADMIN").antMatchers("/css/**").permitAll()
+		http.authorizeRequests().antMatchers("/games/form").permitAll().antMatchers("/css/**").permitAll()
 				.antMatchers("/shopping/**").permitAll().antMatchers(HttpMethod.POST, "/games").hasRole("ADMIN")
 				.antMatchers("/games/**").permitAll().antMatchers("/**").permitAll().anyRequest().authenticated().and()
 				.csrf().and().logout()

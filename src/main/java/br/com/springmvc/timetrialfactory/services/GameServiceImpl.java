@@ -24,9 +24,7 @@ public class GameServiceImpl implements GameService {
 	@Override
 	public void saveGame(Game game) {
 		if (game != null) {
-			if (game.getId() != dao.findById(game.getId()).getId()) {
-				dao.saveGame(game);
-			}
+			dao.saveGame(game);
 		}
 	}
 

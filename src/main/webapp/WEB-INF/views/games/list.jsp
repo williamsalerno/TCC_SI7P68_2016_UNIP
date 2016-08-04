@@ -24,7 +24,7 @@
 							</h1>
 						</div>
 						<div class="btnsGame">
-							<c:if test="${userWeb.logged}">
+							<c:if test="${loggedUser.logged}">
 								<c:forEach items="${cart.items }" var="itemAdded">
 									<c:set var="items" value="${itemAdded }" />
 									<c:if test="${items.game.id eq game.id}">
@@ -33,7 +33,7 @@
 								</c:forEach>
 								<c:choose>
 									<c:when test="${!contains}">
-										<form:form servletRelativeAction="shopping">
+										<form:form servletRelativeAction="/shopping/cart">
 											<input type="hidden" name="${_csrf.parameterName }"
 												value="${_csrf.token }" />
 											<input type="hidden" name="item.game.id" value="${game.id }" />
@@ -52,14 +52,14 @@
 									</c:otherwise>
 								</c:choose>
 							</c:if>
-							<c:if test="${userWeb.logged and userWeb.admin}">
+							<c:if test="${loggedUser.logged}">
 								<form action="<c:url value="/games/${game.id}"/>">
 									<button type="submit" class="btn btn-default"
 										style="position: absolute; top: 0px; right: 110%;">Editar
 										jogo</button>
 								</form>
 							</c:if>
-							<c:if test="${!userWeb.logged}">
+							<c:if test="${!loggedUser.logged}">
 								<a href="<c:url value="/login"/>" class="btn btn-default">Faça
 									login</a>
 								<a href="<c:url value= "/users/selectCountry"/>"
@@ -91,7 +91,7 @@
 						<div class="clearfix"></div>
 					</div>
 				</div>
-				<c:if test="${userWeb.logged and userWeb.admin}">
+				<c:if test="${loggedUser.logged}">
 					<hr>
 					<p style="text-align: center;">
 						<a href="<c:url value="/games/new"/>" class="btn btn-default"

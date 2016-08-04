@@ -82,7 +82,7 @@ hr {
 	}
 }
 
-@media ( min-width : 768px) {
+@media ( min-width : 831px) {
 	.container-fluid>.navbar-collapse, .container-fluid>.navbar-header,
 		.container>.navbar-collapse, .container>.navbar-header {
 		margin-top: -16px;
@@ -92,7 +92,7 @@ hr {
 	}
 }
 
-@media ( max-width : 767px) {
+@media ( max-width : 830px) {
 	.containerLogin {
 		padding-top: 160px !important;
 	}

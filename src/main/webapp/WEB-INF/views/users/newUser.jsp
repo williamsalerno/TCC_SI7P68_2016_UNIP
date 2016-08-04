@@ -125,7 +125,6 @@
 							<strong>${userLogin }</strong>
 						</div>
 					</c:if>
-					<input type="text" value="${loginError }" />
 					<div class="btnForm">
 						<button type="submit" class="btn btn-default">Confirmar</button>
 					</div>
