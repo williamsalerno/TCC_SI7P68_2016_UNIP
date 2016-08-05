@@ -13,7 +13,7 @@ public class RoleDAOImpl extends AbstractDAO<Long, Role> implements RoleDAO{
 
 	@Override
 	public void saveUserRole(Long idUser, Long idRole) {
-		getSession().createQuery("insert into users_role(user_id) select u.id from User u");
+		getSession().createQuery("insert into User (roles) select u.id from User u");
 	}
 
 }
