@@ -1,10 +1,10 @@
 package br.com.springmvc.timetrialfactory.conf;
 
 import static com.google.common.cache.CacheBuilder.newBuilder;
-import static java.util.concurrent.TimeUnit.MINUTES;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
@@ -38,7 +38,6 @@ import br.com.springmvc.timetrialfactory.controllers.UserController;
 import br.com.springmvc.timetrialfactory.controllers.VisitorController;
 import br.com.springmvc.timetrialfactory.daos.PurchaseDAO;
 import br.com.springmvc.timetrialfactory.daos.impl.GameDAOImpl;
-import br.com.springmvc.timetrialfactory.daos.impl.RoleDAOImpl;
 import br.com.springmvc.timetrialfactory.daos.impl.UserDAOImpl;
 import br.com.springmvc.timetrialfactory.models.LoggedUser;
 import br.com.springmvc.timetrialfactory.models.ShoppingCart;
@@ -52,15 +51,15 @@ import br.com.springmvc.timetrialfactory.viewresolver.JsonViewResolver;
 @EnableWebMvc
 @EnableCaching
 @ComponentScan(basePackageClasses = { HomeController.class, GameDAOImpl.class, GameServiceImpl.class,
-		UserServiceImpl.class, UserDAOImpl.class, RoleDAOImpl.class, PurchaseDAO.class, ShoppingCart.class,
-		ShoppingCartController.class, PayPalCall.class, LoggedUser.class, VisitorController.class, UserValidator.class,
+		UserServiceImpl.class, UserDAOImpl.class, PurchaseDAO.class, ShoppingCart.class, ShoppingCartController.class,
+		PayPalCall.class, LoggedUser.class, VisitorController.class, UserValidator.class,
 		AuthenticationController.class, UserController.class, GamesController.class })
 @Import({ SecurityConfiguration.class })
 public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 
 	@Bean
 	public CacheManager CacheManager() {
-		CacheBuilder<Object, Object> builder = newBuilder().maximumSize(100).expireAfterAccess(5, MINUTES);
+		CacheBuilder<Object, Object> builder = newBuilder().maximumSize(100).expireAfterAccess(2, TimeUnit.SECONDS);
 		GuavaCacheManager cacheManager = new GuavaCacheManager();
 		cacheManager.setCacheBuilder(builder);
 		return cacheManager;

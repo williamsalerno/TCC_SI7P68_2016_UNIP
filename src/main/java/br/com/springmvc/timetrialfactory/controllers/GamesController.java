@@ -18,6 +18,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.springmvc.timetrialfactory.models.Game;
+import br.com.springmvc.timetrialfactory.models.LoggedUser;
+import br.com.springmvc.timetrialfactory.models.enums.RoleType;
 import br.com.springmvc.timetrialfactory.services.GameService;
 import br.com.springmvc.timetrialfactory.validation.GameValidator;
 
@@ -27,7 +29,10 @@ import br.com.springmvc.timetrialfactory.validation.GameValidator;
 public class GamesController {
 
 	@Autowired
-	private GameService service;
+	private GameService gameService;
+
+	@Autowired
+	private LoggedUser loggedUser;
 
 	@InitBinder
 	protected void initBinder(WebDataBinder binder) {
@@ -41,7 +46,7 @@ public class GamesController {
 		if (result.hasErrors()) {
 			return gamesForm();
 		}
-		service.saveGame(game);
+		gameService.saveGame(game);
 		redirectAttributes.addFlashAttribute("sucesso", "Produto cadastrado com sucesso!");
 		return new ModelAndView("redirect:list");
 	}
@@ -49,9 +54,14 @@ public class GamesController {
 	// Método GET para carregar a página de form de novo jogo.
 	@RequestMapping(method = RequestMethod.GET, value = "/form")
 	public ModelAndView gamesForm() {
-		ModelAndView modelAndView = new ModelAndView("games/newGame");
-		modelAndView.addObject("game", new Game());
-		return modelAndView;
+		if (loggedUser.getLoggedUser().getRole().equals(RoleType.ADMIN)) {
+			ModelAndView modelAndView = new ModelAndView("games/newGame");
+			modelAndView.addObject("game", new Game());
+			return modelAndView;
+		} else {
+			ModelAndView modelAndView = new ModelAndView("redirect:/logout");
+			return modelAndView;
+		}
 	}
 
 	// Método GET para carregar a lista de jogos do bd.
@@ -59,14 +69,14 @@ public class GamesController {
 	@Cacheable(value = "games")
 	public ModelAndView list() {
 		ModelAndView modelAndView = new ModelAndView("games/list");
-		modelAndView.addObject("games", service.listGames());
+		modelAndView.addObject("games", gameService.listGames());
 		return modelAndView;
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/details/{id}")
 	public ModelAndView show(Long id) {
 		ModelAndView modelAndView = new ModelAndView("games/details");
-		Game game = (Game) service.findGameById(id);
+		Game game = (Game) gameService.findGameById(id);
 		modelAndView.addObject("game", game);
 		return modelAndView;
 	}

@@ -21,6 +21,9 @@ public class AuthenticationController {
 
 	@Autowired
 	private UserService service;
+	
+	@Autowired
+	private LoggedUser loggedUser;
 
 	@RequestMapping(method = GET, value = "/login")
 	public ModelAndView loginForm() {
@@ -38,7 +41,6 @@ public class AuthenticationController {
 			return modelAndView;
 		} else {
 			ModelAndView modelAndView = new ModelAndView("redirect:/games/list");
-			LoggedUser loggedUser = new LoggedUser();
 			loggedUser.login(userToVerify);
 			session.setAttribute("loggedUser", loggedUser);
 			System.out.println(loggedUser.toString());

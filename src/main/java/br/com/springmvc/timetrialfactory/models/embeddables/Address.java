@@ -7,6 +7,10 @@ import javax.persistence.Enumerated;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import br.com.springmvc.timetrialfactory.models.enums.Country;
 
 @Embeddable
@@ -59,6 +63,23 @@ public class Address {
 
 	public void setCep(String cep) {
 		this.cep = cep;
+	}
+
+	public int hashCode() {
+		return new HashCodeBuilder().append(this.cep).toHashCode();
+	}
+
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Address)) {
+			return false;
+		}
+		Address other = (Address) obj;
+		return new EqualsBuilder().append(this.cep, other.cep).isEquals();
+	}
+
+	public String toString() {
+		return new ToStringBuilder(this).append("country", this.country).append("city", this.city)
+				.append("state", this.state).append("cep", this.cep).build();
 	}
 
 }
