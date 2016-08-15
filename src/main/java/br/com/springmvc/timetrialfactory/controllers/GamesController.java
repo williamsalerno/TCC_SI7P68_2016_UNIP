@@ -19,7 +19,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.springmvc.timetrialfactory.models.Game;
 import br.com.springmvc.timetrialfactory.models.LoggedUser;
-import br.com.springmvc.timetrialfactory.models.enums.RoleType;
 import br.com.springmvc.timetrialfactory.services.GameService;
 import br.com.springmvc.timetrialfactory.validation.GameValidator;
 
@@ -43,25 +42,27 @@ public class GamesController {
 	@RequestMapping(method = POST, value = "/newGame")
 	@CacheEvict(value = "games", allEntries = true)
 	public ModelAndView save(@Valid Game game, BindingResult result, RedirectAttributes redirectAttributes) {
-		if (result.hasErrors()) {
-			return gamesForm();
+		if (loggedUser.isAdmin()) {
+			if (result.hasErrors()) {
+				return gamesForm();
+			}
+			gameService.saveGame(game);
+			redirectAttributes.addFlashAttribute("sucesso", "Produto cadastrado com sucesso!");
+			return new ModelAndView("redirect:list");
 		}
-		gameService.saveGame(game);
-		redirectAttributes.addFlashAttribute("sucesso", "Produto cadastrado com sucesso!");
-		return new ModelAndView("redirect:list");
+		return new ModelAndView("redirect:/logout");
 	}
 
 	// Método GET para carregar a página de form de novo jogo.
-	@RequestMapping(method = RequestMethod.GET, value = "/form")
+	@RequestMapping(method = RequestMethod.GET, value = "/new")
 	public ModelAndView gamesForm() {
-		if (loggedUser.getLoggedUser().getRole().equals(RoleType.ADMIN)) {
+		if (loggedUser.isAdmin()) {
 			ModelAndView modelAndView = new ModelAndView("games/newGame");
 			modelAndView.addObject("game", new Game());
 			return modelAndView;
-		} else {
-			ModelAndView modelAndView = new ModelAndView("redirect:/logout");
-			return modelAndView;
 		}
+		ModelAndView modelAndView = new ModelAndView("redirect:/logout");
+		return modelAndView;
 	}
 
 	// Método GET para carregar a lista de jogos do bd.

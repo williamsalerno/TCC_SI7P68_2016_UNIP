@@ -6,13 +6,16 @@ import static org.springframework.web.context.WebApplicationContext.SCOPE_SESSIO
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import br.com.springmvc.timetrialfactory.dto.UserDTO;
+import br.com.springmvc.timetrialfactory.models.enums.RoleType;
+
 @Component
 @Scope(value = SCOPE_SESSION, proxyMode = TARGET_CLASS)
 public class LoggedUser {
 
-	private User logged;
+	private UserDTO logged;
 
-	public void login(User user) {
+	public void login(UserDTO user) {
 		this.logged = user;
 	}
 
@@ -31,6 +34,10 @@ public class LoggedUser {
 	public boolean isLogged() {
 		return logged != null;
 	}
+	
+	public boolean isAdmin() {
+		return logged != null && logged.getRole().equals(RoleType.ADMIN);
+	}
 
 	public void logout() {
 		this.logged = null;
@@ -40,7 +47,5 @@ public class LoggedUser {
 	public String toString() {
 		return "LoggedUser [logged=" + logged.toString() + "]";
 	}
-	
-	
 
 }

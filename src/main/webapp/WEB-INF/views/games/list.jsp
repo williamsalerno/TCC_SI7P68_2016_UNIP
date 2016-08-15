@@ -25,7 +25,7 @@
 						</div>
 						<div class="btnsGame">
 							<c:if test="${loggedUser.logged}">
-								<c:forEach items="${cart.items }" var="itemAdded">
+								<c:forEach items="${shoppingCart.items }" var="itemAdded">
 									<c:set var="items" value="${itemAdded }" />
 									<c:if test="${items.game.id eq game.id}">
 										<c:set var="contains" value="true" />
@@ -33,16 +33,16 @@
 								</c:forEach>
 								<c:choose>
 									<c:when test="${!contains}">
-										<form:form servletRelativeAction="/shopping/cart">
+										<form:form servletRelativeAction="/shopping/cart/addGame">
 											<input type="hidden" name="${_csrf.parameterName }"
 												value="${_csrf.token }" />
-											<input type="hidden" name="item.game.id" value="${game.id }" />
+											<input type="hidden" name="gameId" value="${game.id }" />
 											<button id="exibe" type="submit" class="btn btn-default">Adicionar
 												ao carrinho</button>
 										</form:form>
 									</c:when>
 									<c:otherwise>
-										<c:forEach items="${cart.items }" var="item">
+										<c:forEach items="${shoppingCart.items }" var="item">
 											<c:set var="contains" value="false" />
 											<c:if test="${item.game.id eq game.id}">
 												<button class="btn btn-default disabled">Jogo já
@@ -52,7 +52,7 @@
 									</c:otherwise>
 								</c:choose>
 							</c:if>
-							<c:if test="${loggedUser.logged}">
+							<c:if test="${loggedUser.logged and loggedUser.admin}">
 								<form action="<c:url value="/games/${game.id}"/>">
 									<button type="submit" class="btn btn-default"
 										style="position: absolute; top: 0px; right: 110%;">Editar
@@ -91,11 +91,11 @@
 						<div class="clearfix"></div>
 					</div>
 				</div>
-				<c:if test="${loggedUser.logged}">
+				<c:if test="${loggedUser.logged and loggedUser.admin}">
 					<hr>
 					<p style="text-align: center;">
 						<a href="<c:url value="/games/new"/>" class="btn btn-default"
-							type="submit">Novo Jogo</a>
+							type="submit"><fmt:message key="btn.newGame" /></a>
 					</p>
 				</c:if>
 			</section>

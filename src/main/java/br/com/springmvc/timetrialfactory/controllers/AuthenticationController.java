@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.springmvc.timetrialfactory.assembler.UserAssembler;
+import br.com.springmvc.timetrialfactory.dto.UserDTO;
 import br.com.springmvc.timetrialfactory.models.LoggedUser;
 import br.com.springmvc.timetrialfactory.models.User;
 import br.com.springmvc.timetrialfactory.services.UserService;
@@ -24,6 +26,9 @@ public class AuthenticationController {
 	
 	@Autowired
 	private LoggedUser loggedUser;
+	
+	@Autowired
+	private UserAssembler assembler;
 
 	@RequestMapping(method = GET, value = "/login")
 	public ModelAndView loginForm() {
@@ -34,7 +39,7 @@ public class AuthenticationController {
 
 	@RequestMapping(method = POST, value = "/login")
 	public ModelAndView login(@ModelAttribute("user") User user, HttpSession session) {
-		User userToVerify = (User) service.loadUser(user.getLogin(), user.getPassword());
+		UserDTO userToVerify = assembler.toObject(service.loadUser(user.getLogin(), user.getPassword()));
 		if (userToVerify == null) {
 			ModelAndView modelAndView = new ModelAndView("users/login");
 			modelAndView.addObject("loginError", true);

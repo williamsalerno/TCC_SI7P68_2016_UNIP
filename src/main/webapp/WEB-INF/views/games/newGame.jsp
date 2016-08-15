@@ -2,41 +2,41 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <div id="wrapper">
 	<%@ include file="/WEB-INF/jspf/header.jspf"%>
-	<div id="errors">
-		<ul>
-			<c:forEach items="${errors}" var="error">
-				<li>${error.category }-${error.message }</li>
-			</c:forEach>
-		</ul>
-	</div>
-	<div>
-		<spring:hasBindErrors name="game">
-			<ul>
-				<c:forEach var="error" items="${errors.allErrors }">
-					<li><spring:message code="${error.code }"
-							text="${error.defaultMessage}" /></li>
-				</c:forEach>
-			</ul>
-		</spring:hasBindErrors>
-		<form:form action="newGame" method="post" commandName="game">
-			<input type="hidden" name="${_csrf.parameterName }"
-				value="${_csrf.token }" />
-			<div>
-				<label for="title">Título:</label>
-				<form:input minlength="5" path="title" />
-				<form:errors path="title" />
+	<div class="container">
+		<section class="cartView">
+			<div class="panel panel-default">
+				<spring:hasBindErrors name="game">
+					<ul>
+						<c:forEach var="error" items="${errors.allErrors }">
+							<li><spring:message code="${error.code }"
+									text="${error.defaultMessage}" /></li>
+						</c:forEach>
+					</ul>
+				</spring:hasBindErrors>
+				<form:form action="newGame" method="post" commandName="game">
+					<input type="hidden" name="${_csrf.parameterName }"
+						value="${_csrf.token }" />
+					<div class="input-group">
+						<span class=input-group-addon>Título:</span>
+						<form:input class="form-newgame" minlength="5" path="title" />
+						<form:errors path="title" />
+					</div>
+					<div class="input-group">
+						<span class=input-group-addon>Preço:</span>
+						<form:input class="form-newgame" path="price" min="1" />
+						<form:errors path="price" />
+					</div>
+					<div class="input-group">
+						<span class=input-group-addon>Descrição:</span>
+						<form:textarea class="form-newgame" path="description" rows="5"
+							cols="20" />
+					</div>
+					<div class="btnForm">
+						<button class="btn btn-default" type="submit">Enviar</button>
+					</div>
+				</form:form>
 			</div>
-			<div>
-				<label for="price">Preço:</label>
-				<form:input path="price" min="1" />
-				<form:errors path="price" />
-			</div>
-			<div>
-				<label for="description">Descrição:</label>
-				<form:textarea path="description" rows="5" cols="20" />
-			</div>
-			<button type="submit">Enviar</button>
-		</form:form>
+		</section>
 	</div>
 	<%@ include file="/WEB-INF/jspf/footer.jspf"%>
 </div>

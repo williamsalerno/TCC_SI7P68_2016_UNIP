@@ -22,7 +22,7 @@ public class PurchaseService {
 			purchase.setPurchaseDate(LocalDateTime.now(DateTimeZone.forID("America/Sao_Paulo")));
 			purchase.setUser(userWeb.getLoggedUser());
 			purchase.setPurchaseSituation(PurchaseSituationType.PROCESSANDO);
-			dao.save(purchase);
+			//dao.save(purchase);
 		}
 	}
 

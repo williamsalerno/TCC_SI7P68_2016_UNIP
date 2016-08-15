@@ -26,7 +26,7 @@
 					<c:set var="loggedUserName" value="${loggedUser.name}" />
 					<li id="li-welcome"><span
 						class="userWeb-logged"><spring:message code="welcome" /> ${loggedUserName }!</span></li>
-					<li><a href="<c:url value="/shopping/cart"/>"><span
+					<li><a href="<c:url value="/shopping/cart/view"/>"><span
 							class="glyphicon glyphicon-shopping-cart"></span> <fmt:message
 								key="cart" /></a></li>
 					<li><a href="<c:url value="/logout"/>"><span
