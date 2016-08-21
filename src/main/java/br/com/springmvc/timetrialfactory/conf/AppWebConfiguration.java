@@ -37,13 +37,16 @@ import br.com.springmvc.timetrialfactory.controllers.HomeController;
 import br.com.springmvc.timetrialfactory.controllers.ShoppingCartController;
 import br.com.springmvc.timetrialfactory.controllers.UserController;
 import br.com.springmvc.timetrialfactory.controllers.VisitorController;
-import br.com.springmvc.timetrialfactory.daos.PurchaseDAO;
 import br.com.springmvc.timetrialfactory.daos.impl.GameDAOImpl;
+import br.com.springmvc.timetrialfactory.daos.impl.LicenseDAOImpl;
+import br.com.springmvc.timetrialfactory.daos.impl.PurchaseDAOImpl;
 import br.com.springmvc.timetrialfactory.daos.impl.UserDAOImpl;
 import br.com.springmvc.timetrialfactory.models.LoggedUser;
 import br.com.springmvc.timetrialfactory.models.ShoppingCart;
 import br.com.springmvc.timetrialfactory.security.SecurityConfiguration;
 import br.com.springmvc.timetrialfactory.services.GameServiceImpl;
+import br.com.springmvc.timetrialfactory.services.LicenseServiceImpl;
+import br.com.springmvc.timetrialfactory.services.PurchaseServiceImpl;
 import br.com.springmvc.timetrialfactory.services.UserServiceImpl;
 import br.com.springmvc.timetrialfactory.validation.UserValidator;
 import br.com.springmvc.timetrialfactory.viewresolver.JsonViewResolver;
@@ -52,7 +55,8 @@ import br.com.springmvc.timetrialfactory.viewresolver.JsonViewResolver;
 @EnableWebMvc
 @EnableCaching
 @ComponentScan(basePackageClasses = { HomeController.class, GameDAOImpl.class, GameServiceImpl.class,
-		UserServiceImpl.class, UserDAOImpl.class, UserAssembler.class, PurchaseDAO.class, ShoppingCart.class, ShoppingCartController.class,
+		UserServiceImpl.class, UserDAOImpl.class, UserAssembler.class, PurchaseDAOImpl.class, PurchaseServiceImpl.class,
+		LicenseDAOImpl.class, LicenseServiceImpl.class, ShoppingCart.class, ShoppingCartController.class,
 		PayPalCall.class, LoggedUser.class, VisitorController.class, UserValidator.class,
 		AuthenticationController.class, UserController.class, GamesController.class })
 @Import({ SecurityConfiguration.class })

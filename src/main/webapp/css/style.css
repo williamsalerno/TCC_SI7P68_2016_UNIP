@@ -901,6 +901,11 @@ a.list-group-item .list-group-item-heading, button.list-group-item .list-group-i
 	position: relative;
 }
 
+.panel-heading>p {
+	margin-top: 50px;
+	color: white;
+}
+
 /** Slider **/
 .slider {
 	width: 100%;

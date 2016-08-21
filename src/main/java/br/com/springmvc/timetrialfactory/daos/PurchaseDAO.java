@@ -1,8 +1,13 @@
 package br.com.springmvc.timetrialfactory.daos;
 
-import org.springframework.stereotype.Repository;
+import br.com.springmvc.timetrialfactory.models.Purchase;
 
-@Repository
-public class PurchaseDAO {
+public interface PurchaseDAO {
+
+	void savePurchase(Purchase purchase);
+
+	void updatePurchase(Purchase purchase);
+
+	Purchase findById(Long id);
 
 }

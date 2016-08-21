@@ -40,14 +40,15 @@
 						<button class="link btn btn-default">Voltar</button>
 					</form>
 					<c:if test="${!empty shoppingCart.items }">
-						<form action="<c:url value="/shopping/cart/checkout"/>" method="post">
-							<c:set var="currency" value="BRL" />
-							<input type="hidden" name="currency" value="${currency }" />
-							<button class="link btn btn-default">Gerar pagamento
-								teste</button>
+						<c:url var="checkout_url" value="/shopping/cart/checkout" />
+						<form:form action="${checkout_url }" modelAttribute="shoppingCart"
+							method="post">
 							<input type="hidden" name="${_csrf.parameterName}"
 								value="${_csrf.token}" />
-						</form>
+							<input type="hidden" name="gamesInCart" value="${shoppingCart}" />
+							<button class="link btn btn-default">Gerar pagamento
+								teste</button>
+						</form:form>
 						<form action="<c:url value="/confirmPayment"/>" method="post">
 							<button class="link btn btn-default">Comprovar pagamento
 								teste</button>

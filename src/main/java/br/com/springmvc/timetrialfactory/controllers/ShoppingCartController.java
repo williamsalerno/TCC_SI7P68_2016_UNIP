@@ -2,9 +2,6 @@ package br.com.springmvc.timetrialfactory.controllers;
 
 import static org.springframework.web.context.WebApplicationContext.SCOPE_REQUEST;
 
-import java.util.UUID;
-import java.util.concurrent.Callable;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -12,16 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.paypal.api.payments.Payment;
-import com.paypal.base.rest.PayPalRESTException;
-
-import br.com.springmvc.timetrialfactory.apis.paypal.PayPalCall;
-import br.com.springmvc.timetrialfactory.daos.PurchaseDAO;
 import br.com.springmvc.timetrialfactory.models.Game;
 import br.com.springmvc.timetrialfactory.models.LoggedUser;
 import br.com.springmvc.timetrialfactory.models.ShoppingCart;
 import br.com.springmvc.timetrialfactory.models.ShoppingItem;
 import br.com.springmvc.timetrialfactory.services.GameService;
+import br.com.springmvc.timetrialfactory.services.LicenseService;
 import br.com.springmvc.timetrialfactory.services.PurchaseService;
 
 @Controller
@@ -30,16 +23,16 @@ import br.com.springmvc.timetrialfactory.services.PurchaseService;
 public class ShoppingCartController {
 
 	@Autowired
-	private GameService service;
+	private GameService gameService;
 
 	@Autowired
 	private ShoppingCart shoppingCart;
 
 	@Autowired
-	private PayPalCall payPal;
+	private PurchaseService purchaseService;
 
 	@Autowired
-	private PurchaseDAO purchaseDao;
+	private LicenseService licenseService;
 
 	@Autowired
 	private LoggedUser userWeb;
@@ -48,13 +41,11 @@ public class ShoppingCartController {
 	public ModelAndView add(final Long gameId) {
 		ShoppingItem item = createItem(gameId);
 		shoppingCart.add(item);
-		ModelAndView modelAndView = new ModelAndView("redirect:/shopping/cart/view");
-		modelAndView.addObject("shoppingCart", shoppingCart);
-		return modelAndView;
+		return new ModelAndView("redirect:/shopping/cart/view");
 	}
 
 	private ShoppingItem createItem(final Long id) {
-		Game game = service.findGameById(id);
+		Game game = gameService.findGameById(id);
 		ShoppingItem item = new ShoppingItem(game);
 		return item;
 	}
@@ -62,35 +53,26 @@ public class ShoppingCartController {
 	@RequestMapping(method = RequestMethod.GET, value = "/view")
 	public ModelAndView items() {
 		ModelAndView modelAndView = new ModelAndView("shoppingCart/items");
-		modelAndView.addObject("listadejogos", new Game());
+		modelAndView.addObject("shoppingCart", shoppingCart);
 		return modelAndView;
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/checkout")
-	public String checkout(final String currency) throws PayPalRESTException {
-		Payment urlPayPal = this.payPal.apiRequest(currency, shoppingCart);
-		PurchaseService.registerPurchase(shoppingCart, userWeb, purchaseDao);
-		return urlPayPal.getLinks().get(1).getHref();
+	public ModelAndView checkout() {
+		if (userWeb.isLogged()) {
+			ModelAndView modelAndView = new ModelAndView("shoppingCart/download");
+			purchaseService.savePurchase(shoppingCart, userWeb);
+			licenseService.saveLicense(userWeb, shoppingCart.getItems());
+			return modelAndView;
+		}
+		ModelAndView modelAndView = new ModelAndView("redirect:/logout");
+		return modelAndView;
+
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView remove(final int gameId) {
+	public ModelAndView removeFromCart(final int gameId) {
 		shoppingCart.remove(gameId);
 		return new ModelAndView("redirect:/shopping/cart/view");
 	}
-
-	public String teste() {
-		return new LicenseGenerator().generateLicense();
-	}
-
-	private final class LicenseGenerator {
-
-		private LicenseGenerator() {
-		}
-
-		private String generateLicense() {
-			return UUID.randomUUID().toString();
-		}
-	}
-
 }

@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.springmvc.timetrialfactory.models.LoggedUser;
-import br.com.springmvc.timetrialfactory.models.User;
 
 @Controller("user")
 @SessionAttributes("user")
