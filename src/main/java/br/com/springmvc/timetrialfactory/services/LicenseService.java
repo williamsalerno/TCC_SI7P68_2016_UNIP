@@ -10,8 +10,5 @@ public interface LicenseService {
 
 	void saveLicense(LoggedUser user, List<ShoppingItem> games);
 
-	License findByUserId(Long id);
-
-	License findByGameId(Long id);
-
+	List<License> listUserLicenses();
 }

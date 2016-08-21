@@ -2,6 +2,8 @@ package br.com.springmvc.timetrialfactory.controllers;
 
 import static org.springframework.web.context.WebApplicationContext.SCOPE_REQUEST;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -34,9 +36,6 @@ public class ShoppingCartController {
 	@Autowired
 	private LicenseService licenseService;
 
-	@Autowired
-	private LoggedUser userWeb;
-
 	@RequestMapping(method = RequestMethod.POST, value = "/addGame")
 	public ModelAndView add(final Long gameId) {
 		ShoppingItem item = createItem(gameId);
@@ -58,15 +57,17 @@ public class ShoppingCartController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/checkout")
-	public ModelAndView checkout() {
-		if (userWeb.isLogged()) {
+	public ModelAndView checkout(HttpSession session) {
+		LoggedUser loggedUser = (LoggedUser) session.getAttribute("loggedUser");
+		if (loggedUser.isLogged()) {
 			ModelAndView modelAndView = new ModelAndView("shoppingCart/download");
-			purchaseService.savePurchase(shoppingCart, userWeb);
-			licenseService.saveLicense(userWeb, shoppingCart.getItems());
+			purchaseService.savePurchase(shoppingCart, loggedUser);
+			licenseService.saveLicense(loggedUser, shoppingCart.getItems());
+			return modelAndView;
+		} else {
+			ModelAndView modelAndView = new ModelAndView("redirect:/logout");
 			return modelAndView;
 		}
-		ModelAndView modelAndView = new ModelAndView("redirect:/logout");
-		return modelAndView;
 
 	}
 

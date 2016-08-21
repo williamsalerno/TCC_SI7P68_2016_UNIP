@@ -3,6 +3,9 @@ package br.com.springmvc.timetrialfactory.controllers;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.springmvc.timetrialfactory.assembler.LicenseAssembler;
 import br.com.springmvc.timetrialfactory.assembler.UserAssembler;
 import br.com.springmvc.timetrialfactory.dto.UserDTO;
+import br.com.springmvc.timetrialfactory.models.License;
 import br.com.springmvc.timetrialfactory.models.LoggedUser;
 import br.com.springmvc.timetrialfactory.models.User;
+import br.com.springmvc.timetrialfactory.services.LicenseService;
 import br.com.springmvc.timetrialfactory.services.UserService;
 
 @Controller
@@ -23,12 +29,15 @@ public class AuthenticationController {
 
 	@Autowired
 	private UserService service;
-	
+
 	@Autowired
-	private LoggedUser loggedUser;
-	
+	private LicenseService licenseService;
+
 	@Autowired
 	private UserAssembler assembler;
+
+	@Autowired
+	private LicenseAssembler licenseAssembler;
 
 	@RequestMapping(method = GET, value = "/login")
 	public ModelAndView loginForm() {
@@ -46,9 +55,10 @@ public class AuthenticationController {
 			return modelAndView;
 		} else {
 			ModelAndView modelAndView = new ModelAndView("redirect:/games/list");
+			LoggedUser loggedUser = new LoggedUser();
 			loggedUser.login(userToVerify);
+			loggedUser.setLicenses(licenseAssembler.toObject(licenseService.listUserLicenses()));
 			session.setAttribute("loggedUser", loggedUser);
-			System.out.println(loggedUser.toString());
 			return modelAndView;
 		}
 	}

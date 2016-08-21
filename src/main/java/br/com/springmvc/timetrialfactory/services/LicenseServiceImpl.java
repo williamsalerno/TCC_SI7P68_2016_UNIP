@@ -28,19 +28,15 @@ public class LicenseServiceImpl implements LicenseService {
 				license.setCode(new LicenseGenerator().generateLicense());
 				license.setUser(user.getLoggedUser());
 				license.setGame(gameInCart.getGame());
+				license.setCheckedCode(false);
 				dao.saveLicense(license);
 			}
 		}
 	}
 
 	@Override
-	public License findByUserId(Long id) {
-		return dao.findById(id);
-	}
-
-	@Override
-	public License findByGameId(Long id) {
-		return dao.findById(id);
+	public List<License> listUserLicenses() {
+		return dao.listLicenses();
 	}
 
 	private final class LicenseGenerator {

@@ -1,10 +1,12 @@
 package br.com.springmvc.timetrialfactory.daos;
 
+import java.util.List;
+
 import br.com.springmvc.timetrialfactory.models.License;
 
 public interface LicenseDAO {
 
 	void saveLicense(License license);
 
-	License findById(Long id);
+	List<License> listLicenses();
 }
