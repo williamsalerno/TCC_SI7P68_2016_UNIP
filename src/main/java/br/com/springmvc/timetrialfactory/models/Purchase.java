@@ -2,6 +2,7 @@ package br.com.springmvc.timetrialfactory.models;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,15 +14,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.annotations.Type;
-import org.joda.time.LocalDateTime;
-
 import br.com.springmvc.timetrialfactory.models.enums.PurchaseSituationType;
 
 @Entity
-@Table(name="purchases", catalog="purchases")
+@Table(name = "purchases", catalog = "purchases")
 public class Purchase implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	@ManyToOne
@@ -40,7 +38,6 @@ public class Purchase implements Serializable {
 
 	@NotNull
 	@Column(name = "purchase_date", nullable = false)
-	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
 	private LocalDateTime purchaseDate;
 
 	@Enumerated(EnumType.STRING)
@@ -87,7 +84,5 @@ public class Purchase implements Serializable {
 	public void setPurchaseSituation(PurchaseSituationType purchaseSituation) {
 		this.purchaseSituation = purchaseSituation;
 	}
-	
-	
 
 }

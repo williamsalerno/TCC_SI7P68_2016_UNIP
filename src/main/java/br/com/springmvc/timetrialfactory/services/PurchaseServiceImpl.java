@@ -1,7 +1,7 @@
 package br.com.springmvc.timetrialfactory.services;
 
-import org.joda.time.DateTimeZone;
-import org.joda.time.LocalDateTime;
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,7 +26,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 			for (int i = 0; i < cart.getItems().size(); i++) {
 				purchase.setGame(cart.getItems().get(i).getGame());
 				purchase.setPrice(cart.getItems().get(i).getGame().getPrice());
-				purchase.setPurchaseDate(LocalDateTime.now(DateTimeZone.forID("America/Sao_Paulo")));
+				purchase.setPurchaseDate(LocalDateTime.now());
 				purchase.setUser(userWeb.getLoggedUser());
 				purchase.setPurchaseSituation(PurchaseSituationType.PROCESSANDO);
 				dao.savePurchase(purchase);
