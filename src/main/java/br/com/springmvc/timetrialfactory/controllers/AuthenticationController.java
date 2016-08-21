@@ -3,9 +3,6 @@ package br.com.springmvc.timetrialfactory.controllers;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.springmvc.timetrialfactory.assembler.LicenseAssembler;
 import br.com.springmvc.timetrialfactory.assembler.UserAssembler;
 import br.com.springmvc.timetrialfactory.dto.UserDTO;
-import br.com.springmvc.timetrialfactory.models.License;
 import br.com.springmvc.timetrialfactory.models.LoggedUser;
 import br.com.springmvc.timetrialfactory.models.User;
 import br.com.springmvc.timetrialfactory.services.LicenseService;

@@ -31,24 +31,38 @@
 										<c:set var="contains" value="true" />
 									</c:if>
 								</c:forEach>
+								<c:forEach items="${licenses}" var="license" varStatus="l">
+									<c:set var="licenseList" value="${l.gameId }" />
+									<c:if test="${licenseList eq game.id }">
+										<c:set var="acquired" value="false" />
+									</c:if>
+								</c:forEach>
 								<c:choose>
-									<c:when test="${!contains}">
-										<form:form servletRelativeAction="/shopping/cart/addGame">
-											<input type="hidden" name="${_csrf.parameterName }"
-												value="${_csrf.token }" />
-											<input type="hidden" name="gameId" value="${game.id }" />
-											<button id="exibe" type="submit" class="btn btn-default">Adicionar
-												ao carrinho</button>
-										</form:form>
+									<c:when test="${acquired}">
+										<button class="btn btn-default disabled">Jogo já
+											adquirido</button>
 									</c:when>
 									<c:otherwise>
-										<c:forEach items="${shoppingCart.items }" var="item">
-											<c:set var="contains" value="false" />
-											<c:if test="${item.game.id eq game.id}">
-												<button class="btn btn-default disabled">Jogo já
-													adicionado</button>
-											</c:if>
-										</c:forEach>
+										<c:choose>
+											<c:when test="${!contains}">
+												<form:form servletRelativeAction="/shopping/cart/addGame">
+													<input type="hidden" name="${_csrf.parameterName }"
+														value="${_csrf.token }" />
+													<input type="hidden" name="gameId" value="${game.id }" />
+													<button id="exibe" type="submit" class="btn btn-default">Adicionar
+														ao carrinho</button>
+												</form:form>
+											</c:when>
+											<c:otherwise>
+												<c:forEach items="${shoppingCart.items }" var="item">
+													<c:set var="contains" value="false" />
+													<c:if test="${item.game.id eq game.id}">
+														<button class="btn btn-default disabled">Jogo já
+															adicionado</button>
+													</c:if>
+												</c:forEach>
+											</c:otherwise>
+										</c:choose>
 									</c:otherwise>
 								</c:choose>
 							</c:if>
