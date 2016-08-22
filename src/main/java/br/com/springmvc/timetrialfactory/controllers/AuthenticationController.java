@@ -53,7 +53,7 @@ public class AuthenticationController {
 			ModelAndView modelAndView = new ModelAndView("redirect:/games/list");
 			LoggedUser loggedUser = new LoggedUser();
 			loggedUser.login(userToVerify);
-			loggedUser.setLicenses(licenseAssembler.toObject(licenseService.listUserLicenses()));
+			loggedUser.setLicenses(licenseAssembler.toObject(licenseService.listUserLicenses(loggedUser.getId())));
 			session.setAttribute("loggedUser", loggedUser);
 			return modelAndView;
 		}

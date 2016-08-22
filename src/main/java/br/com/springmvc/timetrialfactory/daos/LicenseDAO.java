@@ -8,5 +8,5 @@ public interface LicenseDAO {
 
 	void saveLicense(License license);
 
-	List<License> listLicenses();
+	List<License> listLicenses(Long userId);
 }

@@ -10,5 +10,5 @@ public interface LicenseService {
 
 	void saveLicense(LoggedUser user, List<ShoppingItem> games);
 
-	List<License> listUserLicenses();
+	List<License> listUserLicenses(Long userIs);
 }

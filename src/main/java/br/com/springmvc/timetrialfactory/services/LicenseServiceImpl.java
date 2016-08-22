@@ -35,8 +35,8 @@ public class LicenseServiceImpl implements LicenseService {
 	}
 
 	@Override
-	public List<License> listUserLicenses() {
-		return dao.listLicenses();
+	public List<License> listUserLicenses(Long userId) {
+		return dao.listLicenses(userId);
 	}
 
 	private final class LicenseGenerator {

@@ -31,10 +31,10 @@
 										<c:set var="contains" value="true" />
 									</c:if>
 								</c:forEach>
-								<c:forEach items="${licenses}" var="license" varStatus="l">
-									<c:set var="licenseList" value="${l.gameId }" />
+								<c:forEach items="${loggedUser.licenses}" var="license" varStatus="l">
+									<c:set var="licenseList" value="${l.current.gameId }" />
 									<c:if test="${licenseList eq game.id }">
-										<c:set var="acquired" value="false" />
+										<c:set var="acquired" value="true" />
 									</c:if>
 								</c:forEach>
 								<c:choose>

@@ -1,12 +1,15 @@
 package br.com.springmvc.timetrialfactory.controllers;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
+import static org.springframework.web.context.WebApplicationContext.SCOPE_REQUEST;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
@@ -24,14 +27,12 @@ import br.com.springmvc.timetrialfactory.validation.GameValidator;
 
 @Controller
 @Transactional
+@Scope(value = SCOPE_REQUEST)
 @RequestMapping("/games")
 public class GamesController {
 
 	@Autowired
 	private GameService gameService;
-
-	@Autowired
-	private LoggedUser loggedUser;
 
 	@InitBinder
 	protected void initBinder(WebDataBinder binder) {
@@ -41,10 +42,11 @@ public class GamesController {
 	// Método POST para salvar um novo jogo no bd.
 	@RequestMapping(method = POST, value = "/newGame")
 	@CacheEvict(value = "games", allEntries = true)
-	public ModelAndView save(@Valid Game game, BindingResult result, RedirectAttributes redirectAttributes) {
+	public ModelAndView save(@Valid Game game, BindingResult result, RedirectAttributes redirectAttributes, HttpSession session) {
+		LoggedUser loggedUser = (LoggedUser) session.getAttribute("loggedUser");
 		if (loggedUser.isAdmin()) {
 			if (result.hasErrors()) {
-				return gamesForm();
+				return gamesForm(session);
 			}
 			gameService.saveGame(game);
 			redirectAttributes.addFlashAttribute("sucesso", "Produto cadastrado com sucesso!");
@@ -55,7 +57,8 @@ public class GamesController {
 
 	// Método GET para carregar a página de form de novo jogo.
 	@RequestMapping(method = RequestMethod.GET, value = "/new")
-	public ModelAndView gamesForm() {
+	public ModelAndView gamesForm(HttpSession session) {
+		LoggedUser loggedUser = (LoggedUser) session.getAttribute("loggedUser");
 		if (loggedUser.isAdmin()) {
 			ModelAndView modelAndView = new ModelAndView("games/newGame");
 			modelAndView.addObject("game", new Game());
