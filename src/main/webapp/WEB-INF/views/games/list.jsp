@@ -31,15 +31,34 @@
 										<c:set var="contains" value="true" />
 									</c:if>
 								</c:forEach>
+								<c:forEach items="${loggedUser.licenses }" var="gameAcquired">
+									<c:if test="${gameAcquired.gameId eq game.id}">
+										<c:set var="acquired" value="true" />
+									</c:if>
+								</c:forEach>
 								<c:choose>
 									<c:when test="${loggedUser.hasGames }">
-										<c:forEach items="${loggedUser.licenses }" var="gameAcquired">
-											<c:if test="${gameAcquired.gameId eq game.id}">
-												<button class="btn btn-default disabled">Jogo já
-													adquirido</button>
-												<span>${game.id }</span>
-											</c:if>
-										</c:forEach>
+										<c:choose>
+											<c:when test="${!acquired}">
+												<form:form servletRelativeAction="/shopping/cart/addGame">
+													<input type="hidden" name="${_csrf.parameterName }"
+														value="${_csrf.token }" />
+													<input type="hidden" name="gameId" value="${game.id }" />
+													<button id="exibe" type="submit" class="btn btn-default">Adicionar
+														ao carrinho</button>
+												</form:form>
+											</c:when>
+											<c:otherwise>
+												<c:forEach items="${loggedUser.licenses }"
+													var="gameAcquired2">
+													<c:set var="acquired" value="false" />
+													<c:if test="${gameAcquired2.gameId eq game.id }">
+														<button class="btn btn-default disabled">Jogo já
+															adquirido</button>
+													</c:if>
+												</c:forEach>
+											</c:otherwise>
+										</c:choose>
 									</c:when>
 									<c:otherwise>
 										<c:choose>
@@ -80,11 +99,7 @@
 									style="position: absolute; top: 0px; right: 110%;">Cadastre-se</a>
 							</c:if>
 						</div>
-						<div class="textGame">
-							<p>${game.description }Loremipsumdolorsitamet,cunamexpetenda
-								ocurreret. Vis graeci delicatissimi no, putant noluisse mea ut.
-								Fuisset scribentur sea ne. Vix ad quod iisque fuisset.</p>
-						</div>
+						<div class="textGame"></div>
 						<div>
 							<a href="<c:url value="details/${game.id}"/>">Detalhes</a>
 						</div>
@@ -104,7 +119,7 @@
 						<div class="clearfix"></div>
 					</div>
 				</div>
-				<c:if test="${loggedUser.logged and loggedUser.admin}">
+				<c:if test="${loggedUser.admin}">
 					<hr>
 					<p style="text-align: center;">
 						<a href="<c:url value="/games/new"/>" class="btn btn-default"

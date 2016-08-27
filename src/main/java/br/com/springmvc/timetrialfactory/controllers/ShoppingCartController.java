@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.springmvc.timetrialfactory.dto.LicenseDTO;
 import br.com.springmvc.timetrialfactory.models.Game;
 import br.com.springmvc.timetrialfactory.models.LoggedUser;
 import br.com.springmvc.timetrialfactory.models.ShoppingCart;
@@ -63,7 +64,12 @@ public class ShoppingCartController {
 			ModelAndView modelAndView = new ModelAndView("shoppingCart/download");
 			purchaseService.savePurchase(shoppingCart, loggedUser);
 			licenseService.saveLicense(loggedUser, shoppingCart.getItems());
-			shoppingCart = null;
+			for (ShoppingItem item : shoppingCart.getItems()) {
+				LicenseDTO dto = new LicenseDTO();
+				dto.setGameId(item.getGame().getId());
+				loggedUser.getLicenses().add(dto);
+			}
+			shoppingCart.getItems().clear();
 			return modelAndView;
 		} else {
 			ModelAndView modelAndView = new ModelAndView("redirect:/logout");

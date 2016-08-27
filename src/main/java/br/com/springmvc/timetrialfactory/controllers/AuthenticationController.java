@@ -48,7 +48,7 @@ public class AuthenticationController {
 		if (userToVerify == null) {
 			ModelAndView modelAndView = new ModelAndView("users/login");
 			modelAndView.addObject("loginError", true);
-			return modelAndView;
+			return modelAndView; 
 		} else {
 			ModelAndView modelAndView = new ModelAndView("redirect:/games/list");
 			LoggedUser loggedUser = new LoggedUser();
