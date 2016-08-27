@@ -52,6 +52,10 @@ public class LoggedUser {
 		return licenses;
 	}
 
+	public boolean isHasGames() {
+		return !this.licenses.isEmpty();
+	}
+
 	public void setLicenses(List<LicenseDTO> licenses) {
 		this.licenses = licenses;
 	}

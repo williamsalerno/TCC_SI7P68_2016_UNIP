@@ -63,6 +63,7 @@ public class ShoppingCartController {
 			ModelAndView modelAndView = new ModelAndView("shoppingCart/download");
 			purchaseService.savePurchase(shoppingCart, loggedUser);
 			licenseService.saveLicense(loggedUser, shoppingCart.getItems());
+			shoppingCart = null;
 			return modelAndView;
 		} else {
 			ModelAndView modelAndView = new ModelAndView("redirect:/logout");

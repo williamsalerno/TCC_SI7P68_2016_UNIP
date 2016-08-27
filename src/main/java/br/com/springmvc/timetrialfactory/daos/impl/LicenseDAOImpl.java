@@ -24,6 +24,6 @@ public class LicenseDAOImpl extends AbstractDAO<Long, License> implements Licens
 	@SuppressWarnings({ "deprecation", "unchecked" })
 	@Override
 	public List<License> listLicenses(Long userId) {
-		return getSession().createQuery("FROM License l WHERE l.game.id = :userId").setParameter("userId", userId).list();
+		return getSession().createQuery("FROM License l WHERE l.user.id = :userId").setParameter("userId", userId).list();
 	}
 }

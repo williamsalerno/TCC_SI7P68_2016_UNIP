@@ -31,16 +31,15 @@
 										<c:set var="contains" value="true" />
 									</c:if>
 								</c:forEach>
-								<c:forEach items="${loggedUser.licenses}" var="license" varStatus="l">
-									<c:set var="licenseList" value="${l.current.gameId }" />
-									<c:if test="${licenseList eq game.id }">
-										<c:set var="acquired" value="true" />
-									</c:if>
-								</c:forEach>
 								<c:choose>
-									<c:when test="${acquired}">
-										<button class="btn btn-default disabled">Jogo já
-											adquirido</button>
+									<c:when test="${loggedUser.hasGames }">
+										<c:forEach items="${loggedUser.licenses }" var="gameAcquired">
+											<c:if test="${gameAcquired.gameId eq game.id}">
+												<button class="btn btn-default disabled">Jogo já
+													adquirido</button>
+												<span>${game.id }</span>
+											</c:if>
+										</c:forEach>
 									</c:when>
 									<c:otherwise>
 										<c:choose>
