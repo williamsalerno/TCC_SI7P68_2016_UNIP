@@ -1,12 +1,13 @@
 package br.com.springmvc.timetrialfactory.models;
 
+import static javax.persistence.EnumType.STRING;
+import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.Valid;
@@ -31,7 +32,7 @@ public class User {
 	private static final int MAX_LENGTH = 12;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "id", updatable = false)
 	private Long id;
 
@@ -64,7 +65,7 @@ public class User {
 	@Valid
 	private Address address;
 
-	@Enumerated(EnumType.STRING)
+	@Enumerated(STRING)
 	@Column(name = "role", nullable = false)
 	private RoleType role;
 
@@ -148,8 +149,7 @@ public class User {
 	public String toString() {
 		return new ToStringBuilder(this).append("firstName", this.firstName).append("lastName", this.lastName)
 				.append("email", this.email).append("address", this.address).append("login", this.login)
-				.append("password", this.password)
-				.append("role", this.role).build();
+				.append("password", this.password).append("role", this.role).build();
 	}
 
 }

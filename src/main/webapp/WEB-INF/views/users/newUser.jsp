@@ -1,12 +1,5 @@
 <div id="wrapper">
 	<%@ include file="/WEB-INF/jspf/header.jspf"%>
-	<div id="errors">
-		<ul>
-			<c:forEach items="${errors}" var="error">
-				<li>${error.category }-${error.message }</li>
-			</c:forEach>
-		</ul>
-	</div>
 	<div class="containerLogin">
 		<div class="content">
 			<div class="login">
