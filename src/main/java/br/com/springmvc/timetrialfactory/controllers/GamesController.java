@@ -4,6 +4,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import static org.springframework.web.context.WebApplicationContext.SCOPE_REQUEST;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
@@ -101,8 +102,9 @@ public class GamesController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/{id}", name = "game")
-	public ModelAndView update(@Validated Game game, BindingResult result) {
+	public ModelAndView update(@Valid Game game, BindingResult result, RedirectAttributes attr) {
 		if (result.hasErrors()) {
+			attr.addFlashAttribute("org.springframework.validation.BindingResult.game", result);
 			return new ModelAndView("redirect:/edit/{id}");
 		} else {
 			gameService.updateGame(game);

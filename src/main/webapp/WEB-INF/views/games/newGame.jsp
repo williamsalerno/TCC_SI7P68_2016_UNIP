@@ -18,8 +18,8 @@
 						value="${_csrf.token }" />
 					<div class="input-group">
 						<span class=input-group-addon>Título:</span>
-						<form:input class="form-newgame" minlength="5" path="title" />
-						<form:errors path="title" />
+						<form:input class="form-newgame" type="text" minlength="5" path="title" />
+						<strong><form:errors path="title" cssClass="message-error"/></strong>
 					</div>
 					<div class="input-group">
 						<span class=input-group-addon>Preço:</span>
