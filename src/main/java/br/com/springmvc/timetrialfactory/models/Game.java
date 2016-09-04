@@ -14,7 +14,6 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "games", catalog = "names")
@@ -37,7 +36,7 @@ public class Game {
 	private BigDecimal price;
 
 	@Lob
-	@NotEmpty
+	@NotBlank
 	@NotNull
 	@Column(name = "description")
 	private String description;

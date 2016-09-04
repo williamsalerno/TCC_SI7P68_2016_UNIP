@@ -6,6 +6,8 @@ import static org.springframework.web.context.WebApplicationContext.SCOPE_REQUES
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.hibernate.exception.ConstraintViolationException;
+import org.postgresql.util.PSQLException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -14,8 +16,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,7 +25,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.com.springmvc.timetrialfactory.models.Game;
 import br.com.springmvc.timetrialfactory.models.LoggedUser;
 import br.com.springmvc.timetrialfactory.services.GameService;
-import br.com.springmvc.timetrialfactory.validation.GameValidator;
 
 @Controller
 @Transactional
@@ -35,11 +34,6 @@ public class GamesController {
 
 	@Autowired
 	private GameService gameService;
-
-	@InitBinder
-	protected void initBinder(WebDataBinder binder) {
-		binder.setValidator(new GameValidator());
-	}
 
 	// Método POST para salvar um novo jogo no bd.
 	@RequestMapping(method = POST, value = "/newGame")
@@ -105,9 +99,17 @@ public class GamesController {
 	public ModelAndView update(@Valid Game game, BindingResult result, RedirectAttributes attr) {
 		if (result.hasErrors()) {
 			attr.addFlashAttribute("org.springframework.validation.BindingResult.game", result);
-			return new ModelAndView("redirect:/edit/{id}");
+			return new ModelAndView("redirect:/games/edit/{id}");
 		} else {
-			gameService.updateGame(game);
+			try {
+				gameService.updateGame(game);
+			} catch (PSQLException e) {
+				e.printStackTrace();
+				return new ModelAndView("redirect:/games/edit/{id}");
+			} catch (ConstraintViolationException e) {
+				e.printStackTrace();
+				return new ModelAndView("redirect:/games/edit/{id}");
+			}
 			return this.list();
 		}
 	}

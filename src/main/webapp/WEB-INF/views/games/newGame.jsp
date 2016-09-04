@@ -5,21 +5,15 @@
 	<div class="container">
 		<section class="cartView">
 			<div class="panel panel-default">
-				<spring:hasBindErrors name="game">
-					<ul>
-						<c:forEach var="error" items="${errors.allErrors }">
-							<li><spring:message code="${error.code }"
-									text="${error.defaultMessage}" /></li>
-						</c:forEach>
-					</ul>
-				</spring:hasBindErrors>
 				<form:form action="newGame" method="post" commandName="game">
 					<input type="hidden" name="${_csrf.parameterName }"
 						value="${_csrf.token }" />
 					<div class="input-group">
 						<span class=input-group-addon>Título:</span>
-						<form:input class="form-newgame" type="text" minlength="5" path="title" />
-						<strong><form:errors path="title" cssClass="message-error"/></strong>
+						<form:input class="form-control" type="text" minlength="5"
+							path="title" />
+						<strong> <form:errors path="title"
+								cssClass="message-error" /></strong>
 					</div>
 					<div class="input-group">
 						<span class=input-group-addon>Preço:</span>
