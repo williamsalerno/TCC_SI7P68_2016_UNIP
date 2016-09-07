@@ -19,6 +19,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -32,6 +33,8 @@ import br.com.springmvc.timetrialfactory.services.GameService;
 @RequestMapping("/games")
 public class GamesController {
 
+	private static final String REDIRECT_LOGOUT = "redirect:/logout";
+
 	@Autowired
 	private GameService gameService;
 
@@ -40,29 +43,27 @@ public class GamesController {
 	@CacheEvict(value = "games", allEntries = true)
 	public ModelAndView save(@Validated Game game, BindingResult result, RedirectAttributes redirectAttributes,
 			HttpSession session) {
-		LoggedUser loggedUser = (LoggedUser) session.getAttribute("loggedUser");
-		if (loggedUser.isAdmin()) {
-			if (result.hasErrors()) {
-				return gamesForm(session);
-			}
-			gameService.saveGame(game);
-			redirectAttributes.addFlashAttribute("sucesso", "Produto cadastrado com sucesso!");
-			return new ModelAndView("redirect:list");
+		if (!isAdminLogged((LoggedUser) session.getAttribute("loggedUser"))) {
+			return new ModelAndView(REDIRECT_LOGOUT);
 		}
-		return new ModelAndView("redirect:/logout");
+		if (result.hasErrors()) {
+			return gamesForm(session);
+		}
+		gameService.saveGame(game);
+		redirectAttributes.addFlashAttribute("sucesso", "Produto cadastrado com sucesso!");
+		return new ModelAndView("redirect:list");
 	}
 
 	// Método GET para carregar a página de form de novo jogo.
 	@RequestMapping(method = RequestMethod.GET, value = "/new")
 	public ModelAndView gamesForm(HttpSession session) {
-		LoggedUser loggedUser = (LoggedUser) session.getAttribute("loggedUser");
-		if (loggedUser.isAdmin()) {
-			ModelAndView modelAndView = new ModelAndView("games/newGame");
-			modelAndView.addObject("game", new Game());
-			return modelAndView;
+		if (!isAdminLogged((LoggedUser) session.getAttribute("loggedUser"))) {
+			return new ModelAndView(REDIRECT_LOGOUT);
 		}
-		ModelAndView modelAndView = new ModelAndView("redirect:/logout");
+		ModelAndView modelAndView = new ModelAndView("games/newGame");
+		modelAndView.addObject("game", new Game());
 		return modelAndView;
+
 	}
 
 	// Método GET para carregar a lista de jogos do bd.
@@ -83,35 +84,46 @@ public class GamesController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/edit/{id}")
-	public ModelAndView edit(@ModelAttribute Game game) {
+	public ModelAndView edit(@ModelAttribute Game game, HttpSession session) {
+		if (!isAdminLogged((LoggedUser) session.getAttribute("loggedUser"))) {
+			return new ModelAndView(REDIRECT_LOGOUT);
+		}
 		ModelAndView modelAndView = new ModelAndView("games/edit");
 		modelAndView.addObject("game", game);
 		return modelAndView;
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/delete/{id}")
-	public ModelAndView delete(@ModelAttribute Game game) {
+	public ModelAndView delete(@ModelAttribute Game game, HttpSession session) {
+		if (!isAdminLogged((LoggedUser) session.getAttribute("loggedUser"))) {
+			return new ModelAndView(REDIRECT_LOGOUT);
+		}
 		gameService.deleteGame(game);
 		return this.list();
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/{id}", name = "game")
-	public ModelAndView update(@Valid Game game, BindingResult result, RedirectAttributes attr) {
+	public ModelAndView update(@Valid Game game, BindingResult result, RedirectAttributes attr, HttpSession session) {
+		if (!isAdminLogged((LoggedUser) session.getAttribute("loggedUser"))) {
+			return new ModelAndView(REDIRECT_LOGOUT);
+		}
 		if (result.hasErrors()) {
 			attr.addFlashAttribute("org.springframework.validation.BindingResult.game", result);
-			return new ModelAndView("redirect:/games/edit/{id}");
+			return new ModelAndView("games/edit");
 		} else {
-			try {
-				gameService.updateGame(game);
-			} catch (PSQLException e) {
-				e.printStackTrace();
-				return new ModelAndView("redirect:/games/edit/{id}");
-			} catch (ConstraintViolationException e) {
-				e.printStackTrace();
-				return new ModelAndView("redirect:/games/edit/{id}");
-			}
+			gameService.updateGame(game);
 			return this.list();
 		}
+	}
+
+	private boolean isAdminLogged(LoggedUser loggedUser) {
+		if (loggedUser != null) {
+			if (!loggedUser.isAdmin()) {
+				return false;
+			}
+			return true;
+		}
+		return false;
 	}
 
 }

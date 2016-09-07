@@ -2,8 +2,6 @@ package br.com.springmvc.timetrialfactory.services;
 
 import java.util.List;
 
-import org.hibernate.exception.ConstraintViolationException;
-import org.postgresql.util.PSQLException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,7 +29,7 @@ public class GameServiceImpl implements GameService {
 	}
 
 	@Override
-	public void updateGame(Game game) throws PSQLException, ConstraintViolationException {
+	public void updateGame(Game game){
 		if (game != null) {
 			dao.updateGame(game);
 		}

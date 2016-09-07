@@ -15,6 +15,14 @@ import br.com.springmvc.timetrialfactory.dto.UserDTO;
 @Component
 @Scope(value = SCOPE_SESSION, proxyMode = TARGET_CLASS)
 public class LoggedUser {
+	
+	public LoggedUser(){
+		
+	}
+	
+public LoggedUser(LoggedUser user){
+		
+	}
 
 	private UserDTO logged;
 

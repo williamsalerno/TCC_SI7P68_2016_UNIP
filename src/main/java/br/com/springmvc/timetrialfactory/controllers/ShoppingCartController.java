@@ -72,8 +72,7 @@ public class ShoppingCartController {
 			shoppingCart.getItems().clear();
 			return modelAndView;
 		} else {
-			ModelAndView modelAndView = new ModelAndView("redirect:/logout");
-			return modelAndView;
+			return new ModelAndView("redirect:/logout");
 		}
 
 	}

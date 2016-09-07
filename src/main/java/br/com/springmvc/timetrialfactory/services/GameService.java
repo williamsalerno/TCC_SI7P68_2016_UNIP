@@ -2,9 +2,6 @@ package br.com.springmvc.timetrialfactory.services;
 
 import java.util.List;
 
-import org.hibernate.exception.ConstraintViolationException;
-import org.postgresql.util.PSQLException;
-
 import br.com.springmvc.timetrialfactory.models.Game;
 
 public interface GameService {
@@ -13,7 +10,7 @@ public interface GameService {
 
 	void saveGame(Game game);
 
-	void updateGame(Game game) throws PSQLException, ConstraintViolationException;
+	void updateGame(Game game);
 
 	void deleteGame(Game game);
 

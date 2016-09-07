@@ -26,12 +26,12 @@ public class Game {
 
 	@NotNull
 	@NotBlank
-	@Length(min = 5, message = "Título do jogo é obrigatório e deve ter, no mínimo, 5 caracteres.")
+	@Length(min = 5)
 	@Column(name = "title", nullable = false, unique = true)
 	private String title;
 
 	@NotNull
-	@Min(value = 1, message = "O preço do jogo deve ser maior que ou igual a 1.")
+	@Min(value = 1)
 	@Column(name = "price", nullable = false)
 	private BigDecimal price;
 
