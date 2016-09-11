@@ -44,4 +44,11 @@ public class UserDAOImpl extends AbstractDAO<Long, User> implements UserDAO {
 		return (User) criteria.uniqueResult();
 	}
 
+	@SuppressWarnings("deprecation")
+	@Override
+	public User findByCode(Long code) {
+		return (User) getSession().createQuery("FROM User u WHERE u.activationCode = :code").setParameter("code", code)
+				.uniqueResult();
+	}
+
 }

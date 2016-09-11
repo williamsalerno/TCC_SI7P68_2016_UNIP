@@ -12,4 +12,6 @@ public interface UserService {
 
 	User loadUser(String login, String password);
 
+	User findByCode(Long code);
+
 }

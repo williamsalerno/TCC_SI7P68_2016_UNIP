@@ -69,6 +69,12 @@ public class User {
 	@Column(name = "role", nullable = false)
 	private RoleType role;
 
+	@Column(name = "active", nullable = false)
+	private Boolean active;
+
+	@Column(name = "activationCode")
+	private Long activationCode;
+
 	public Long getId() {
 		return id;
 	}
@@ -131,6 +137,22 @@ public class User {
 
 	public void setRole(RoleType role) {
 		this.role = role;
+	}
+
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
+
+	public Long getActivationCode() {
+		return activationCode;
+	}
+
+	public void setActivationCode(Long activationCode) {
+		this.activationCode = activationCode;
 	}
 
 	public int hashCode() {

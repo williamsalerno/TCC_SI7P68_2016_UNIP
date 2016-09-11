@@ -30,6 +30,13 @@
 								value="<fmt:message key="btn.enter" />" />
 						</div>
 						<hr style="margin-bottom: 40px;">
+						<c:if test="${activate }">
+							<div class="alert alert-info" style="text-align: center;">
+								<fmt:message var="messageNewUser" key="message.activateInfo" />
+								<c:set var="messageActivateInfo" value="${messageNewUser }" />
+								${messageActivateInfo }
+							</div>
+						</c:if>
 						<c:if test="${success }">
 							<div class="alert alert-success" style="text-align: center;">
 								<fmt:message var="messageNewUser" key="message.success" />
@@ -41,6 +48,12 @@
 							<div class="alert alert-danger" style="text-align: center;">
 								<strong><fmt:message key="message.error" /></strong>
 								<fmt:message key="message.invalidCredential" />
+							</div>
+						</c:if>
+						<c:if test="${activationError != null }">
+							<div class="alert alert-danger" style="text-align: center;">
+								<strong><fmt:message key="message.error" /></strong>
+								<fmt:message key="message.inactiveAcc" />
 							</div>
 						</c:if>
 					</form:form>

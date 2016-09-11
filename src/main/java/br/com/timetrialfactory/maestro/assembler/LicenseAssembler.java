@@ -15,16 +15,16 @@ import br.com.timetrialfactory.maestro.services.UserService;
 public class LicenseAssembler implements Assembler<List<License>, List<LicenseDTO>> {
 
 	@Autowired
-	UserAssembler userAssembler;
+	private UserAssembler userAssembler;
 
 	@Autowired
-	GameAssembler gameAssembler;
+	private GameAssembler gameAssembler;
 
 	@Autowired
-	UserService userService;
+	private UserService userService;
 
 	@Autowired
-	GameService gameService;
+	private GameService gameService;
 
 	@Override
 	public List<LicenseDTO> toObject(List<License> list) {

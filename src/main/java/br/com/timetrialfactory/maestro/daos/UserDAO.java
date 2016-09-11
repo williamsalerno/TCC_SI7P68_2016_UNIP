@@ -14,4 +14,6 @@ public interface UserDAO {
 
 	boolean checkUser(User user);
 
+	User findByCode(Long code);
+
 }

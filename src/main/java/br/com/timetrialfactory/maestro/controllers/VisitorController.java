@@ -13,9 +13,12 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.timetrialfactory.maestro.assembler.UserAssembler;
+import br.com.timetrialfactory.maestro.dto.UserDTO;
 import br.com.timetrialfactory.maestro.email.EmailSender;
 import br.com.timetrialfactory.maestro.models.User;
 import br.com.timetrialfactory.maestro.models.embeddables.Address;
@@ -29,7 +32,10 @@ public class VisitorController {
 
 	@Autowired
 	private UserService service;
-	
+
+	@Autowired
+	private UserAssembler userAssembler;
+
 	@Autowired
 	private EmailSender emailSender;
 
@@ -52,7 +58,7 @@ public class VisitorController {
 			return modelAndView;
 		} else {
 			emailSender.sendConfirmationEmail(user);
-			attr.addFlashAttribute("success", true);
+			attr.addFlashAttribute("activate", true);
 			return new ModelAndView("redirect:/login");
 		}
 	}
@@ -74,6 +80,20 @@ public class VisitorController {
 	public ModelAndView selectCountry() {
 		ModelAndView modelAndView = new ModelAndView("users/selectCountry");
 		return modelAndView;
+	}
+
+	@RequestMapping(method = GET)
+	public ModelAndView confirmAccount(@RequestParam Long confirmationCode, RedirectAttributes attr) {
+		UserDTO dto = null;
+		if (confirmationCode != null) {
+			dto = userAssembler.toObject(service.findByCode(confirmationCode));
+		}
+		if (dto != null) {
+			dto.setActive(true);
+			service.updateUser(userAssembler.toEntity(dto));
+			attr.addFlashAttribute("success", true);
+		}
+		return new ModelAndView("redirect:/login");
 	}
 
 }

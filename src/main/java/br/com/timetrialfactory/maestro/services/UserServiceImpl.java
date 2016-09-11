@@ -1,12 +1,14 @@
 package br.com.timetrialfactory.maestro.services;
 
+import static br.com.timetrialfactory.maestro.models.enums.RoleType.GENERIC;
+import static java.util.UUID.randomUUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.timetrialfactory.maestro.daos.UserDAO;
 import br.com.timetrialfactory.maestro.models.User;
-import br.com.timetrialfactory.maestro.models.enums.RoleType;
 
 @Service("userService")
 @Transactional
@@ -22,13 +24,18 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public boolean saveUser(User user) {
-		if (dao.checkUser(user)) {
-			user.setRole(RoleType.GENERIC);
-			dao.saveUser(user);
-			return true;
-		} else {
-			return false;
+		if (user != null) {
+			if (dao.checkUser(user)) {
+				user.setRole(GENERIC);
+				user.setActivationCode(randomUUID().getMostSignificantBits());
+				user.setActive(false);
+				dao.saveUser(user);
+				return true;
+			} else {
+				return false;
+			}
 		}
+		return false;
 	}
 
 	/*
@@ -39,19 +46,33 @@ public class UserServiceImpl implements UserService {
 	 */
 	@Override
 	public void updateUser(User user) {
-		User entity = dao.findById(user.getId());
-		if (entity != null) {
+		if (user != null) {
+			User entity = dao.findById(user.getId());
 			entity.setFirstName(user.getFirstName());
 			entity.setLastName(user.getLastName());
 			entity.setAddress(user.getAddress());
 			entity.setEmail(user.getEmail());
 			entity.setPassword(user.getPassword());
+			if (!entity.getActive()) {
+				entity.setActive(user.getActive());
+			}
 		}
 	}
 
 	@Override
 	public User loadUser(String login, String password) {
-		return dao.getUserByLoginAndPassword(login, password);
+		if (login != null && password != null) {
+			return dao.getUserByLoginAndPassword(login, password);
+		}
+		return new User();
+	}
+
+	@Override
+	public User findByCode(Long code) {
+		if (code != null) {
+			return dao.findByCode(code);
+		}
+		return new User();
 	}
 
 }
