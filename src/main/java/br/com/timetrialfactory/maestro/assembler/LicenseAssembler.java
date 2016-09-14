@@ -39,12 +39,8 @@ public class LicenseAssembler implements Assembler<List<License>, List<LicenseDT
 				if (license.getUser() != null) {
 					dto.setUserId(license.getUser().getId());
 				}
-				if (license.getCode() != null) {
-					dto.setCode(license.getCode());
-				}
-				if (license.getCheckedCode() != null) {
-					dto.setCheckedCode(license.getCheckedCode());
-				}
+				dto.setCode(license.getCode());
+				dto.setCheckedCode(license.getCheckedCode());
 				object.add(dto);
 			}
 		}
