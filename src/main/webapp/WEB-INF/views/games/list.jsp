@@ -21,7 +21,14 @@
 							</div>
 							<div class="priceGame">
 								<h1 style="margin-right: 20px;">
-									<fmt:formatNumber type="currency" value="${game.price }" />
+									<c:choose>
+										<c:when test="${game.price < 1}">
+											Free
+										</c:when>
+										<c:otherwise>
+											<fmt:formatNumber type="currency" value="${game.price }" />
+										</c:otherwise>
+									</c:choose>
 								</h1>
 							</div>
 							<div class="btnsGame">

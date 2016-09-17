@@ -31,7 +31,7 @@ public class Game {
 	private String title;
 
 	@NotNull
-	@Min(value = 1)
+	@Min(value = 0)
 	@Column(name = "price", nullable = false)
 	private BigDecimal price;
 
