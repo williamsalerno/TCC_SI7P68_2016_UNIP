@@ -7,23 +7,19 @@
 					<p>
 						<spring:message code="choose_lang" />
 					</p>
-					<a href="?locale=pt_BR"><spring:message code="lang_pt" /></a> <a
-						href="?locale=en_US"><spring:message code="lang_en" /></a>
+					<a href="?locale=pt_BR"><spring:message code="lang_pt" /></a> <a href="?locale=en_US"><spring:message code="lang_en" /></a>
 				</div>
 				<div class="row">
 					<div class="col-xs-4 col-md-4">
-						<a href="https://www.youtube.com/channel/UCNq1aarxvu_gkRRcqjv3Z-A"> <img class="imgFooter" src="<c:url value="/img/youtube.png"/>"
-							alt="youtube/timetrialfac">
+						<a href="https://www.youtube.com/channel/UCNq1aarxvu_gkRRcqjv3Z-A"> <img class="imgFooter" src="<c:url value="/img/youtube.png"/>" alt="youtube/timetrialfac">
 						</a>
 					</div>
 					<div class="col-xs-4 col-md-4">
-						<a href="#"> <img class="imgFooter" src="<c:url value="/img/facebook.png"/>"
-							alt="facebook/timetrialfac">
+						<a href="#"> <img class="imgFooter" src="<c:url value="/img/facebook.png"/>" alt="facebook/timetrialfac">
 						</a>
 					</div>
 					<div class="col-xs-4 col-md-4">
-						<a href="#"> <img class="imgFooter" src="<c:url value="/img/twitter.png"/>"
-							alt="twitter/timetrialfac">
+						<a href="#"> <img class="imgFooter" src="<c:url value="/img/twitter.png"/>" alt="twitter/timetrialfac">
 						</a>
 					</div>
 				</div>
@@ -35,4 +31,3 @@
 		</div>
 	</div>
 </footer>
-
