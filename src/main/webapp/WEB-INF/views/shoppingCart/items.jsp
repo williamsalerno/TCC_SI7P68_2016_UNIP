@@ -1,7 +1,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<div id="wrapper">
-	<%@ include file="/WEB-INF/jspf/header.jspf"%>
-	<div class="container">
+<%@ include file="/WEB-INF/jspf/header.jspf"%>
+<div id="container">
+	<div class="content">
 		<section class="cartView">
 			<div class="panel panel-default">
 				<!-- Default panel contents -->
@@ -19,11 +19,8 @@
 								<h4 id="cartPrice">
 									<fmt:formatNumber type="currency" value="${item.game.price }" />
 								</h4>
-								<form id="removeCart" action="<c:url value="/shopping/cart"/>"
-									method="post">
-									<input type="hidden" name="${_csrf.parameterName }"
-										value="${_csrf.token }" /> <input type="hidden" name="gameId"
-										value="${s.index}" />
+								<form id="removeCart" action="<c:url value="/shopping/cart"/>" method="post">
+									<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" /> <input type="hidden" name="gameId" value="${s.index}" />
 									<button class="link btn btn-default btnRemoveCart">Remover</button>
 								</form>
 							</div>
@@ -34,30 +31,25 @@
 						</div>
 					</c:otherwise>
 				</c:choose>
-
 				<div class="btnCart">
 					<form action="<c:url value="/games/list"/>" method="get">
 						<button class="link btn btn-default">Voltar</button>
 					</form>
 					<c:if test="${!empty shoppingCart.items }">
 						<c:url var="checkout_url" value="/shopping/cart/checkout" />
-						<form:form action="${checkout_url }" modelAttribute="shoppingCart"
-							method="post">
-							<input type="hidden" name="${_csrf.parameterName}"
-								value="${_csrf.token}" />
+						<form:form action="${checkout_url }" modelAttribute="shoppingCart" method="post">
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 							<input type="hidden" name="gamesInCart" value="${shoppingCart}" />
-							<button class="link btn btn-default">Gerar pagamento
-								teste</button>
+							<button class="link btn btn-default">Gerar pagamento teste</button>
 						</form:form>
 						<form action="<c:url value="/confirmPayment"/>" method="post">
-							<button class="link btn btn-default">Comprovar pagamento
-								teste</button>
+							<button class="link btn btn-default">Comprovar pagamento teste</button>
 						</form>
 					</c:if>
 				</div>
 			</div>
 		</section>
 	</div>
-	<%@ include file="/WEB-INF/jspf/footer.jspf"%>
 </div>
-
+<%@ include file="/WEB-INF/jspf/footer.jspf"%>
+<%@ include file="/WEB-INF/jspf/end.jspf"%>

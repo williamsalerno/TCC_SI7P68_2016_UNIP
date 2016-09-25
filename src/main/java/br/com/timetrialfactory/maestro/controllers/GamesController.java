@@ -38,16 +38,16 @@ public class GamesController {
 	// Método POST para salvar um novo jogo no bd.
 	@RequestMapping(method = POST, value = "/newGame")
 	@CacheEvict(value = "games", allEntries = true)
-	public ModelAndView save(@Validated Game game, BindingResult result, RedirectAttributes redirectAttributes,
-			HttpSession session) {
+	public ModelAndView save(@Validated Game game, BindingResult result, RedirectAttributes attr, HttpSession session) {
 		if (!isAdminLogged((LoggedUser) session.getAttribute("loggedUser"))) {
 			return new ModelAndView(REDIRECT_LOGOUT);
 		}
 		if (result.hasErrors()) {
-			return gamesForm(session);
+			attr.addFlashAttribute("org.springframework.validation.BindingResult.game", result);
+			return new ModelAndView("games/newGame");
 		}
 		gameService.saveGame(game);
-		redirectAttributes.addFlashAttribute("sucesso", "Produto cadastrado com sucesso!");
+		attr.addFlashAttribute("sucesso", "Produto cadastrado com sucesso!");
 		return new ModelAndView("redirect:list");
 	}
 

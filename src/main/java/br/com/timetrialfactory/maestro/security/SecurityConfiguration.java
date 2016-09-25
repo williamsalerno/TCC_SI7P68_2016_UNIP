@@ -9,8 +9,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().and().logout()
-				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
+		http.csrf().and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
 	}
 
 }

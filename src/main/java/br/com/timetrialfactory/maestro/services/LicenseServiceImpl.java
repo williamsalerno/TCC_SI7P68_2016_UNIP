@@ -2,6 +2,7 @@ package br.com.timetrialfactory.maestro.services;
 
 import static java.util.UUID.randomUUID;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ import br.com.timetrialfactory.maestro.models.ShoppingItem;
 @Transactional
 public class LicenseServiceImpl implements LicenseService {
 
+	private final static BigDecimal free = new BigDecimal("0");
+
 	@Autowired
 	private LicenseDAO dao;
 
@@ -28,7 +31,11 @@ public class LicenseServiceImpl implements LicenseService {
 				license.setCode(new LicenseGenerator().generateLicense());
 				license.setUser(user.getLoggedUser());
 				license.setGame(gameInCart.getGame());
-				license.setCheckedCode(false);
+				if (gameInCart.getGame().getPrice().equals(free)) {
+					license.setCheckedCode(true);
+				} else {
+					license.setCheckedCode(false);
+				}
 				dao.saveLicense(license);
 			}
 		}

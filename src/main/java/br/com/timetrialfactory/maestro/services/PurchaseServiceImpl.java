@@ -1,6 +1,8 @@
 package br.com.timetrialfactory.maestro.services;
 
-import java.time.LocalDateTime;
+import static java.time.LocalDateTime.now;
+
+import java.math.BigDecimal;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,8 @@ import br.com.timetrialfactory.maestro.models.enums.PurchaseSituationType;
 @Transactional
 public class PurchaseServiceImpl implements PurchaseService {
 
+	private final static BigDecimal free = new BigDecimal("0");
+
 	@Autowired
 	private PurchaseDAO dao;
 
@@ -26,9 +30,13 @@ public class PurchaseServiceImpl implements PurchaseService {
 			for (int i = 0; i < cart.getItems().size(); i++) {
 				purchase.setGame(cart.getItems().get(i).getGame());
 				purchase.setPrice(cart.getItems().get(i).getGame().getPrice());
-				purchase.setPurchaseDate(LocalDateTime.now());
+				purchase.setPurchaseDate(now());
 				purchase.setUser(userWeb.getLoggedUser());
-				purchase.setPurchaseSituation(PurchaseSituationType.PROCESSANDO);
+				if (cart.getTotal().equals(free)) {
+					purchase.setPurchaseSituation(PurchaseSituationType.CONFIRMADO);
+				} else {
+					purchase.setPurchaseSituation(PurchaseSituationType.PROCESSANDO);
+				}
 				dao.savePurchase(purchase);
 			}
 		}

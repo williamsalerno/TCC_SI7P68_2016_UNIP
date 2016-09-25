@@ -2,7 +2,7 @@ package br.com.timetrialfactory.maestro.models.enums;
 
 public enum PurchaseSituationType {
 
-	FINALIZADO("FINALIZADO", 1), PROCESSANDO("PROCESSANDO", 2), CANCELADO("CANCELADO", 3);
+	PENDENTE("PENDENTE", 1), PROCESSANDO("PROCESSANDO", 2), CONFIRMADO("CONFIRMADO", 3), CANCELADO("CANCELADO", 4);
 
 	private String situacao;
 	private Integer id;
