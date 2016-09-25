@@ -5,40 +5,29 @@
 <nav class="navbar navbar-inverse">
 	<div class="container-fluid">
 		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse"
-				data-target="#myNavbar">
-				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span>
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+				<span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="<c:url value="/"/>">TimeTrial
-				Factory </a>
+			<a class="navbar-brand" href="<c:url value="/"/>">TimeTrial Factory </a>
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav">
 				<li><a href="#"><fmt:message key="about" /></a></li>
-				<li><a href="<c:url value="/games/list"/>"><fmt:message
-							key="listGames" /></a></li>
+				<li><a href="<c:url value="/games/list"/>"><fmt:message key="listGames" /></a></li>
 				<li><a href="#"><fmt:message key="contact" /></a></li>
 				<li><a href="#"><fmt:message key="support" /></a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<c:if test="${loggedUser != null }">
 					<c:set var="loggedUserName" value="${loggedUser.name}" />
-					<li id="li-welcome"><span
-						class="userWeb-logged"><spring:message code="welcome" /> ${loggedUserName }!</span></li>
-					<li><a href="<c:url value="/shopping/cart/view"/>"><span
-							class="glyphicon glyphicon-shopping-cart"></span> <fmt:message
-								key="cart" /></a></li>
-					<li><a href="<c:url value="/logout"/>"><span
-							class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+					<li id="li-welcome"><span class="userWeb-logged"><spring:message code="welcome" /> ${loggedUserName }!</span></li>
+					<li><a href="<c:url value="/shopping/cart/view"/>"><span class="glyphicon glyphicon-cog"></span> <fmt:message key="profile" /></a></li>
+					<li><a href="<c:url value="/shopping/cart/view"/>"><span class="glyphicon glyphicon-shopping-cart"></span> <fmt:message key="cart" /></a></li>
+					<li><a href="<c:url value="/logout"/>"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 				</c:if>
 				<c:if test="${loggedUser == null }">
-					<li><a id="newUser"
-						href="<c:url value="/newUser/selectCountry"/>"><span
-							class="glyphicon glyphicon-user"></span> <fmt:message
-								key="register" /></a></li>
-					<li><a href="<c:url value="/login"/>"><span
-							class="glyphicon glyphicon-log-in"></span> Login</a></li>
+					<li><a id="newUser" href="<c:url value="/newUser/selectCountry"/>"><span class="glyphicon glyphicon-user"></span> <fmt:message key="register" /></a></li>
+					<li><a href="<c:url value="/login"/>"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
 				</c:if>
 			</ul>
 		</div>

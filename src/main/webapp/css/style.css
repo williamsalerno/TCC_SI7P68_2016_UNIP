@@ -90,7 +90,7 @@ footer {
 	}
 }
 
-@media ( min-width : 900px) {
+@media ( min-width : 930px) {
 	.navbar-collapse.collapse {
 		display: block !important;
 		height: auto !important;
