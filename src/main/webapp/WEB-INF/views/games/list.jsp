@@ -94,7 +94,12 @@
 								<a href="<c:url value= "/users/selectCountry"/>" class="btn btn-default" style="position: absolute; top: 0px; right: 110%;">Cadastre-se</a>
 							</c:if>
 						</div>
-						<div class="textGame"></div>
+						<div class="textGame">
+							<p>
+								<c:out value="${game.description }" />
+							</p>
+							<p>Alguma descrição aqui</p>
+						</div>
 					</div>
 				</section>
 			</c:forEach>

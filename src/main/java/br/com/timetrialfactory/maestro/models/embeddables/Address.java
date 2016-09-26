@@ -1,5 +1,7 @@
 package br.com.timetrialfactory.maestro.models.embeddables;
 
+import static br.com.timetrialfactory.maestro.utils.FormatterStringUtil.formatToUTF8;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
@@ -22,11 +24,11 @@ public class Address {
 	private Country country;
 
 	@Column(name = "address_State")
-	@Pattern(regexp = "[\\x00-\\x7F]+")
+	@Pattern(regexp = "\\p{L} +")
 	private String state;
 
 	@Column(name = "address_City")
-	@Pattern(regexp = "[\\x00-\\x7F]+")
+	@Pattern(regexp = "\\p{L} +")
 	private String city;
 
 	@Column(name = "address_Cep")
@@ -46,7 +48,7 @@ public class Address {
 	}
 
 	public void setState(String state) {
-		this.state = state;
+		this.state = formatToUTF8(state);
 	}
 
 	public String getCity() {
@@ -54,7 +56,7 @@ public class Address {
 	}
 
 	public void setCity(String city) {
-		this.city = city;
+		this.city = formatToUTF8(city);
 	}
 
 	public String getCep() {

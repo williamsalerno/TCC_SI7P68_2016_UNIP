@@ -731,6 +731,19 @@ input:focus, select:focus {
 	border: 1px solid #3C2205 !important;
 }
 
+.caption>p {
+	color: white;
+}
+
+.caption>h3 {
+	color: #FFC277 !important;
+}
+
+#thumbHome>.thumbnail {
+	display: inline-block;
+	margin: 10px;
+}
+
 .list-group-item.active {
 	background-color: #FF8F12 !important;
 	border-color: #D8780C !important;
@@ -862,6 +875,12 @@ a.list-group-item .list-group-item-heading, button.list-group-item .list-group-i
 
 #thumbHome {
 	margin: auto;
+	display: inline;
+}
+
+#thumbHome>.thumbnail>img {
+	width: 410px !important;
+	height: 410px !important;
 }
 
 .updates-section-title {

@@ -1,5 +1,7 @@
 package br.com.timetrialfactory.maestro.models;
 
+import static java.lang.Boolean.FALSE;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -26,7 +28,7 @@ public class License {
 	private User user;
 
 	@Column(name = "checked_code")
-	private Boolean checkedCode;
+	private Boolean checkedCode = FALSE;
 
 	public String getCode() {
 		return code;

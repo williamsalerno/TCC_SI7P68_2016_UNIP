@@ -36,12 +36,10 @@ public class Purchase implements Serializable {
 	@Column(name = "game_price", nullable = false)
 	private BigDecimal price;
 
-	@NotNull
 	@Column(name = "purchase_date", nullable = false)
 	private LocalDateTime purchaseDate;
 
 	@Enumerated(EnumType.STRING)
-	@NotNull
 	@Column(name = "purchase_situation", nullable = false)
 	private PurchaseSituationType purchaseSituation;
 

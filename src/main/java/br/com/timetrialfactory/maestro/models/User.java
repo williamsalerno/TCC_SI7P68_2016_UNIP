@@ -1,5 +1,7 @@
 package br.com.timetrialfactory.maestro.models;
 
+import static br.com.timetrialfactory.maestro.utils.FormatterStringUtil.formatToUTF8;
+import static java.lang.Boolean.FALSE;
 import static javax.persistence.EnumType.STRING;
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -37,22 +39,24 @@ public class User {
 	private Long id;
 
 	@NotNull
+	@Pattern(regexp = "\\p{L}+")
 	@Column(name = "first_name", nullable = false)
-	@Pattern(regexp = "[a-zA-Z]+")
 	private String firstName;
 
 	@NotNull
+	@Pattern(regexp = "\\p{L}+")
 	@Column(name = "last_name", nullable = false)
-	@Pattern(regexp = "[a-zA-Z]+")
 	private String lastName;
 
 	@NotNull
 	@Size(min = MIN_LOGIN_LENGTH, max = MAX_LENGTH)
+	@Pattern(regexp = "[a-zA-Z0-9]+")
 	@Column(name = "username", nullable = false, unique = true)
 	private String login;
 
 	@NotNull
 	@Size(min = MIN_PASSWORD_LENGTH, max = MAX_LENGTH)
+	@Pattern(regexp = "[a-zA-Z0-9]+")
 	@Column(name = "password", nullable = false)
 	private String password;
 
@@ -70,7 +74,7 @@ public class User {
 	private RoleType role;
 
 	@Column(name = "active", nullable = false)
-	private Boolean active;
+	private Boolean active = FALSE;
 
 	@Column(name = "activationCode")
 	private Long activationCode;
@@ -88,7 +92,7 @@ public class User {
 	}
 
 	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+		this.firstName = formatToUTF8(firstName);
 	}
 
 	public String getLastName() {
@@ -96,7 +100,7 @@ public class User {
 	}
 
 	public void setLastName(String lastName) {
-		this.lastName = lastName;
+		this.lastName = formatToUTF8(lastName);
 	}
 
 	public String getLogin() {
