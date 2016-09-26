@@ -5,7 +5,7 @@
 <nav class="navbar navbar-inverse">
 	<div class="container-fluid">
 		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar" id="myNavbarButton">
 				<span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 			</button>
 			<a class="navbar-brand" href="<c:url value="/"/>">TimeTrial Factory </a>
@@ -21,7 +21,7 @@
 				<c:if test="${loggedUser != null }">
 					<c:set var="loggedUserName" value="${loggedUser.name}" />
 					<li id="li-welcome"><span class="userWeb-logged"><spring:message code="welcome" /> ${loggedUserName }!</span></li>
-					<li><a href="<c:url value="/shopping/cart/view"/>"><span class="glyphicon glyphicon-cog"></span> <fmt:message key="profile" /></a></li>
+					<li><a href="<c:url value="/user/myProfile"/>"><span class="glyphicon glyphicon-cog"></span> <fmt:message key="profile" /></a></li>
 					<li><a href="<c:url value="/shopping/cart/view"/>"><span class="glyphicon glyphicon-shopping-cart"></span> <fmt:message key="cart" /></a></li>
 					<li><a href="<c:url value="/logout"/>"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 				</c:if>

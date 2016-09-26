@@ -98,7 +98,6 @@
 							<p>
 								<c:out value="${game.description }" />
 							</p>
-							<p>Alguma descrição aqui</p>
 						</div>
 					</div>
 				</section>
