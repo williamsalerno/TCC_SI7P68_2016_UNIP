@@ -24,11 +24,11 @@ public class Address {
 	private Country country;
 
 	@Column(name = "address_State")
-	@Pattern(regexp = "\\p{L} +")
+	@Pattern(regexp = "[A-Za-zÀ-ú ]+")
 	private String state;
 
 	@Column(name = "address_City")
-	@Pattern(regexp = "\\p{L} +")
+	@Pattern(regexp = "[A-Za-zÀ-ú ]+")
 	private String city;
 
 	@Column(name = "address_Cep")
