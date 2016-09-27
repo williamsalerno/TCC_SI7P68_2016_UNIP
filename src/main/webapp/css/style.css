@@ -91,11 +91,17 @@ footer {
 }
 
 @media ( min-width : 930px) {
-	.navbar-collapse.collapse {
+	#myNavbar {
 		display: block !important;
 		height: auto !important;
 		padding-bottom: 0;
 		overflow: visible !important;
+	}
+}
+
+@media ( min-width : 1000px) {
+	#myNavbarButton {
+		display: none !important;
 	}
 }
 
@@ -130,7 +136,9 @@ footer {
 	margin-right: auto;
 	margin-left: auto;
 	max-width: 1170px;
-	padding-bottom: 10em;
+	padding-bottom: 33px;
+	margin-top: 1px;
+	padding-top: 90px;
 }
 
 .navbar {
