@@ -1,6 +1,6 @@
 package br.com.timetrialfactory.maestro.services;
 
-import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ public class GameServiceImpl implements GameService {
 	private GameDAO dao;
 
 	@Override
-	public List<Game> listGames() {
+	public Set<Game> listGames() {
 		return dao.listGames();
 	}
 

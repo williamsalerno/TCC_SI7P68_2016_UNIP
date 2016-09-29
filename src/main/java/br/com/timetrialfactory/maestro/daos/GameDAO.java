@@ -1,12 +1,12 @@
 package br.com.timetrialfactory.maestro.daos;
 
-import java.util.List;
+import java.util.Set;
 
 import br.com.timetrialfactory.maestro.models.Game;
 
 public interface GameDAO {
 	
-	List<Game> listGames();
+	Set<Game> listGames();
 	
 	Game findById(Long id);
 	

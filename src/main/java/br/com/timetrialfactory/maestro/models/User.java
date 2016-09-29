@@ -13,7 +13,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -21,6 +20,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 
 import br.com.timetrialfactory.maestro.models.embeddables.Address;
 import br.com.timetrialfactory.maestro.models.enums.RoleType;
@@ -38,29 +38,29 @@ public class User {
 	@Column(name = "id", updatable = false)
 	private Long id;
 
-	@NotNull
+	@NotBlank
 	@Pattern(regexp = "\\p{L}+")
 	@Column(name = "first_name", nullable = false)
 	private String firstName;
 
-	@NotNull
+	@NotBlank
 	@Pattern(regexp = "\\p{L}+")
 	@Column(name = "last_name", nullable = false)
 	private String lastName;
 
-	@NotNull
+	@NotBlank
 	@Size(min = MIN_LOGIN_LENGTH, max = MAX_LENGTH)
 	@Pattern(regexp = "[a-zA-Z0-9]+")
 	@Column(name = "username", nullable = false, unique = true)
 	private String login;
 
-	@NotNull
+	@NotBlank
 	@Size(min = MIN_PASSWORD_LENGTH, max = MAX_LENGTH)
 	@Pattern(regexp = "[a-zA-Z0-9]+")
 	@Column(name = "password", nullable = false)
 	private String password;
 
-	@NotNull
+	@NotBlank
 	@Email(regexp = "^((?!_)(?!\\.))[a-z0-9._]+[a-z0-9]+@{1}\\w+\\.com{1}(\\.br)*$")
 	@Column(name = "email", nullable = false, unique = true)
 	private String email;

@@ -1,5 +1,9 @@
 package br.com.timetrialfactory.maestro.assembler;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import org.springframework.stereotype.Component;
 
 import br.com.timetrialfactory.maestro.dto.GameDTO;
@@ -32,6 +36,17 @@ public class GameAssembler implements Assembler<Game, GameDTO> {
 			entity.setDescription(object.getDescription());
 		}
 		return entity;
+	}
+
+	public static Set<Game> toSet(List<Game> listGames) {
+		Set<Game> gameSet = new HashSet<>();
+		if (listGames != null) {
+			for (Game game : listGames) {
+				gameSet.add(game);
+			}
+			return gameSet;
+		}
+		return gameSet;
 	}
 
 }

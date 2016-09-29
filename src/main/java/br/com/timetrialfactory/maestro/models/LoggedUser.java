@@ -4,7 +4,7 @@ import static br.com.timetrialfactory.maestro.models.enums.RoleType.ADMIN;
 import static org.springframework.context.annotation.ScopedProxyMode.TARGET_CLASS;
 import static org.springframework.web.context.WebApplicationContext.SCOPE_SESSION;
 
-import java.util.List;
+import java.util.Set;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -26,7 +26,7 @@ public LoggedUser(LoggedUser user){
 
 	private UserDTO logged;
 
-	private List<LicenseDTO> licenses;
+	private Set<LicenseDTO> licenses;
 
 	public void login(UserDTO user) {
 		this.logged = user;
@@ -56,11 +56,11 @@ public LoggedUser(LoggedUser user){
 		this.logged = null;
 	}
 
-	public List<LicenseDTO> getLicenses() {
+	public Set<LicenseDTO> getLicenses() {
 		return licenses;
 	}
 
-	public void setLicenses(List<LicenseDTO> licenses) {
+	public void setLicenses(Set<LicenseDTO> licenses) {
 		this.licenses = licenses;
 	}
 

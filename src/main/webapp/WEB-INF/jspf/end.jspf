@@ -3,6 +3,7 @@
 <script src="https://apis.google.com/js/platform.js"></script>
 <script src="<c:url value="/js/jquery.puts.js"/>"></script>
 <script src="<c:url value="/js/formAnimation.js"/>"></script>
+<script src="<c:url value="/js/formValidation.js"/>"></script>
 <script src="<c:url value="/js/gamesListAnimation.js"/>"></script>
 </body>
 </html>

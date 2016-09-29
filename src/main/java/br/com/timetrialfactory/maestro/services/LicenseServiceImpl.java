@@ -4,6 +4,7 @@ import static java.util.UUID.randomUUID;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,7 +43,7 @@ public class LicenseServiceImpl implements LicenseService {
 	}
 
 	@Override
-	public List<License> listUserLicenses(Long userId) {
+	public Set<License> listUserLicenses(Long userId) {
 		return dao.listLicenses(userId);
 	}
 

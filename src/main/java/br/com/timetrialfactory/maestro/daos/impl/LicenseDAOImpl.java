@@ -1,6 +1,8 @@
 package br.com.timetrialfactory.maestro.daos.impl;
 
-import java.util.List;
+import static br.com.timetrialfactory.maestro.assembler.LicenseAssembler.toSet;
+
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -23,7 +25,8 @@ public class LicenseDAOImpl extends AbstractDAO<Long, License> implements Licens
 
 	@SuppressWarnings({ "deprecation", "unchecked" })
 	@Override
-	public List<License> listLicenses(Long userId) {
-		return getSession().createQuery("FROM License l WHERE l.user.id = :userId").setParameter("userId", userId).list();
+	public Set<License> listLicenses(Long userId) {
+		return toSet(getSession().createQuery("FROM License l WHERE l.user.id = :userId").setParameter("userId", userId)
+				.list());
 	}
 }

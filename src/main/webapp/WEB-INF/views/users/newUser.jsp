@@ -13,26 +13,26 @@
 				<div class="input-group">
 					<fmt:message var="phFirstName" key="placeholder.firstName" />
 					<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></span>
-					<form:input type="text" class="form-control" path="firstName" placeholder="${phFirstName }" aria-describedby="basic-addon1" required="required" />
-					<strong><form:errors delimiter="br" path="firstName" cssClass="message-error" /></strong>
+					<form:input id="firstName" type="text" class="form-control" path="firstName" placeholder="${phFirstName }" aria-describedby="basic-addon1" required="required" />
+					<strong id="firstNameError" class="message-error"><form:errors delimiter="br" path="firstName" /></strong>
 				</div>
 				<div class="input-group">
 					<fmt:message var="phLastName" key="placeholder.lastName" />
 					<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></span>
-					<form:input type="text" class="form-control" path="lastName" placeholder="${phLastName }" aria-describedby="basic-addon1" required="required" />
+					<form:input id="lastName" type="text" class="form-control" path="lastName" placeholder="${phLastName }" aria-describedby="basic-addon1" required="required" />
 					<strong><form:errors delimiter="br" path="lastName" cssClass="message-error" /></strong>
 				</div>
 				<div class="input-group">
 					<fmt:message var="phEmail" key="placeholder.email" />
 					<span class="input-group-addon" id="basic-addon1">@</span>
-					<form:input type="email" class="form-control" path="email" placeholder="${phEmail }" required="required" />
+					<form:input id="email" type="email" class="form-control" path="email" placeholder="${phEmail }" required="required" />
 					<strong> <form:errors delimiter="br" path="email" cssClass="message-error" />
 					</strong>
 				</div>
 				<br>
 				<div class="input-group">
 					<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span></span>
-					<form:input type="text" class="form-control" path="address.country" value="${param.country}" readonly="true" />
+					<form:input id="addressCountry" type="text" class="form-control" path="address.country" value="${param.country}" readonly="true" />
 					<strong><form:errors delimiter="br" path="address.country" cssClass="message-error" /> </strong>
 				</div>
 				<c:set var="brazil" value="BRAZIL" />
@@ -40,21 +40,21 @@
 					<div class="input-group">
 						<fmt:message var="phCep" key="placeholder.cep" />
 						<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></span>
-						<form:input type="text" class="form-control" path="address.cep" placeholder="${phCep }" required="required" />
+						<form:input id="addressCep" type="text" class="form-control" path="address.cep" placeholder="${phCep }" required="required" />
 						<strong> <form:errors delimiter="br" path="address.cep" cssClass="message-error" />
 						</strong>
 					</div>
 					<div class="input-group">
 						<fmt:message var="phCity" key="placeholder.city" />
 						<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></span>
-						<form:input type="text" class="form-control" path="address.city" placeholder="${phCity }" required="required" />
+						<form:input id="addressCity" type="text" class="form-control" path="address.city" placeholder="${phCity }" required="required" />
 						<strong> <form:errors delimiter="br" path="address.city" cssClass="message-error" />
 						</strong>
 					</div>
 					<div class="input-group">
 						<fmt:message var="phState" key="placeholder.state" />
 						<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></span>
-						<form:input type="text" class="form-control" path="address.state" placeholder="${phState }" required="required" />
+						<form:input id="addressState" type="text" class="form-control" path="address.state" placeholder="${phState }" required="required" />
 						<strong><form:errors delimiter="br" path="address.state" cssClass="message-error" /> </strong>
 					</div>
 					<br>
@@ -62,18 +62,18 @@
 				<div class="input-group">
 					<fmt:message var="phUsername" key="placeholder.username" />
 					<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span></span>
-					<form:input type="text" class="form-control" path="login" placeholder="${phUsername }" required="required" />
+					<form:input id="username" type="text" class="form-control" path="login" placeholder="${phUsername }" required="required" />
 					<strong><form:errors delimiter="br" path="login" cssClass="message-error" /> </strong>
 				</div>
 				<div class="input-group">
 					<fmt:message var="phPassword" key="placeholder.password" />
 					<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></span>
-					<form:input type="password" class="form-control" id="password" path="password" placeholder="${phPassword }" required="required" />
+					<form:input id="password" type="password" class="form-control" path="password" placeholder="${phPassword }" required="required" />
 					<strong><form:errors delimiter="br" path="password" cssClass="message-error" /> </strong>
 				</div>
 				<div class="input-group">
-					<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></span><input type="password" class="form-control" id="confirm"
-						equalTo="#password" placeholder='<fmt:message key="placeholder.confirmPassword" />' required="required">
+					<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></span><input id="confirmPassword" type="password" class="form-control" placeholder='<fmt:message key="placeholder.confirmPassword" />' required="required"> <strong
+						id="passwordError" class="message-error"> </strong>
 				</div>
 				<hr style="margin: 40px;">
 				<c:if test="${error}">

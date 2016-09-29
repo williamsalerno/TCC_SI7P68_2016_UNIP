@@ -1,6 +1,7 @@
 package br.com.timetrialfactory.maestro.services;
 
 import java.util.List;
+import java.util.Set;
 
 import br.com.timetrialfactory.maestro.models.License;
 import br.com.timetrialfactory.maestro.models.LoggedUser;
@@ -10,5 +11,5 @@ public interface LicenseService {
 
 	void saveLicense(LoggedUser user, List<ShoppingItem> games);
 
-	List<License> listUserLicenses(Long userIs);
+	Set<License> listUserLicenses(Long userIs);
 }

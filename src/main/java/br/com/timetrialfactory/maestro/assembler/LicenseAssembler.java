@@ -1,7 +1,8 @@
 package br.com.timetrialfactory.maestro.assembler;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -12,7 +13,7 @@ import br.com.timetrialfactory.maestro.services.GameService;
 import br.com.timetrialfactory.maestro.services.UserService;
 
 @Component
-public class LicenseAssembler implements Assembler<List<License>, List<LicenseDTO>> {
+public class LicenseAssembler implements Assembler<Set<License>, Set<LicenseDTO>> {
 
 	@Autowired
 	private UserAssembler userAssembler;
@@ -27,10 +28,10 @@ public class LicenseAssembler implements Assembler<List<License>, List<LicenseDT
 	private GameService gameService;
 
 	@Override
-	public List<LicenseDTO> toObject(List<License> list) {
-		List<LicenseDTO> object = null;
+	public Set<LicenseDTO> toObject(Set<License> list) {
+		Set<LicenseDTO> object = null;
 		if (list != null) {
-			object = new ArrayList<LicenseDTO>();
+			object = new HashSet<LicenseDTO>();
 			for (License license : list) {
 				LicenseDTO dto = new LicenseDTO();
 				if (license.getGame() != null) {
@@ -48,10 +49,10 @@ public class LicenseAssembler implements Assembler<List<License>, List<LicenseDT
 	}
 
 	@Override
-	public List<License> toEntity(List<LicenseDTO> list) {
-		List<License> entity = null;
+	public Set<License> toEntity(Set<LicenseDTO> list) {
+		Set<License> entity = null;
 		if (list != null) {
-			entity = new ArrayList<License>();
+			entity = new HashSet<License>();
 			for (LicenseDTO dto : list) {
 				License license = new License();
 				license.setGame(gameAssembler.toObject(gameService.findGameById(dto.getGameId())));
@@ -62,6 +63,17 @@ public class LicenseAssembler implements Assembler<List<License>, List<LicenseDT
 			}
 		}
 		return entity;
+	}
+
+	public static Set<License> toSet(List<License> listLicenses) {
+		Set<License> licenseSet = new HashSet<License>();
+		if (listLicenses != null) {
+			for (License license : listLicenses) {
+				licenseSet.add(license);
+			}
+			return licenseSet;
+		}
+		return licenseSet;
 	}
 
 }

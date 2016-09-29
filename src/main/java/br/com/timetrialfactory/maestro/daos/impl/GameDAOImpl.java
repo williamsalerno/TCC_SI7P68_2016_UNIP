@@ -1,6 +1,8 @@
 package br.com.timetrialfactory.maestro.daos.impl;
 
-import java.util.List;
+import static br.com.timetrialfactory.maestro.assembler.GameAssembler.toSet;
+
+import java.util.Set;
 
 import org.springframework.stereotype.Repository;
 
@@ -13,8 +15,8 @@ public class GameDAOImpl extends AbstractDAO<Long, Game> implements GameDAO {
 
 	@SuppressWarnings({ "unchecked", "deprecation" })
 	@Override
-	public List<Game> listGames() {
-		return getSession().createCriteria(Game.class).list();
+	public Set<Game> listGames() {
+		return toSet(getSession().createCriteria(Game.class).list());
 	}
 
 	@Override
