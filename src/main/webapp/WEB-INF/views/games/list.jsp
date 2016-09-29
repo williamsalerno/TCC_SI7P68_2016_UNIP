@@ -9,7 +9,7 @@
 				<c:set var="gameId" value="id${game.id }" />
 				<section class="moreInfoGame" id=${gameId }>
 					<div class="imageGame">
-						<img src="<c:url value="/img/uploaded/${game.id}.png"/>" width=300px height=288px alt="Disruption screen image" data-holder-rendered="true">
+						<img src="<c:url value="/img/uploaded/${game.id}_thumb.png"/>" width=300px height=288px alt="Disruption screen image" data-holder-rendered="true">
 					</div>
 					<div class="detailsGame">
 						<div class="titleGame">
@@ -108,7 +108,7 @@
 						<c:forEach items="${games}" var="game" varStatus="g">
 							<c:set var="gameIdThumb" value="id${game.id }" />
 							<div class="thumbnailGame" id=${gameIdThumb }>
-								<img src="<c:url value="/games/${game.id}/image"/>" width="100" height="100" style="height: 100%; width: 100%;" />
+								<img src="<c:url value="/img/uploaded/${game.id}_min.png"/>" width="100" height="100" style="height: 100%; width: 100%;" />
 							</div>
 						</c:forEach>
 						<div class="clearfix"></div>

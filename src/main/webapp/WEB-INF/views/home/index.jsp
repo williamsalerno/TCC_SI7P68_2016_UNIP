@@ -6,7 +6,7 @@
 				<c:forEach items="${games}" var="game" varStatus="g">
 					<c:set var="gameId" value="id${game.id }" />
 					<div class="thumbnail">
-						<img src="<c:url value="/img/uploaded/${game.id}.png"/>" width=410px height=410px alt="Disruption screen image" data-holder-rendered="true">
+						<img src="<c:url value="/img/uploaded/${game.id}_thumb.png"/>" width=410px height=410px alt="Disruption screen image" data-holder-rendered="true">
 						<div class="caption">
 							<h3>${game.title }</h3>
 							<p>${game.description }</p>
