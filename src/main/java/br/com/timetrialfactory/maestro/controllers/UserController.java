@@ -6,18 +6,24 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.timetrialfactory.maestro.assembler.UserAssembler;
 import br.com.timetrialfactory.maestro.dto.LicenseDTO;
 import br.com.timetrialfactory.maestro.models.Game;
 import br.com.timetrialfactory.maestro.models.LoggedUser;
+import br.com.timetrialfactory.maestro.models.User;
 import br.com.timetrialfactory.maestro.services.GameService;
+import br.com.timetrialfactory.maestro.services.UserService;
 
 @Controller("user")
 @Scope(value = SCOPE_REQUEST)
@@ -27,12 +33,17 @@ public class UserController {
 	@Autowired
 	private GameService service;
 
+	@Autowired
+	private UserService userService;
+
+	@Autowired
+	private UserAssembler userAssembler;
+
 	@RequestMapping(method = RequestMethod.GET, value = "/myProfile")
 	public ModelAndView loggedUser(HttpSession session) {
 		LoggedUser loggedUser = (LoggedUser) session.getAttribute("loggedUser");
 		if (loggedUser != null) {
 			ModelAndView modelAndView = new ModelAndView("users/myProfile");
-			modelAndView.getModel().put("user", loggedUser);
 			return modelAndView;
 		} else {
 			return new ModelAndView("redirect:/logout");
@@ -44,7 +55,6 @@ public class UserController {
 		LoggedUser loggedUser = (LoggedUser) session.getAttribute("loggedUser");
 		if (loggedUser != null) {
 			ModelAndView modelAndView = new ModelAndView("users/myGames");
-			modelAndView.getModel().put("user", loggedUser);
 			Set<Game> gamesList = this.listUserGames(service.listGames(), loggedUser.getLicenses());
 			modelAndView.getModel().put("games", gamesList);
 			return modelAndView;
@@ -53,11 +63,42 @@ public class UserController {
 		}
 	}
 
+	@RequestMapping(method = RequestMethod.GET, value = "/myInfo")
+	public ModelAndView myInfo(HttpSession session) {
+		LoggedUser loggedUser = (LoggedUser) session.getAttribute("loggedUser");
+		if (loggedUser != null) {
+			loggedUser.getLoggedUser().setPassword("");
+			ModelAndView modelAndView = new ModelAndView("users/ownInfo");
+			modelAndView.getModel().put("user", loggedUser.getLoggedUser());
+			return modelAndView;
+		} else {
+			return new ModelAndView("redirect:/logout");
+		}
+	}
+
+	@RequestMapping(method = RequestMethod.POST, value = "/myInfo/update")
+	public ModelAndView update(@Valid User user, BindingResult result, RedirectAttributes attr, HttpSession session) {
+		if (result.hasErrors()) {
+			attr.addFlashAttribute("org.springframework.validation.BindingResult.user", result);
+			ModelAndView modelAndView = new ModelAndView("users/ownInfo");
+			modelAndView.addObject("settedCountry", user.getAddress().getCountry().getName());
+			return modelAndView;
+		} else {
+			userService.updateUser(user);
+			LoggedUser loggedUser = new LoggedUser();
+			loggedUser.login(userAssembler.toObject(userService.findById(user.getId())));
+			session.setAttribute("loggedUser", loggedUser);
+			return new ModelAndView("redirect:/user/myProfile");
+		}
+	}
+
 	private Set<Game> listUserGames(Set<Game> gamesList, Set<LicenseDTO> licenseList) {
 		Set<Game> games = new HashSet<Game>();
 		for (Game game : gamesList) {
-			if (licenseList.iterator().next().getGameId() == game.getId()) {
-				games.add(game);
+			for (LicenseDTO gameToCompare : licenseList) {
+				if (gameToCompare.getGameId() == game.getId()) {
+					games.add(game);
+				}
 			}
 		}
 		return games;

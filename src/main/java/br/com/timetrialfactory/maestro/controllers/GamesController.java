@@ -47,7 +47,6 @@ public class GamesController {
 			return new ModelAndView("games/newGame");
 		}
 		gameService.saveGame(game);
-		attr.addFlashAttribute("sucesso", "Produto cadastrado com sucesso!");
 		return new ModelAndView("redirect:list");
 	}
 

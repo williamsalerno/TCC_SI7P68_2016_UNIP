@@ -182,6 +182,19 @@ footer {
 	box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.75);
 }
 
+.myGames>h4 {
+	color: #FFC277;
+	display: inline;
+}
+
+.myGames>h4, .myGames>a {
+	margin: 60px;
+}
+
+.caption a {
+	color: #FFC277 !important;
+}
+
 #cartPrice {
 	position: absolute;
 	left: 300px;
@@ -298,6 +311,10 @@ footer {
 	border: 1px solid #FF983C;
 }
 
+.updateInfo {
+	color: white;
+}
+
 .form-control {
 	display: block;
 	width: 100%;
@@ -306,7 +323,7 @@ footer {
 	font-size: 14px;
 	line-height: 1.42857143;
 	color: #afafaf;
-	background-color: transparent;
+	background-color: rgba(255, 255, 255, 0.29);
 	background-image: none;
 	border: 1px solid transparent;
 }
@@ -495,6 +512,11 @@ input:focus, select:focus {
 	position: absolute;
 	right: 0px;
 	top: 75px;
+}
+
+.btnsRow {
+	display: inline;
+	margin: 60px;
 }
 
 .detailsGame {

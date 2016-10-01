@@ -72,8 +72,8 @@
 					<strong><form:errors delimiter="br" path="password" cssClass="message-error" /> </strong>
 				</div>
 				<div class="input-group">
-					<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></span><input id="confirmPassword" type="password" class="form-control" placeholder='<fmt:message key="placeholder.confirmPassword" />' required="required"> <strong
-						id="passwordError" class="message-error"> </strong>
+					<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></span><input id="confirmPassword" equalTo="#password" type="password" class="form-control" placeholder='<fmt:message key="placeholder.confirmPassword" />' required="required">
+					<strong id="passwordError" class="message-error"> </strong>
 				</div>
 				<hr style="margin: 40px;">
 				<c:if test="${error}">
@@ -88,6 +88,9 @@
 				<br>
 				<div class="clearfix"></div>
 			</form:form>
+			<script type="text/javascript">
+				$('#usersForm').validate();
+			</script>
 		</div>
 	</div>
 </div>

@@ -6,11 +6,15 @@
 			<div class="panel panel-default">
 				<!-- Default panel contents -->
 				<div class="panel-heading">
-					<h2>Itens no carrinho</h2>
+					<h2>
+						<fmt:message key="h2.itemsCart" />
+					</h2>
 				</div>
 				<c:choose>
 					<c:when test="${empty shoppingCart.items }">
-						<h3 style="text-align: center;">Carrinho vazio</h3>
+						<h3 style="text-align: center;">
+							<fmt:message key="h3.emptyCart" />
+						</h3>
 					</c:when>
 					<c:otherwise>
 						<c:forEach items="${shoppingCart.items}" var="item" varStatus="s">
@@ -32,19 +36,20 @@
 					</c:otherwise>
 				</c:choose>
 				<div class="btnCart">
-					<form action="<c:url value="/games/list"/>" method="get">
-						<button class="link btn btn-default">Voltar</button>
+					<form class="btnsRow" action="<c:url value="/games/list"/>" method="get">
+						<button class="link btn btn-default">
+							<fmt:message key="btn.back" />
+						</button>
 					</form>
 					<c:if test="${!empty shoppingCart.items }">
 						<c:url var="checkout_url" value="/shopping/cart/checkout" />
-						<form:form action="${checkout_url }" modelAttribute="shoppingCart" method="post">
+						<form:form class="btnsRow" action="${checkout_url }" modelAttribute="shoppingCart" method="post">
 							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 							<input type="hidden" name="gamesInCart" value="${shoppingCart}" />
-							<button class="link btn btn-default">Gerar pagamento teste</button>
+							<button class="link btn btn-default">
+								<fmt:message key="btn.buy" />
+							</button>
 						</form:form>
-						<form action="<c:url value="/confirmPayment"/>" method="post">
-							<button class="link btn btn-default">Comprovar pagamento teste</button>
-						</form>
 					</c:if>
 				</div>
 			</div>

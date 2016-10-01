@@ -4,9 +4,11 @@
 		<div class="row">
 			<div class="thumbnail">
 				<div class="center">
-					<img src="<c:url value="/img/new-file.png"/>" alt="Informações pessoais" data-holder-rendered="true">
+					<a href="<c:url value="/user/myInfo"/>"><img src="<c:url value="/img/new-file.png"/>" alt="Informações pessoais" data-holder-rendered="true"></a>
 					<div class="caption">
-						<h3>Informações pessoais</h3>
+						<h3>
+							<a href="<c:url value="/user/myInfo"/>"><fmt:message key="ownInfo" /></a>
+						</h3>
 					</div>
 				</div>
 			</div>
@@ -14,7 +16,9 @@
 				<div class="center">
 					<a href="<c:url value="/user/myGames"/>"><img src="<c:url value="/img/game-console.png"/>" alt="Meus jogos" data-holder-rendered="true" /></a>
 					<div class="caption">
-						<h3>Meus jogos</h3>
+						<h3>
+							<a href="<c:url value="/user/myGames"/>"><fmt:message key="myGames" /></a>
+						</h3>
 					</div>
 				</div>
 			</div>

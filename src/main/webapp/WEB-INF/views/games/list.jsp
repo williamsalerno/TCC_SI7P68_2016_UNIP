@@ -46,14 +46,18 @@
 												<form:form servletRelativeAction="/shopping/cart/addGame">
 													<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
 													<input type="hidden" name="gameId" value="${game.id }" />
-													<button id="exibe" type="submit" class="btn btn-default">Adicionar ao carrinho</button>
+													<button id="exibe" type="submit" class="btn btn-default">
+														<fmt:message key="btn.addToCart" />
+													</button>
 												</form:form>
 											</c:when>
 											<c:otherwise>
 												<c:forEach items="${loggedUser.licenses }" var="gameAcquired2">
 													<c:set var="acquired" value="false" />
 													<c:if test="${gameAcquired2.gameId eq game.id }">
-														<button class="btn btn-default disabled">Jogo já adquirido</button>
+														<button class="btn btn-default disabled">
+															<fmt:message key="btn.acquired" />
+														</button>
 													</c:if>
 												</c:forEach>
 											</c:otherwise>
@@ -65,14 +69,18 @@
 												<form:form servletRelativeAction="/shopping/cart/addGame">
 													<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
 													<input type="hidden" name="gameId" value="${game.id }" />
-													<button id="exibe" type="submit" class="btn btn-default">Adicionar ao carrinho</button>
+													<button id="exibe" type="submit" class="btn btn-default">
+														<fmt:message key="btn.addToCart" />
+													</button>
 												</form:form>
 											</c:when>
 											<c:otherwise>
 												<c:forEach items="${shoppingCart.items }" var="item">
 													<c:set var="contains" value="false" />
 													<c:if test="${item.game.id eq game.id}">
-														<button class="btn btn-default disabled">Jogo já adicionado</button>
+														<button class="btn btn-default disabled">
+															<fmt:message key="btn.added" />
+														</button>
 													</c:if>
 												</c:forEach>
 											</c:otherwise>
@@ -86,12 +94,14 @@
 									<input type="hidden" name="title" value="${game.title }" />
 									<input type="hidden" name="price" value="${game.price }" />
 									<input type="hidden" name="description" value="${game.description }" />
-									<button type="submit" class="btn btn-default" style="position: absolute; top: 0px; right: 110%;">Editar jogo</button>
+									<button type="submit" class="btn btn-default" style="position: absolute; top: 0px; right: 110%;">
+										<fmt:message key="btn.editGame" />
+									</button>
 								</form:form>
 							</c:if>
 							<c:if test="${!loggedUser.logged}">
-								<a href="<c:url value="/login"/>" class="btn btn-default">Faça login</a>
-								<a href="<c:url value= "/users/selectCountry"/>" class="btn btn-default" style="position: absolute; top: 0px; right: 110%;">Cadastre-se</a>
+								<a href="<c:url value="/login"/>" class="btn btn-default"><fmt:message key="btn.login" /></a>
+								<a href="<c:url value= "/users/selectCountry"/>" class="btn btn-default" style="position: absolute; top: 0px; right: 110%;"><fmt:message key="btn.register" /></a>
 							</c:if>
 						</div>
 						<div class="textGame">
