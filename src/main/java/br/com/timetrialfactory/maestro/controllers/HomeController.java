@@ -28,4 +28,10 @@ public class HomeController {
 		return modelAndView;
 	}
 
+	@RequestMapping(method = GET, value = "/support")
+	public ModelAndView support() {
+		ModelAndView modelAndView = new ModelAndView("home/support");
+		return modelAndView;
+	}
+
 }

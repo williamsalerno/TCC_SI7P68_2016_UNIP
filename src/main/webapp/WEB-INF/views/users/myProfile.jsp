@@ -2,7 +2,7 @@
 <div class="profile" id="container">
 	<div class="content">
 		<div class="row">
-			<div class="thumbnail">
+			<div class="thumbnail" id="profile_support">
 				<div class="center">
 					<a href="<c:url value="/user/myInfo"/>"><img src="<c:url value="/img/new-file.png"/>" alt="Informações pessoais" data-holder-rendered="true"></a>
 					<div class="caption">
@@ -12,7 +12,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="thumbnail">
+			<div class="thumbnail" id="profile_support">
 				<div class="center">
 					<a href="<c:url value="/user/myGames"/>"><img src="<c:url value="/img/game-console.png"/>" alt="Meus jogos" data-holder-rendered="true" /></a>
 					<div class="caption">

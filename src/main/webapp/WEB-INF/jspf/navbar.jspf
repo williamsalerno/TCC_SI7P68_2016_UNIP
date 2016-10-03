@@ -14,8 +14,7 @@
 			<ul class="nav navbar-nav">
 				<li><a href="<c:url value="/aboutUs"/>"><fmt:message key="about" /></a></li>
 				<li><a href="<c:url value="/games/list"/>"><fmt:message key="listGames" /></a></li>
-				<li><a href="#"><fmt:message key="contact" /></a></li>
-				<li><a href="#"><fmt:message key="support" /></a></li>
+				<li><a href="<c:url value="/support"/>"><fmt:message key="support" /></a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<c:if test="${loggedUser != null }">

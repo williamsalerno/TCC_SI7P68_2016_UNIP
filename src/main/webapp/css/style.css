@@ -122,7 +122,11 @@ footer {
 }
 
 .profile>.content {
-	padding-top: 210px !important;
+	padding-top: 150px !important;
+}
+
+.support>.content {
+    padding-top: 90px !important;
 }
 
 .navbar {
@@ -182,13 +186,22 @@ footer {
 	box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.75);
 }
 
+.myGames {
+	border: 1px solid rgb(0, 0, 0);
+	background: rgba(0, 0, 0, 0.3);
+	color: #FFC277;
+	margin-bottom: 8px;
+	padding-left: 8px;
+	box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.75);
+}
+
 .myGames>h4 {
 	color: #FFC277;
 	display: inline;
 }
 
 .myGames>h4, .myGames>a {
-	margin: 60px;
+	margin: 40px 10%;
 }
 
 .caption a {
@@ -210,6 +223,10 @@ footer {
 	position: absolute;
 	left: 600px;
 	margin-top: 2px;
+}
+
+.row #profile_support {
+	padding-top: 20px;
 }
 
 .navbar-brand>img {
