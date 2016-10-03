@@ -22,4 +22,10 @@ public class HomeController {
 		return modelAndView;
 	}
 
+	@RequestMapping(method = GET, value = "/aboutUs")
+	public ModelAndView about() {
+		ModelAndView modelAndView = new ModelAndView("home/about");
+		return modelAndView;
+	}
+
 }

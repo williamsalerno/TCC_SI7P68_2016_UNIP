@@ -852,6 +852,11 @@ a.list-group-item .list-group-item-heading, button.list-group-item .list-group-i
 	color: #FDBA7F !important;
 }
 
+.jumbotron {
+	color: bisque !important;
+	background-color: #171717 !important;
+}
+
 /*
 ----------------------------------------
  MUDANÇAS VICTOR - LAYOUT
@@ -971,6 +976,10 @@ a.list-group-item .list-group-item-heading, button.list-group-item .list-group-i
 	margin: auto;
 	width: 100%;
 	text-align: center;
+}
+
+.jumbosAbout {
+	margin-bottom: 60px;
 }
 
 .imgFooter {
