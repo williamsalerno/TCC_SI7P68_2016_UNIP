@@ -38,6 +38,7 @@ import br.com.timetrialfactory.maestro.controllers.AuthenticationController;
 import br.com.timetrialfactory.maestro.controllers.GamesController;
 import br.com.timetrialfactory.maestro.controllers.HomeController;
 import br.com.timetrialfactory.maestro.controllers.ShoppingCartController;
+import br.com.timetrialfactory.maestro.controllers.SupportController;
 import br.com.timetrialfactory.maestro.controllers.UserController;
 import br.com.timetrialfactory.maestro.controllers.VisitorController;
 import br.com.timetrialfactory.maestro.daos.impl.GameDAOImpl;
@@ -62,7 +63,8 @@ import br.com.timetrialfactory.maestro.viewresolver.JsonViewResolver;
 		UserServiceImpl.class, UserDAOImpl.class, UserAssembler.class, PurchaseDAOImpl.class, PurchaseServiceImpl.class,
 		LicenseDAOImpl.class, LicenseServiceImpl.class, ShoppingCart.class, ShoppingCartController.class,
 		PayPalCall.class, LoggedUser.class, VisitorController.class, UserValidator.class,
-		AuthenticationController.class, UserController.class, GamesController.class, EmailSender.class })
+		AuthenticationController.class, UserController.class, GamesController.class, SupportController.class,
+		EmailSender.class })
 @Import({ SecurityConfiguration.class })
 public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 

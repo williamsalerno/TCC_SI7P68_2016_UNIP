@@ -75,4 +75,12 @@ public class UserServiceImpl implements UserService {
 		return new User();
 	}
 
+	@Override
+	public User findByEmail(String email) {
+		if(email != null){
+			return dao.findByEmail(email);
+		}
+		return new User();
+	}
+
 }

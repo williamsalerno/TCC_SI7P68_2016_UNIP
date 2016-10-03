@@ -51,4 +51,11 @@ public class UserDAOImpl extends AbstractDAO<Long, User> implements UserDAO {
 				.uniqueResult();
 	}
 
+	@SuppressWarnings("deprecation")
+	@Override
+	public User findByEmail(String email) {
+		return (User) getSession().createQuery("FROM User u WHERE u.email = :email").setParameter("email", email)
+				.uniqueResult();
+	}
+
 }

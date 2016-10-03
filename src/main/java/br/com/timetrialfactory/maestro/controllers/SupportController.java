@@ -1,0 +1,42 @@
+package br.com.timetrialfactory.maestro.controllers;
+
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import br.com.timetrialfactory.maestro.email.EmailSender;
+import br.com.timetrialfactory.maestro.models.User;
+import br.com.timetrialfactory.maestro.services.UserService;
+
+@Controller
+@RequestMapping(value = "/support")
+public class SupportController {
+
+	@Autowired
+	private EmailSender emailSender;
+
+	@Autowired
+	private UserService userService;
+
+	@RequestMapping(method = GET)
+	public ModelAndView support() {
+		ModelAndView modelAndView = new ModelAndView("home/support");
+		modelAndView.addObject("user", new User());
+		return modelAndView;
+	}
+
+	@RequestMapping(method = POST, value = "/forgotMyPassword/recover")
+	public ModelAndView recoverPassword(@ModelAttribute User user, RedirectAttributes attr) {
+		ModelAndView modelAndView = new ModelAndView("redirect:/support#showMessage");
+		User userToFind = userService.findByEmail(user.getEmail());
+		emailSender.sendRecoveryPasswordEmail(userToFind.getLogin(), userToFind.getEmail(), userToFind.getPassword());
+		attr.addFlashAttribute("passwordRecover", true);
+		return modelAndView;
+	}
+}

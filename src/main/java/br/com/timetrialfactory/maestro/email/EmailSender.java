@@ -9,7 +9,7 @@ import br.com.timetrialfactory.maestro.models.User;
 
 @Component
 public class EmailSender {
-	
+
 	@Autowired
 	private MailSender mailer;
 
@@ -31,6 +31,24 @@ public class EmailSender {
 					.append(user.getActivationCode().toString())
 					.append("\n\n")
 					.append("Esta é uma medida de segurança para garantirmos que o seu e-mail é autêntico. Obrigado e bom divertimento!").toString());
+			mailer.send(email);
+		}
+	}
+
+	public void sendRecoveryPasswordEmail(String username, String emailUser, String password) {
+		if (username != null && emailUser != null && password != null) {
+			SimpleMailMessage email = new SimpleMailMessage();
+			email.setFrom("timetrial.fac@gmail.com");
+			email.setTo(emailUser);
+			email.setSubject("Recuperação de Senha");
+			email.setText(new StringBuilder().append("Saudações!")
+					.append("\n\n")
+					.append("Você requisitou uma recuperação de senha para a conta ").append(username)
+					.append("\n")
+					.append("Senha: ").append(password)
+					.append("\n\n")
+					.append("Bom divertimento!")
+					.toString());
 			mailer.send(email);
 		}
 	}

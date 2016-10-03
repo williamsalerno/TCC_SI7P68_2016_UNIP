@@ -25,13 +25,20 @@
 						</h3>
 					</div>
 					<div id="collapse2" class="left collapse">
-						<form:form action="/support/forgotMyPassword/request" commandName="user" class="form-horizontal" method="post">
+						<form:form action="/support/forgotMyPassword/recover" commandName="user" class="form-horizontal" method="post">
 							<fmt:message var="phUsername" key="placeholder.username" />
 							<form:input type="text" class="form-support" path="login" placeholder="${phUsername }" required="required" />
 							<fmt:message var="phEmail" key="placeholder.email" />
-							<form:input type="password" class="form-support" path="email" placeholder="${phEmail }" required="required" />
+							<form:input type="text" class="form-support" path="email" placeholder="${phEmail }" required="required" />
 							<input name="submit" type="submit" class="btn btn-default" value="<fmt:message key="btn.recover" />" />
 						</form:form>
+						<c:if test="${passwordRecover }">
+							<div class="alert alert-info infoRecoverPassword" id="showMessage">
+								<fmt:message var="messageRecoverPassword" key="message.recoverPassword" />
+								<c:set var="messagePasswordInfo" value="${messageRecoverPassword }" />
+								${messagePasswordInfo }
+							</div>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -44,11 +51,11 @@
 						</h3>
 					</div>
 					<div id="collapse3" class="left collapse">
-						<form:form action="/support/forgotMyPassword/request" commandName="user" class="form-horizontal" method="post">
+						<form:form action="/support/forgotMyPassword/recover" commandName="user" class="form-horizontal" method="post">
 							<fmt:message var="phUsername" key="placeholder.username" />
 							<form:input type="text" class="form-support" path="login" placeholder="${phUsername }" required="required" />
 							<fmt:message var="phEmail" key="placeholder.email" />
-							<form:input type="password" class="form-support" path="email" placeholder="${phEmail }" required="required" />
+							<form:input type="text" class="form-support" path="email" placeholder="${phEmail }" required="required" />
 							<input name="submit" type="submit" class="btn btn-default" value="<fmt:message key="btn.recover" />" />
 						</form:form>
 					</div>

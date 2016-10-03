@@ -16,4 +16,6 @@ public interface UserDAO {
 
 	User findByCode(Long code);
 
+	User findByEmail(String email);
+
 }
