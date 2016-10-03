@@ -11,7 +11,7 @@
 							<h3>${game.title }</h3>
 							<p>${game.description }</p>
 							<p>
-								<a id="moreDetails" href="/games/list?id=${game.id}" class="btn btn-primary" role="button">Mais detalhes</a>
+								<a id="moreDetails" href="/games/list?id=${game.id}" class="btn btn-primary" role="button"><fmt:message key="btn.details" /></a>
 							</p>
 						</div>
 					</div>

@@ -126,7 +126,19 @@ footer {
 }
 
 .support>.content {
-    padding-top: 90px !important;
+	padding-top: 90px !important;
+}
+
+.form-support {
+	display: inline;
+	text-align: left;
+	width: 260px;
+	height: 32px;
+	margin-right: 10px;
+	background-color: rgba(255, 255, 255, 0.29);
+	background-image: none;
+	border: 1px solid transparent;
+	border-radius: 4px;
 }
 
 .navbar {
@@ -918,6 +930,10 @@ a.list-group-item .list-group-item-heading, button.list-group-item .list-group-i
 	height: 410px !important;
 }
 
+.thumbnail .caption {
+	margin: 15px !important;
+}
+
 .updates-section-title {
 	width: 100%;
 	background-color: #101010;
@@ -993,6 +1009,16 @@ a.list-group-item .list-group-item-heading, button.list-group-item .list-group-i
 	margin: auto;
 	width: 100%;
 	text-align: center;
+}
+
+.left {
+	margin: auto;
+	width: 100%;
+	text-align: left;
+}
+
+.support .left {
+	margin: 15px;
 }
 
 .jumbosAbout {

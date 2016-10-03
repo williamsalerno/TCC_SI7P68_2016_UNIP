@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.timetrialfactory.maestro.models.User;
 import br.com.timetrialfactory.maestro.services.GameService;
 
 @Controller
@@ -31,6 +32,7 @@ public class HomeController {
 	@RequestMapping(method = GET, value = "/support")
 	public ModelAndView support() {
 		ModelAndView modelAndView = new ModelAndView("home/support");
+		modelAndView.addObject("user", new User());
 		return modelAndView;
 	}
 
