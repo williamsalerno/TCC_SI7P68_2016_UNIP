@@ -33,10 +33,10 @@ public class SupportController {
 
 	@RequestMapping(method = POST, value = "/forgotMyPassword/recover")
 	public ModelAndView recoverPassword(@ModelAttribute User user, RedirectAttributes attr) {
-		ModelAndView modelAndView = new ModelAndView("redirect:/support#showMessage");
+		ModelAndView modelAndView = new ModelAndView("home/support");
 		User userToFind = userService.findByEmail(user.getEmail());
 		emailSender.sendRecoveryPasswordEmail(userToFind.getLogin(), userToFind.getEmail(), userToFind.getPassword());
-		attr.addFlashAttribute("passwordRecover", true);
+		modelAndView.addObject("passwordRecover", true);
 		return modelAndView;
 	}
 }

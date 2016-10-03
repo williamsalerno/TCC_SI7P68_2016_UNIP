@@ -24,7 +24,7 @@
 							<a data-toggle="collapse" data-parent="#accordion" href="#collapse2"><fmt:message key="forgotPassword" /></a>
 						</h3>
 					</div>
-					<div id="collapse2" class="left collapse">
+					<div id="collapse2" class="left collapse in">
 						<form:form action="/support/forgotMyPassword/recover" commandName="user" class="form-horizontal" method="post">
 							<fmt:message var="phUsername" key="placeholder.username" />
 							<form:input type="text" class="form-support" path="login" placeholder="${phUsername }" required="required" />
@@ -33,7 +33,7 @@
 							<input name="submit" type="submit" class="btn btn-default" value="<fmt:message key="btn.recover" />" />
 						</form:form>
 						<c:if test="${passwordRecover }">
-							<div class="alert alert-info infoRecoverPassword" id="showMessage">
+							<div class="alert alert-info infoRecoverPassword">
 								<fmt:message var="messageRecoverPassword" key="message.recoverPassword" />
 								<c:set var="messagePasswordInfo" value="${messageRecoverPassword }" />
 								${messagePasswordInfo }
