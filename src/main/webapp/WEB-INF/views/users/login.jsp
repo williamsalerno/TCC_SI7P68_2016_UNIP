@@ -53,7 +53,7 @@
 					<a id="newAcc" href="<c:url value= "/newUser/selectCountry"/>"><fmt:message key="a.register1" /> <br> <fmt:message key="a.register2" /> </a>
 				</div>
 				<div class=aLogin>
-					<a href="<c:url value= "/users/new"/>"><fmt:message key="a.forgetPassword" /></a>
+					<a href="<c:url value= "/support"/>"><fmt:message key="a.forgetPassword" /></a>
 				</div>
 			</div>
 		</section>

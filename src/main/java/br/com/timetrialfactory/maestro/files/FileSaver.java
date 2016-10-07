@@ -25,10 +25,8 @@ public class FileSaver {
 		try {
 			IOUtils.copy(image.getInputStream(), fileOutputStream);
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 			throw new FileNotFoundException("Mensagem de erro");
 		} catch (IOException e) {
-			e.printStackTrace();
 			throw new IOException("Mensagem de erro");
 		} finally {
 			fileOutputStream.close();
