@@ -76,9 +76,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User findByEmail(String email) {
-		if(email != null){
-			return dao.findByEmail(email);
+	public User findByEmailAndUsername(String email, String login) {
+		if (email != null && login != null) {
+			return dao.findByEmailAndUsername(email, login);
 		}
 		return new User();
 	}

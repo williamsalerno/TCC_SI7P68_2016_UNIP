@@ -39,6 +39,13 @@
 								${messagePasswordInfo }
 							</div>
 						</c:if>
+						<c:if test="${recoverError }">
+							<div class="alert alert-danger infoRecoverPassword">
+								<fmt:message var="messageRecoverPassword" key="message.recoverPasswordError" />
+								<c:set var="messagePasswordInfo" value="${messageRecoverPassword }" />
+								${messagePasswordInfo }
+							</div>
+						</c:if>
 					</div>
 				</div>
 			</div>

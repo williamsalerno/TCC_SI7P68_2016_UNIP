@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.timetrialfactory.maestro.email.EmailSender;
 import br.com.timetrialfactory.maestro.models.User;
@@ -32,11 +31,17 @@ public class SupportController {
 	}
 
 	@RequestMapping(method = POST, value = "/forgotMyPassword/recover")
-	public ModelAndView recoverPassword(@ModelAttribute User user, RedirectAttributes attr) {
+	public ModelAndView recoverPassword(@ModelAttribute User user) {
 		ModelAndView modelAndView = new ModelAndView("home/support");
-		User userToFind = userService.findByEmail(user.getEmail());
-		emailSender.sendRecoveryPasswordEmail(userToFind.getLogin(), userToFind.getEmail(), userToFind.getPassword());
-		modelAndView.addObject("passwordRecover", true);
-		return modelAndView;
+		User userToFind = userService.findByEmailAndUsername(user.getEmail(), user.getLogin());
+		if (userToFind == null) {
+			modelAndView.addObject("recoverError", true);
+			return modelAndView;
+		} else {
+			emailSender.sendRecoveryPasswordEmail(userToFind.getLogin(), userToFind.getEmail(),
+					userToFind.getPassword());
+			modelAndView.addObject("passwordRecover", true);
+			return modelAndView;
+		}
 	}
 }

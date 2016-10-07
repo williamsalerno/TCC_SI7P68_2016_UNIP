@@ -53,9 +53,9 @@ public class UserDAOImpl extends AbstractDAO<Long, User> implements UserDAO {
 
 	@SuppressWarnings("deprecation")
 	@Override
-	public User findByEmail(String email) {
-		return (User) getSession().createQuery("FROM User u WHERE u.email = :email").setParameter("email", email)
-				.uniqueResult();
+	public User findByEmailAndUsername(String email, String login) {
+		return (User) getSession().createQuery("FROM User u WHERE u.email = :email and u.login = :login")
+				.setParameter("email", email).setParameter("login", login).uniqueResult();
 	}
 
 }

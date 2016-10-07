@@ -16,6 +16,6 @@ public interface UserDAO {
 
 	User findByCode(Long code);
 
-	User findByEmail(String email);
+	User findByEmailAndUsername(String email, String Login);
 
 }
