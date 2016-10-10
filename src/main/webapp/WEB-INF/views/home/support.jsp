@@ -10,9 +10,17 @@
 							<a data-toggle="collapse" data-parent="#accordion" href="#collapse1">FAQ</a>
 						</h3>
 					</div>
-					<div id="collapse1" class="left collapse in" style="color: white;">
-						<h4>Uma pergunta?</h4>
-						<p>Uma resposta</p>
+					<div id="collapse1" class="center collapse in" style="color: white;">
+						<h4>Quanto tempo levou para o projeto ficar pronto?</h4>
+						<p>Considerando que o jogo foi um projeto independente e, portanto, apenas inserido no contexto deste trabalho, levamos 10 meses para finalizar tudo.</p>
+						<br>
+						<br>
+						<h4>Serão lançados outros jogos futuramente?</h4>
+						<p>Sim, o trabalho será levado adiante e novos jogos serão projetados.</p>
+						<br>
+						<br>
+						<h4>Por que eu preciso informar meu endereço no cadastro?</h4>
+						<p>O endereço nos permite fazer uma análise de densidade demográfica que ajuda a estudarmos quantas cópias estão sendo distribuidas nacional e internacionalmente.</p>
 					</div>
 				</div>
 			</div>
