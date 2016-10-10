@@ -20,7 +20,7 @@
 						<br>
 						<br>
 						<h4>Por que eu preciso informar meu endereço no cadastro?</h4>
-						<p>O endereço nos permite fazer uma análise de densidade demográfica que ajuda a estudarmos quantas cópias estão sendo distribuidas nacional e internacionalmente.</p>
+						<p>O endereço nos permite fazer uma análise de densidade demográfica que ajuda a estudarmos quantas e como as cópias estão sendo distribuidas nacional e internacionalmente.</p>
 					</div>
 				</div>
 			</div>
