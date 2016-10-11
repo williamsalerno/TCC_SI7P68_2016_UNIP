@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.timetrialfactory.maestro.email.EmailSender;
@@ -43,5 +44,15 @@ public class SupportController {
 			modelAndView.addObject("passwordRecover", true);
 			return modelAndView;
 		}
+	}
+
+	@RequestMapping(method = POST, value = "/message")
+	public ModelAndView sendMessage(@RequestParam String sender, @RequestParam String subject,
+			@RequestParam String message) {
+		ModelAndView modelAndView = new ModelAndView("home/support");
+		emailSender.sendMessage(sender, subject, message);
+		modelAndView.addObject("user", new User());
+		modelAndView.addObject("messageSuccess", true);
+		return modelAndView;
 	}
 }

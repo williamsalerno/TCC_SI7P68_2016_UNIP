@@ -13,12 +13,10 @@
 					<div id="collapse1" class="center collapse in" style="color: white;">
 						<h4>Quanto tempo levou para o projeto ficar pronto?</h4>
 						<p>Considerando que o jogo foi um projeto independente e, portanto, apenas inserido no contexto deste trabalho, levamos 10 meses para finalizar tudo.</p>
-						<br>
-						<br>
+						<br> <br>
 						<h4>Serão lançados outros jogos futuramente?</h4>
 						<p>Sim, o trabalho será levado adiante e novos jogos serão projetados.</p>
-						<br>
-						<br>
+						<br> <br>
 						<h4>Por que eu preciso informar meu endereço no cadastro?</h4>
 						<p>O endereço nos permite fazer uma análise de densidade demográfica que ajuda a estudarmos quantas e como as cópias estão sendo distribuidas nacional e internacionalmente.</p>
 					</div>
@@ -65,14 +63,25 @@
 							<a data-toggle="collapse" data-parent="#accordion" href="#collapse3"><fmt:message key="contact" /></a>
 						</h3>
 					</div>
-					<div id="collapse3" class="left collapse">
-						<form:form action="/support/forgotMyPassword/recover" commandName="user" class="form-horizontal" method="post">
-							<fmt:message var="phUsername" key="placeholder.username" />
-							<form:input type="text" class="form-support" path="login" placeholder="${phUsername }" required="required" />
-							<fmt:message var="phEmail" key="placeholder.email" />
-							<form:input type="text" class="form-support" path="email" placeholder="${phEmail }" required="required" />
-							<input name="submit" type="submit" class="btn btn-default" value="<fmt:message key="btn.recover" />" />
+					<div id="collapse3" class="center collapse">
+						<form:form action="/support/message" class="form-horizontal" method="post">
+							<fmt:message var="phSender" key="placeholder.sender" />
+							<input type="text" class="form-support" name="sender" placeholder="${phSender }" required="required" />
+							<fmt:message var="phSubject" key="placeholder.subject" />
+							<input type="text" class="form-support" name="subject" placeholder="${phSubject }" required="required" />
+							<div class="center">
+								<fmt:message var="phMessage" key="placeholder.message" />
+								<textarea class="form-support sendMessage" name="message" placeholder="${phMessage }" required="required" rows="5" cols="20"></textarea>
+							</div>
+							<input style="margin-bottom: 15px;" name="submit" type="submit" class="btn btn-default" value="<fmt:message key="btn.send" />" />
 						</form:form>
+						<c:if test="${messageSuccess }">
+							<div class="alert alert-success infoRecoverPassword">
+								<fmt:message var="messageSent" key="message.sent" />
+								<c:set var="messageSentInfo" value="${messageSent }" />
+								${messageSentInfo }
+							</div>
+						</c:if>
 					</div>
 				</div>
 			</div>

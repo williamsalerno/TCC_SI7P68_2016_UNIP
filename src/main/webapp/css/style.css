@@ -1042,6 +1042,12 @@ a.list-group-item .list-group-item-heading, button.list-group-item .list-group-i
 	margin-bottom: 20px;
 }
 
+.sendMessage {
+	margin: 10px 0px 30px -7px;
+	width: 535px;
+	height: 140px;
+}
+
 /** Ids **/
 #li-welcome {
 	padding-top: 14.5px;
