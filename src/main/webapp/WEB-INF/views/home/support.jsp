@@ -4,33 +4,45 @@
 		<div class="row" id="accordion">
 			<div class="thumbnail" id="profile_support">
 				<div class="center">
-					<a data-toggle="collapse" data-parent="#accordion" href="#collapse1"><img src="<c:url value="/img/faq.png"/>" alt="FAQ" data-holder-rendered="true"></a>
+					<a data-toggle="collapse" data-parent="#accordion" href="#faq"><img src="<c:url value="/img/faq.png"/>" alt="FAQ" data-holder-rendered="true"></a>
 					<div class="caption">
 						<h3>
-							<a data-toggle="collapse" data-parent="#accordion" href="#collapse1">FAQ</a>
+							<a data-toggle="collapse" data-parent="#accordion" href="#faq">FAQ</a>
 						</h3>
 					</div>
-					<div id="collapse1" class="center collapse in" style="color: white;">
-						<h4>Quanto tempo levou para o projeto ficar pronto?</h4>
-						<p>Considerando que o jogo foi um projeto independente e, portanto, apenas inserido no contexto deste trabalho, levamos 10 meses para finalizar tudo.</p>
+					<div id="faq" class="center collapse" style="color: white;">
+						<h4>
+							<fmt:message key="h4.q1" />
+						</h4>
+						<p>
+							<fmt:message key="p.q1" />
+						</p>
 						<br> <br>
-						<h4>Serão lançados outros jogos futuramente?</h4>
-						<p>Sim, o trabalho será levado adiante e novos jogos serão projetados.</p>
+						<h4>
+							<fmt:message key="h4.q2" />
+						</h4>
+						<p>
+							<fmt:message key="p.q2" />
+						</p>
 						<br> <br>
-						<h4>Por que eu preciso informar meu endereço no cadastro?</h4>
-						<p>O endereço nos permite fazer uma análise de densidade demográfica que ajuda a estudarmos quantas e como as cópias estão sendo distribuidas nacional e internacionalmente.</p>
+						<h4>
+							<fmt:message key="h4.q3" />
+						</h4>
+						<p>
+							<fmt:message key="p.q3" />
+						</p>
 					</div>
 				</div>
 			</div>
 			<div class="thumbnail" id="profile_support">
 				<div class="center">
-					<a data-toggle="collapse" data-parent="#accordion" href="#collapse2"><img src="<c:url value="/img/forgotPassword.png"/>" alt="I Forgot my password" data-holder-rendered="true" /></a>
+					<a data-toggle="collapse" data-parent="#accordion" href="#forgotPassword"><img src="<c:url value="/img/forgotPassword.png"/>" alt="I Forgot my password" data-holder-rendered="true" /></a>
 					<div class="caption">
 						<h3>
-							<a data-toggle="collapse" data-parent="#accordion" href="#collapse2"><fmt:message key="forgotPassword" /></a>
+							<a data-toggle="collapse" data-parent="#accordion" href="#forgotPassword"><fmt:message key="forgotPassword" /></a>
 						</h3>
 					</div>
-					<div id="collapse2" class="left collapse in">
+					<div id="forgotPassword" class="left collapse">
 						<form:form action="/support/forgotMyPassword/recover" commandName="user" class="form-horizontal" method="post">
 							<fmt:message var="phUsername" key="placeholder.username" />
 							<form:input type="text" class="form-support" path="login" placeholder="${phUsername }" required="required" />
@@ -57,13 +69,13 @@
 			</div>
 			<div class="thumbnail" id="profile_support">
 				<div class="center">
-					<a data-toggle="collapse" data-parent="#accordion" href="#collapse3"><img src="<c:url value="/img/contact.png"/>" alt="Contact" data-holder-rendered="true" /></a>
+					<a data-toggle="collapse" data-parent="#accordion" href="#contact"><img src="<c:url value="/img/contact.png"/>" alt="Contact" data-holder-rendered="true" /></a>
 					<div class="caption">
 						<h3>
-							<a data-toggle="collapse" data-parent="#accordion" href="#collapse3"><fmt:message key="contact" /></a>
+							<a data-toggle="collapse" data-parent="#accordion" href="#contact"><fmt:message key="contact" /></a>
 						</h3>
 					</div>
-					<div id="collapse3" class="center collapse">
+					<div id="contact" class="center collapse">
 						<form:form action="/support/message" class="form-horizontal" method="post">
 							<fmt:message var="phSender" key="placeholder.sender" />
 							<input type="text" class="form-support" name="sender" placeholder="${phSender }" required="required" />

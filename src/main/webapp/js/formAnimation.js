@@ -28,20 +28,6 @@ $nc.click(function(e) {
 	}
 })
 
-// $uf = $('#countryButton');
-// $uf.click(function(e) {
-// e.preventDefault();
-// $('.escondido').slideUp(400);
-// if (e.isDefaultPrevented()) {
-// continueClicked();
-// }
-// function continueClicked() {
-// setTimeout(function() {
-// $('.login').load('#usersDiv')
-// }, 500);
-// }
-// })
-
 $lg = $('.navbar-nav li #log-in');
 $lg.click(function(e) {
 	e.preventDefault();

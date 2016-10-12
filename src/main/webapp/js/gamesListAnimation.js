@@ -29,4 +29,9 @@ $(document).ready(function() {
 	if(idIndex !== null && idIndex !== ""){
 		$("#id"+idIndex).show();
 	}
+	
+	var idCollapse = getParameterByName("id");
+	if(idCollapse !== null && idCollapse !== ""){
+		$("#"+idCollapse).addClass('in');
+	}
 });

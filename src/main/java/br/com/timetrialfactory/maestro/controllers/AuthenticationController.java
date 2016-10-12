@@ -55,10 +55,7 @@ public class AuthenticationController {
 			return modelAndView;
 		} else {
 			ModelAndView modelAndView = new ModelAndView("redirect:/games/list");
-			LoggedUser loggedUser = new LoggedUser();
-			loggedUser.login(userToVerify);
-			loggedUser.setLicenses(licenseAssembler.toObject(licenseService.listUserLicenses(loggedUser.getId())));
-			session.setAttribute("loggedUser", loggedUser);
+			session.setAttribute("loggedUser", this.setLoggedUser(userToVerify));
 			return modelAndView;
 		}
 	}
@@ -69,5 +66,12 @@ public class AuthenticationController {
 		loggedUser.logout();
 		session.invalidate();
 		return modelAndView;
+	}
+
+	private LoggedUser setLoggedUser(UserDTO user) {
+		LoggedUser loggedUser = new LoggedUser();
+		loggedUser.login(user);
+		loggedUser.setLicenses(licenseAssembler.toObject(licenseService.listUserLicenses(loggedUser.getId())));
+		return loggedUser;
 	}
 }

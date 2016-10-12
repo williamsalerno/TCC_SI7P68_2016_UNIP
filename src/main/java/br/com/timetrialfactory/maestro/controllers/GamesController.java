@@ -45,9 +45,10 @@ public class GamesController {
 		if (result.hasErrors()) {
 			attr.addFlashAttribute("org.springframework.validation.BindingResult.game", result);
 			return new ModelAndView("games/newGame");
+		} else {
+			gameService.saveGame(game);
+			return new ModelAndView("redirect:list");
 		}
-		gameService.saveGame(game);
-		return new ModelAndView("redirect:list");
 	}
 
 	// Método GET para carregar a página de form de novo jogo.
@@ -55,10 +56,11 @@ public class GamesController {
 	public ModelAndView gamesForm(HttpSession session) {
 		if (!isAdminLogged((LoggedUser) session.getAttribute("loggedUser"))) {
 			return new ModelAndView(REDIRECT_LOGOUT);
+		} else {
+			ModelAndView modelAndView = new ModelAndView("games/newGame");
+			modelAndView.addObject("game", new Game());
+			return modelAndView;
 		}
-		ModelAndView modelAndView = new ModelAndView("games/newGame");
-		modelAndView.addObject("game", new Game());
-		return modelAndView;
 
 	}
 
@@ -74,8 +76,7 @@ public class GamesController {
 	@RequestMapping(method = RequestMethod.GET, value = "/details/{id}")
 	public ModelAndView show(Long id) {
 		ModelAndView modelAndView = new ModelAndView("games/details");
-		Game game = (Game) gameService.findGameById(id);
-		modelAndView.addObject("game", game);
+		modelAndView.addObject("game", gameService.findGameById(id));
 		return modelAndView;
 	}
 
@@ -83,19 +84,21 @@ public class GamesController {
 	public ModelAndView edit(@ModelAttribute Game game, HttpSession session) {
 		if (!isAdminLogged((LoggedUser) session.getAttribute("loggedUser"))) {
 			return new ModelAndView(REDIRECT_LOGOUT);
+		} else {
+			ModelAndView modelAndView = new ModelAndView("games/edit");
+			modelAndView.addObject("game", game);
+			return modelAndView;
 		}
-		ModelAndView modelAndView = new ModelAndView("games/edit");
-		modelAndView.addObject("game", game);
-		return modelAndView;
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/delete/{id}")
 	public ModelAndView delete(@ModelAttribute Game game, HttpSession session) {
 		if (!isAdminLogged((LoggedUser) session.getAttribute("loggedUser"))) {
 			return new ModelAndView(REDIRECT_LOGOUT);
+		} else {
+			gameService.deleteGame(game);
+			return this.list();
 		}
-		gameService.deleteGame(game);
-		return this.list();
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/{id}", name = "game")

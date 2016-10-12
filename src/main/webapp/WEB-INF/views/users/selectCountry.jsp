@@ -34,4 +34,5 @@
 	</div>
 </div>
 <%@ include file="/WEB-INF/jspf/footer.jspf"%>
+<script src="<c:url value="/js/formAnimation.js"/>"></script>
 <%@ include file="/WEB-INF/jspf/end.jspf"%>

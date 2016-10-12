@@ -88,11 +88,11 @@
 				<br>
 				<div class="clearfix"></div>
 			</form:form>
-			<script type="text/javascript">
-				$('#usersForm').validate();
-			</script>
 		</div>
 	</div>
 </div>
 <%@ include file="/WEB-INF/jspf/footer.jspf"%>
+<script type="text/javascript">
+	$('#usersForm').validate();
+</script>
 <%@ include file="/WEB-INF/jspf/end.jspf"%>
