@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.timetrialfactory.maestro.assembler.GameAssembler;
 import br.com.timetrialfactory.maestro.daos.GameDAO;
 import br.com.timetrialfactory.maestro.models.Game;
 
@@ -15,10 +16,13 @@ public class GameServiceImpl implements GameService {
 
 	@Autowired
 	private GameDAO dao;
+	
+	@Autowired
+	private GameAssembler assembler;
 
 	@Override
 	public Set<Game> listGames() {
-		return dao.listGames();
+		return assembler.toSet(dao.listGames());
 	}
 
 	@Override

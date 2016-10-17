@@ -16,12 +16,6 @@ import br.com.timetrialfactory.maestro.services.UserService;
 public class LicenseAssembler implements Assembler<Set<License>, Set<LicenseDTO>> {
 
 	@Autowired
-	private UserAssembler userAssembler;
-
-	@Autowired
-	private GameAssembler gameAssembler;
-
-	@Autowired
 	private UserService userService;
 
 	@Autowired
@@ -55,8 +49,8 @@ public class LicenseAssembler implements Assembler<Set<License>, Set<LicenseDTO>
 			entity = new HashSet<License>();
 			for (LicenseDTO dto : list) {
 				License license = new License();
-				license.setGame(gameAssembler.toObject(gameService.findGameById(dto.getGameId())));
-				license.setUser(userAssembler.toObject(userService.findById(dto.getUserId())));
+				license.setGame(gameService.findGameById(dto.getGameId()));
+				license.setUser(userService.findById(dto.getUserId()));
 				license.setCode(dto.getCode());
 				license.setCheckedCode(dto.isCheckedCode());
 				entity.add(license);

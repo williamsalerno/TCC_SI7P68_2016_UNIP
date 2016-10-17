@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.timetrialfactory.maestro.assembler.LicenseAssembler;
-import br.com.timetrialfactory.maestro.assembler.UserAssembler;
-import br.com.timetrialfactory.maestro.dto.UserDTO;
 import br.com.timetrialfactory.maestro.models.LoggedUser;
 import br.com.timetrialfactory.maestro.models.User;
 import br.com.timetrialfactory.maestro.services.LicenseService;
@@ -30,9 +28,6 @@ public class AuthenticationController {
 	private LicenseService licenseService;
 
 	@Autowired
-	private UserAssembler assembler;
-
-	@Autowired
 	private LicenseAssembler licenseAssembler;
 
 	@RequestMapping(method = GET, value = "/login")
@@ -44,7 +39,7 @@ public class AuthenticationController {
 
 	@RequestMapping(method = POST, value = "/login")
 	public ModelAndView login(@ModelAttribute("user") User user, HttpSession session) {
-		UserDTO userToVerify = assembler.toObject(service.loadUser(user.getLogin(), user.getPassword()));
+		User userToVerify = service.loadUser(user.getLogin(), user.getPassword());
 		if (userToVerify == null) {
 			ModelAndView modelAndView = new ModelAndView("users/login");
 			modelAndView.addObject("loginError", true);
@@ -68,7 +63,7 @@ public class AuthenticationController {
 		return modelAndView;
 	}
 
-	private LoggedUser setLoggedUser(UserDTO user) {
+	private LoggedUser setLoggedUser(User user) {
 		LoggedUser loggedUser = new LoggedUser();
 		loggedUser.login(user);
 		loggedUser.setLicenses(licenseAssembler.toObject(licenseService.listUserLicenses(loggedUser.getId())));

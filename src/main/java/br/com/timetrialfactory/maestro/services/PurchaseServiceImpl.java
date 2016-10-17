@@ -12,13 +12,14 @@ import br.com.timetrialfactory.maestro.daos.PurchaseDAO;
 import br.com.timetrialfactory.maestro.models.LoggedUser;
 import br.com.timetrialfactory.maestro.models.Purchase;
 import br.com.timetrialfactory.maestro.models.ShoppingCart;
+import br.com.timetrialfactory.maestro.models.ShoppingItem;
 import br.com.timetrialfactory.maestro.models.enums.PurchaseSituationType;
 
 @Service("purchaseService")
 @Transactional
 public class PurchaseServiceImpl implements PurchaseService {
 
-	private final static BigDecimal free = new BigDecimal("0");
+	private final static BigDecimal free = new BigDecimal("0.00");
 
 	@Autowired
 	private PurchaseDAO dao;
@@ -27,15 +28,19 @@ public class PurchaseServiceImpl implements PurchaseService {
 	public void savePurchase(ShoppingCart cart, LoggedUser userWeb) {
 		if (userWeb.isLogged() && cart != null) {
 			Purchase purchase = new Purchase();
-			for (int i = 0; i < cart.getItems().size(); i++) {
-				purchase.setGame(cart.getItems().get(i).getGame());
-				purchase.setPrice(cart.getItems().get(i).getGame().getPrice());
+			for (ShoppingItem items : cart.getItems()) {
+				purchase.setGame(items.getGame());
+				if (items.getGame() != null) {
+					purchase.setPrice(items.getGame().getPrice());
+				}
 				purchase.setPurchaseDate(now());
 				purchase.setUser(userWeb.getLoggedUser());
-				if (cart.getTotal().equals(free)) {
-					purchase.setPurchaseSituation(PurchaseSituationType.CONFIRMADO);
-				} else {
-					purchase.setPurchaseSituation(PurchaseSituationType.PROCESSANDO);
+				if (purchase.getPrice() != null) {
+					if (purchase.getPrice().equals(free)) {
+						purchase.setPurchaseSituation(PurchaseSituationType.CONFIRMADO);
+					} else {
+						purchase.setPurchaseSituation(PurchaseSituationType.PROCESSANDO);
+					}
 				}
 				dao.savePurchase(purchase);
 			}

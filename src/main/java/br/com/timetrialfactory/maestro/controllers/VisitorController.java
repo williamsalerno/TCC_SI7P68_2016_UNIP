@@ -34,9 +34,6 @@ public class VisitorController {
 	private UserService service;
 
 	@Autowired
-	private UserAssembler userAssembler;
-
-	@Autowired
 	private EmailSender emailSender;
 
 	@InitBinder("address")
@@ -84,13 +81,13 @@ public class VisitorController {
 
 	@RequestMapping(method = GET)
 	public ModelAndView confirmAccount(@RequestParam Long confirmationCode, RedirectAttributes attr) {
-		UserDTO dto = null;
+		User user = null;
 		if (confirmationCode != null) {
-			dto = userAssembler.toObject(service.findByCode(confirmationCode));
+			user = service.findByCode(confirmationCode);
 		}
-		if (dto != null) {
-			dto.setActive(true);
-			service.updateUser(userAssembler.toEntity(dto));
+		if (user != null) {
+			user.setActive(true);
+			service.updateUser(user);
 			attr.addFlashAttribute("success", true);
 		}
 		return new ModelAndView("redirect:/login");

@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.com.timetrialfactory.maestro.assembler.UserAssembler;
 import br.com.timetrialfactory.maestro.dto.LicenseDTO;
 import br.com.timetrialfactory.maestro.models.Game;
 import br.com.timetrialfactory.maestro.models.LoggedUser;
@@ -35,9 +34,6 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
-
-	@Autowired
-	private UserAssembler userAssembler;
 
 	@RequestMapping(method = RequestMethod.GET, value = "/myProfile")
 	public ModelAndView loggedUser(HttpSession session) {
@@ -86,7 +82,7 @@ public class UserController {
 		} else {
 			userService.updateUser(user);
 			LoggedUser loggedUser = new LoggedUser();
-			loggedUser.login(userAssembler.toObject(userService.findById(user.getId())));
+			loggedUser.login(userService.findById(user.getId()));
 			session.setAttribute("loggedUser", loggedUser);
 			return new ModelAndView("redirect:/user/myProfile");
 		}

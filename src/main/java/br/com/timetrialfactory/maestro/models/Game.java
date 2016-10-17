@@ -25,7 +25,6 @@ public class Game {
 	@Column(name = "id", updatable = false)
 	private Long id;
 
-	@NotNull
 	@NotBlank
 	@Length(min = 5)
 	@Column(name = "title", nullable = false, unique = true)
@@ -37,7 +36,6 @@ public class Game {
 	private BigDecimal price;
 
 	@NotBlank
-	@NotNull
 	@Column(name = "description")
 	private String description;
 
