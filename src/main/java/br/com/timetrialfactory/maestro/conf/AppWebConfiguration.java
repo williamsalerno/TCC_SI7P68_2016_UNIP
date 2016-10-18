@@ -33,7 +33,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import com.google.common.cache.CacheBuilder;
 
 import br.com.timetrialfactory.maestro.apis.paypal.PayPalCall;
-import br.com.timetrialfactory.maestro.assembler.UserAssembler;
+import br.com.timetrialfactory.maestro.assembler.LicenseAssembler;
 import br.com.timetrialfactory.maestro.controllers.AuthenticationController;
 import br.com.timetrialfactory.maestro.controllers.GamesController;
 import br.com.timetrialfactory.maestro.controllers.HomeController;
@@ -60,8 +60,8 @@ import br.com.timetrialfactory.maestro.viewresolver.JsonViewResolver;
 @EnableWebMvc
 @EnableCaching
 @ComponentScan(basePackageClasses = { HomeController.class, GameDAOImpl.class, GameServiceImpl.class,
-		UserServiceImpl.class, UserDAOImpl.class, UserAssembler.class, PurchaseDAOImpl.class, PurchaseServiceImpl.class,
-		LicenseDAOImpl.class, LicenseServiceImpl.class, ShoppingCart.class, ShoppingCartController.class,
+		UserServiceImpl.class, UserDAOImpl.class, PurchaseDAOImpl.class, PurchaseServiceImpl.class,
+		LicenseDAOImpl.class, LicenseAssembler.class, LicenseServiceImpl.class, ShoppingCart.class, ShoppingCartController.class,
 		PayPalCall.class, LoggedUser.class, VisitorController.class, UserValidator.class,
 		AuthenticationController.class, UserController.class, GamesController.class, SupportController.class,
 		EmailSender.class })

@@ -1,12 +1,12 @@
 package br.com.timetrialfactory.maestro.services;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.timetrialfactory.maestro.assembler.GameAssembler;
 import br.com.timetrialfactory.maestro.daos.GameDAO;
 import br.com.timetrialfactory.maestro.models.Game;
 
@@ -16,13 +16,17 @@ public class GameServiceImpl implements GameService {
 
 	@Autowired
 	private GameDAO dao;
-	
-	@Autowired
-	private GameAssembler assembler;
 
 	@Override
 	public Set<Game> listGames() {
-		return assembler.toSet(dao.listGames());
+		Set<Game> gameSet = new HashSet<>();
+		if (dao.listGames() != null) {
+			for (Game game : dao.listGames()) {
+				gameSet.add(game);
+			}
+			return gameSet;
+		}
+		return gameSet;
 	}
 
 	@Override
@@ -33,7 +37,7 @@ public class GameServiceImpl implements GameService {
 	}
 
 	@Override
-	public void updateGame(Game game){
+	public void updateGame(Game game) {
 		if (game != null) {
 			dao.updateGame(game);
 		}

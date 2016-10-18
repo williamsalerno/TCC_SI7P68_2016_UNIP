@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.com.timetrialfactory.maestro.assembler.UserAssembler;
-import br.com.timetrialfactory.maestro.dto.UserDTO;
 import br.com.timetrialfactory.maestro.email.EmailSender;
 import br.com.timetrialfactory.maestro.models.User;
 import br.com.timetrialfactory.maestro.models.embeddables.Address;

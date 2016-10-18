@@ -40,19 +40,7 @@ public class AuthenticationController {
 	@RequestMapping(method = POST, value = "/login")
 	public ModelAndView login(@ModelAttribute("user") User user, HttpSession session) {
 		User userToVerify = service.loadUser(user.getLogin(), user.getPassword());
-		if (userToVerify == null) {
-			ModelAndView modelAndView = new ModelAndView("users/login");
-			modelAndView.addObject("loginError", true);
-			return modelAndView;
-		} else if (!userToVerify.getActive()) {
-			ModelAndView modelAndView = new ModelAndView("users/login");
-			modelAndView.addObject("activationError", true);
-			return modelAndView;
-		} else {
-			ModelAndView modelAndView = new ModelAndView("redirect:/games/list");
-			session.setAttribute("loggedUser", this.setLoggedUser(userToVerify));
-			return modelAndView;
-		}
+		return this.verifyUserToLogin(userToVerify, session);
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/logout")
@@ -68,5 +56,21 @@ public class AuthenticationController {
 		loggedUser.login(user);
 		loggedUser.setLicenses(licenseAssembler.toObject(licenseService.listUserLicenses(loggedUser.getId())));
 		return loggedUser;
+	}
+	
+	private ModelAndView verifyUserToLogin(User userToVerify, HttpSession session){
+		if (userToVerify == null) {
+			ModelAndView modelAndView = new ModelAndView("users/login");
+			modelAndView.addObject("loginError", true);
+			return modelAndView;
+		} else if (!userToVerify.getActive()) {
+			ModelAndView modelAndView = new ModelAndView("users/login");
+			modelAndView.addObject("activationError", true);
+			return modelAndView;
+		} else {
+			ModelAndView modelAndView = new ModelAndView("redirect:/games/list");
+			session.setAttribute("loggedUser", this.setLoggedUser(userToVerify));
+			return modelAndView;
+		}
 	}
 }
