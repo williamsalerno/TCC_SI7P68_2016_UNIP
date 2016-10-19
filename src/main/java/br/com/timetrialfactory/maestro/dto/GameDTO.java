@@ -2,15 +2,18 @@ package br.com.timetrialfactory.maestro.dto;
 
 import java.math.BigDecimal;
 
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
 public class GameDTO {
 
-	private long id;
+	@Null
+	private Long id;
 
 	@NotBlank
 	@Length(min = 5)
@@ -18,16 +21,20 @@ public class GameDTO {
 
 	@NotNull
 	@Min(value = 0)
+	@Digits(integer = 3, fraction = 2)
 	private BigDecimal price;
 
 	@NotBlank
 	private String description;
 
-	public long getId() {
+	@Null
+	private String downloadLink;
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -53,6 +60,14 @@ public class GameDTO {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getDownloadLink() {
+		return downloadLink;
+	}
+
+	public void setDownloadLink(String downloadLink) {
+		this.downloadLink = downloadLink;
 	}
 
 }

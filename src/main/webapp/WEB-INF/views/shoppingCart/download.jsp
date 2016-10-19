@@ -13,8 +13,12 @@
 						<fmt:message key="p.infoDownload" />
 					</p>
 				</div>
-				<div class="btnCart">
-					<a class="link btn btn-default" href=https://s3.amazonaws.com/timetrialgames/Disruption/Disruption.rar>Download </a>
+				<div>
+					<c:forEach items="${downloadLinks }" var="links">
+						<div class="btnCart">
+							<a class="link btn btn-default" href="${links.game.downloadLink }">Download </a>
+						</div>
+					</c:forEach>
 				</div>
 			</div>
 		</section>

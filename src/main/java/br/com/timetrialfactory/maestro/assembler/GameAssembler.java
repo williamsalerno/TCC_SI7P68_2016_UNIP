@@ -21,6 +21,7 @@ public class GameAssembler implements Assembler<GameDTO, Game> {
 			object.setTitle(entity.getTitle());
 			object.setPrice(entity.getPrice());
 			object.setDescription(entity.getDescription());
+			object.setDownloadLink(entity.getDownloadLink());
 		}
 		return object;
 	}
@@ -34,6 +35,9 @@ public class GameAssembler implements Assembler<GameDTO, Game> {
 			entity.setTitle(object.getTitle());
 			entity.setPrice(object.getPrice());
 			entity.setDescription(object.getDescription());
+			if (object.getDownloadLink() != null) {
+				entity.setDownloadLink(object.getDownloadLink());
+			}
 		}
 		return entity;
 	}

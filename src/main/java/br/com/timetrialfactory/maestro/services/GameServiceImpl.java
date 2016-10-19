@@ -42,6 +42,7 @@ public class GameServiceImpl implements GameService {
 	public void saveGame(GameDTO game) {
 		if (game != null) {
 			dao.saveGame(assembler.toEntity(game));
+			this.gamesList = null;
 		}
 	}
 
@@ -49,6 +50,7 @@ public class GameServiceImpl implements GameService {
 	public void updateGame(GameDTO game) {
 		if (game != null) {
 			dao.updateGame(assembler.toEntity(game));
+			this.gamesList = null;
 		}
 	}
 
@@ -56,12 +58,8 @@ public class GameServiceImpl implements GameService {
 	public void deleteGame(GameDTO game) {
 		if (game != null) {
 			dao.deleteGame(assembler.toEntity(game));
+			this.gamesList = null;
 		}
-	}
-
-	@Override
-	public void insertGameInCart(GameDTO game) {
-		dao.findById(game.getId());
 	}
 
 	@Override

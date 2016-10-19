@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 public class ShoppingCart {
 
 	private List<ShoppingItem> items = new ArrayList<ShoppingItem>();
-
+	
 	private BigDecimal total = new BigDecimal("0.0");
 
 	public List<ShoppingItem> getItems() {
@@ -25,7 +25,7 @@ public class ShoppingCart {
 	public void setItems(List<ShoppingItem> items) {
 		this.items = items;
 	}
-
+	
 	public BigDecimal getTotal() {
 		return total;
 	}

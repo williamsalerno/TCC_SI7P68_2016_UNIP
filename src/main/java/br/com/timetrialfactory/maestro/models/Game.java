@@ -15,6 +15,8 @@ import javax.persistence.Table;
 @Table(name = "games", catalog = "names")
 public class Game {
 
+	private static final String DOWNLOAD_DISRUPTION = "https://s3.amazonaws.com/timetrialgames/Disruption/Disruption.rar";
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", updatable = false)
@@ -26,8 +28,11 @@ public class Game {
 	@Column(name = "price", nullable = false)
 	private BigDecimal price;
 
-	@Column(name = "description")
+	@Column(name = "description", nullable = false)
 	private String description;
+
+	@Column(name = "downloadLink", nullable = false)
+	private String downloadLink = DOWNLOAD_DISRUPTION;
 
 	public Long getId() {
 		return id;
@@ -59,6 +64,14 @@ public class Game {
 
 	public void setDescription(String description) {
 		this.description = formatToUTF8(description);
+	}
+
+	public String getDownloadLink() {
+		return downloadLink;
+	}
+
+	public void setDownloadLink(String downloadLink) {
+		this.downloadLink = downloadLink;
 	}
 
 }

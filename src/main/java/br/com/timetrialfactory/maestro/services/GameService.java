@@ -14,8 +14,6 @@ public interface GameService {
 
 	void deleteGame(GameDTO game);
 
-	void insertGameInCart(GameDTO game);
-	
 	GameDTO findGameById(Long id);
 	
 }

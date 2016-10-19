@@ -69,6 +69,7 @@ public class ShoppingCartController {
 				dto.setGameId(item.getGame().getId());
 				loggedUser.getLicenses().add(dto);
 			}
+			modelAndView.addObject("downloadLinks", shoppingCart.getItems());
 			shoppingCart.getItems().clear();
 			return modelAndView;
 		} else {
