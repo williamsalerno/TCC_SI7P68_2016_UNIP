@@ -2,6 +2,8 @@ package br.com.timetrialfactory.maestro.controllers;
 
 import static org.springframework.web.context.WebApplicationContext.SCOPE_REQUEST;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,7 +71,8 @@ public class ShoppingCartController {
 				dto.setGameId(item.getGame().getId());
 				loggedUser.getLicenses().add(dto);
 			}
-			modelAndView.addObject("downloadLinks", shoppingCart.getItems());
+			List<ShoppingItem> items = shoppingCart.getItems();
+			modelAndView.addObject("downloadLinks", items);
 			shoppingCart.getItems().clear();
 			return modelAndView;
 		} else {
