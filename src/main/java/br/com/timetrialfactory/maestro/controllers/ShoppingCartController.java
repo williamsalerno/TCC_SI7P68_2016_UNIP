@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.timetrialfactory.maestro.dto.GameDTO;
 import br.com.timetrialfactory.maestro.dto.LicenseDTO;
-import br.com.timetrialfactory.maestro.models.Game;
 import br.com.timetrialfactory.maestro.models.LoggedUser;
 import br.com.timetrialfactory.maestro.models.ShoppingCart;
 import br.com.timetrialfactory.maestro.models.ShoppingItem;
@@ -45,7 +45,7 @@ public class ShoppingCartController {
 	}
 
 	private ShoppingItem createItem(final Long id) {
-		Game game = gameService.findGameById(id);
+		GameDTO game = gameService.findGameById(id);
 		ShoppingItem item = new ShoppingItem(game);
 		return item;
 	}

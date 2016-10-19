@@ -7,8 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.timetrialfactory.maestro.assembler.GameAssembler;
 import br.com.timetrialfactory.maestro.daos.GameDAO;
-import br.com.timetrialfactory.maestro.models.Game;
+import br.com.timetrialfactory.maestro.dto.GameDTO;
 
 @Service("gameService")
 @Transactional
@@ -17,11 +18,19 @@ public class GameServiceImpl implements GameService {
 	@Autowired
 	private GameDAO dao;
 
+	@Autowired
+	private GameAssembler assembler;
+
+	private Set<GameDTO> gamesList;
+
 	@Override
-	public Set<Game> listGames() {
-		Set<Game> gameSet = new HashSet<>();
-		if (dao.listGames() != null) {
-			for (Game game : dao.listGames()) {
+	public Set<GameDTO> listGames() {
+		Set<GameDTO> gameSet = new HashSet<GameDTO>();
+		if (gamesList == null) {
+			gamesList = assembler.toObjectSet(dao.listGames());
+		}
+		if (gamesList != null) {
+			for (GameDTO game : gamesList) {
 				gameSet.add(game);
 			}
 			return gameSet;
@@ -30,34 +39,43 @@ public class GameServiceImpl implements GameService {
 	}
 
 	@Override
-	public void saveGame(Game game) {
+	public void saveGame(GameDTO game) {
 		if (game != null) {
-			dao.saveGame(game);
+			dao.saveGame(assembler.toEntity(game));
 		}
 	}
 
 	@Override
-	public void updateGame(Game game) {
+	public void updateGame(GameDTO game) {
 		if (game != null) {
-			dao.updateGame(game);
+			dao.updateGame(assembler.toEntity(game));
 		}
 	}
 
 	@Override
-	public void deleteGame(Game game) {
+	public void deleteGame(GameDTO game) {
 		if (game != null) {
-			dao.deleteGame(game);
+			dao.deleteGame(assembler.toEntity(game));
 		}
 	}
 
 	@Override
-	public void insertGameInCart(Game game) {
+	public void insertGameInCart(GameDTO game) {
 		dao.findById(game.getId());
 	}
 
 	@Override
-	public Game findGameById(Long id) {
-		return dao.findById(id);
+	public GameDTO findGameById(Long id) {
+		Set<GameDTO> gamesToVerify = this.listGames();
+		GameDTO gameFound = null;
+		if (gamesToVerify != null) {
+			for (GameDTO game : gamesToVerify) {
+				if (game.getId() == id) {
+					gameFound = game;
+				}
+			}
+		}
+		return gameFound;
 	}
 
 }

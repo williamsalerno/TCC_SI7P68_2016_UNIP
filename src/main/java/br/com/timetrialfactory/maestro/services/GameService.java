@@ -2,20 +2,20 @@ package br.com.timetrialfactory.maestro.services;
 
 import java.util.Set;
 
-import br.com.timetrialfactory.maestro.models.Game;
+import br.com.timetrialfactory.maestro.dto.GameDTO;
 
 public interface GameService {
 
-	Set<Game> listGames();
+	Set<GameDTO> listGames();
 
-	void saveGame(Game game);
+	void saveGame(GameDTO game);
 
-	void updateGame(Game game);
+	void updateGame(GameDTO game);
 
-	void deleteGame(Game game);
+	void deleteGame(GameDTO game);
 
-	void insertGameInCart(Game game);
+	void insertGameInCart(GameDTO game);
 	
-	Game findGameById(Long id);
+	GameDTO findGameById(Long id);
 	
 }

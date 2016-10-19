@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.timetrialfactory.maestro.dto.GameDTO;
 import br.com.timetrialfactory.maestro.dto.LicenseDTO;
-import br.com.timetrialfactory.maestro.models.Game;
 import br.com.timetrialfactory.maestro.models.LoggedUser;
 import br.com.timetrialfactory.maestro.models.User;
 import br.com.timetrialfactory.maestro.services.GameService;
@@ -51,7 +51,7 @@ public class UserController {
 		LoggedUser loggedUser = (LoggedUser) session.getAttribute("loggedUser");
 		if (loggedUser != null) {
 			ModelAndView modelAndView = new ModelAndView("users/myGames");
-			Set<Game> gamesList = this.listUserGames(service.listGames(), loggedUser.getLicenses());
+			Set<GameDTO> gamesList = this.listUserGames(service.listGames(), loggedUser.getLicenses());
 			modelAndView.getModel().put("games", gamesList);
 			return modelAndView;
 		} else {
@@ -88,9 +88,9 @@ public class UserController {
 		}
 	}
 
-	private Set<Game> listUserGames(Set<Game> gamesList, Set<LicenseDTO> licenseList) {
-		Set<Game> games = new HashSet<Game>();
-		for (Game game : gamesList) {
+	private Set<GameDTO> listUserGames(Set<GameDTO> gamesList, Set<LicenseDTO> licenseList) {
+		Set<GameDTO> games = new HashSet<GameDTO>();
+		for (GameDTO game : gamesList) {
 			for (LicenseDTO gameToCompare : licenseList) {
 				if (gameToCompare.getGameId() == game.getId()) {
 					games.add(game);

@@ -8,25 +8,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import br.com.timetrialfactory.maestro.dto.GameDTO;
+
 @Component
 @Scope(value = SCOPE_SESSION)
 public class ShoppingItem {
 
 	@Autowired
-	private Game game;
+	private GameDTO game;
 
 	public ShoppingItem() {
 	}
 
-	public ShoppingItem(Game game) {
+	public ShoppingItem(GameDTO game) {
 		this.game = game;
 	}
 
-	public Game getGame() {
+	public GameDTO getGame() {
 		return game;
 	}
 
-	public void setGame(Game game) {
+	public void setGame(GameDTO game) {
 		this.game = game;
 	}
 
