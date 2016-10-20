@@ -19,8 +19,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.timetrialfactory.maestro.dto.GameDTO;
 import br.com.timetrialfactory.maestro.dto.LicenseDTO;
+import br.com.timetrialfactory.maestro.dto.UserDTO;
 import br.com.timetrialfactory.maestro.models.LoggedUser;
-import br.com.timetrialfactory.maestro.models.User;
 import br.com.timetrialfactory.maestro.services.GameService;
 import br.com.timetrialfactory.maestro.services.UserService;
 
@@ -73,7 +73,7 @@ public class UserController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/myInfo/update")
-	public ModelAndView update(@Valid User user, BindingResult result, RedirectAttributes attr, HttpSession session) {
+	public ModelAndView update(@Valid UserDTO user, BindingResult result, RedirectAttributes attr, HttpSession session) {
 		if (result.hasErrors()) {
 			attr.addFlashAttribute("org.springframework.validation.BindingResult.user", result);
 			ModelAndView modelAndView = new ModelAndView("users/ownInfo");

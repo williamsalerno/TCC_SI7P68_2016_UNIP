@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.timetrialfactory.maestro.assembler.UserAssembler;
 import br.com.timetrialfactory.maestro.daos.UserDAO;
+import br.com.timetrialfactory.maestro.dto.UserDTO;
 import br.com.timetrialfactory.maestro.models.User;
 
 @Service("userService")
@@ -17,14 +19,18 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserDAO dao;
 
+	@Autowired
+	private UserAssembler assembler;
+
 	@Override
-	public User findById(Long id) {
-		return dao.findById(id);
+	public UserDTO findById(Long id) {
+		return assembler.toObject(dao.findById(id));
 	}
 
 	@Override
-	public boolean saveUser(User user) {
-		if (user != null) {
+	public boolean saveUser(UserDTO dto) {
+		if (dto != null) {
+			User user = assembler.toEntity(dto);
 			if (dao.checkUser(user)) {
 				user.setRole(GENERIC);
 				user.setActivationCode(randomUUID().getMostSignificantBits());
@@ -45,42 +51,42 @@ public class UserServiceImpl implements UserService {
 	 * transaction ends.
 	 */
 	@Override
-	public void updateUser(User user) {
+	public void updateUser(UserDTO user) {
 		if (user != null) {
-			User entity = dao.findById(user.getId());
+			UserDTO entity = assembler.toObject(dao.findById(user.getId()));
 			entity.setFirstName(user.getFirstName());
 			entity.setLastName(user.getLastName());
 			entity.setAddress(user.getAddress());
 			entity.setEmail(user.getEmail());
 			entity.setPassword(user.getPassword());
-			if (!entity.getActive()) {
-				entity.setActive(user.getActive());
+			if (!entity.isActive()) {
+				entity.setActive(user.isActive());
 			}
 		}
 	}
 
 	@Override
-	public User loadUser(String login, String password) {
+	public UserDTO loadUser(String login, String password) {
 		if (login != null && password != null) {
-			return dao.getUserByLoginAndPassword(login, password);
+			return assembler.toObject(dao.getUserByLoginAndPassword(login, password));
 		}
-		return new User();
+		return new UserDTO();
 	}
 
 	@Override
-	public User findByCode(Long code) {
+	public UserDTO findByCode(Long code) {
 		if (code != null) {
-			return dao.findByCode(code);
+			return assembler.toObject(dao.findByCode(code));
 		}
-		return new User();
+		return new UserDTO();
 	}
 
 	@Override
-	public User findByEmailAndUsername(String email, String login) {
+	public UserDTO findByEmailAndUsername(String email, String login) {
 		if (email != null && login != null) {
-			return dao.findByEmailAndUsername(email, login);
+			return assembler.toObject(dao.findByEmailAndUsername(email, login));
 		}
-		return new User();
+		return new UserDTO();
 	}
 
 }

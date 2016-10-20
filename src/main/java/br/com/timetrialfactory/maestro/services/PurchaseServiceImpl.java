@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.timetrialfactory.maestro.assembler.GameAssembler;
+import br.com.timetrialfactory.maestro.assembler.UserAssembler;
 import br.com.timetrialfactory.maestro.daos.PurchaseDAO;
 import br.com.timetrialfactory.maestro.models.LoggedUser;
 import br.com.timetrialfactory.maestro.models.Purchase;
@@ -24,9 +25,12 @@ public class PurchaseServiceImpl implements PurchaseService {
 
 	@Autowired
 	private PurchaseDAO dao;
-	
+
 	@Autowired
 	private GameAssembler gameAssembler;
+
+	@Autowired
+	private UserAssembler userAssembler;
 
 	@Override
 	public void savePurchase(ShoppingCart cart, LoggedUser userWeb) {
@@ -38,7 +42,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 					purchase.setPrice(items.getGame().getPrice());
 				}
 				purchase.setPurchaseDate(now());
-				purchase.setUser(userWeb.getLoggedUser());
+				purchase.setUser(userAssembler.toEntity(userWeb.getLoggedUser()));
 				if (purchase.getPrice() != null) {
 					if (purchase.getPrice().equals(free)) {
 						purchase.setPurchaseSituation(PurchaseSituationType.CONFIRMADO);

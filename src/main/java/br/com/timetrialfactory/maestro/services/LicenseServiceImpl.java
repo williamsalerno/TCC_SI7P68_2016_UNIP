@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.timetrialfactory.maestro.assembler.GameAssembler;
+import br.com.timetrialfactory.maestro.assembler.UserAssembler;
 import br.com.timetrialfactory.maestro.daos.LicenseDAO;
 import br.com.timetrialfactory.maestro.models.License;
 import br.com.timetrialfactory.maestro.models.LoggedUser;
@@ -23,9 +24,12 @@ public class LicenseServiceImpl implements LicenseService {
 
 	@Autowired
 	private LicenseDAO dao;
-	
+
 	@Autowired
 	private GameAssembler gameAssembler;
+
+	@Autowired
+	private UserAssembler userAssembler;
 
 	@Override
 	public void saveLicense(LoggedUser user, List<ShoppingItem> games) {
@@ -33,7 +37,7 @@ public class LicenseServiceImpl implements LicenseService {
 			for (ShoppingItem gameInCart : games) {
 				License license = new License();
 				license.setCode(new LicenseGenerator().generateLicense());
-				license.setUser(user.getLoggedUser());
+				license.setUser(userAssembler.toEntity(user.getLoggedUser()));
 				license.setGame(gameAssembler.toEntity(gameInCart.getGame()));
 				if (gameInCart.getGame().getPrice().equals(free)) {
 					license.setCheckedCode(true);

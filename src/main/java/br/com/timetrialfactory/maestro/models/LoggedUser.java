@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import br.com.timetrialfactory.maestro.dto.LicenseDTO;
+import br.com.timetrialfactory.maestro.dto.UserDTO;
 
 @Component
 @Scope(value = SCOPE_SESSION, proxyMode = TARGET_CLASS)
@@ -23,15 +24,15 @@ public class LoggedUser {
 
 	}
 
-	private User logged;
+	private UserDTO logged;
 
 	private Set<LicenseDTO> licenses;
 
-	public void login(User user) {
+	public void login(UserDTO user) {
 		this.logged = user;
 	}
 
-	public User getLoggedUser() {
+	public UserDTO getLoggedUser() {
 		return logged;
 	}
 

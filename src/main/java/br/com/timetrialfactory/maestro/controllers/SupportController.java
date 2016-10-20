@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.timetrialfactory.maestro.dto.UserDTO;
 import br.com.timetrialfactory.maestro.email.EmailSender;
 import br.com.timetrialfactory.maestro.models.User;
 import br.com.timetrialfactory.maestro.services.UserService;
@@ -32,9 +33,9 @@ public class SupportController {
 	}
 
 	@RequestMapping(method = POST, value = "/forgotMyPassword/recover")
-	public ModelAndView recoverPassword(@ModelAttribute User user) {
+	public ModelAndView recoverPassword(@ModelAttribute UserDTO user) {
 		ModelAndView modelAndView = new ModelAndView("home/support");
-		User userToFind = userService.findByEmailAndUsername(user.getEmail(), user.getLogin());
+		UserDTO userToFind = userService.findByEmailAndUsername(user.getEmail(), user.getLogin());
 		if (userToFind == null) {
 			modelAndView.addObject("recoverError", true);
 			return modelAndView;

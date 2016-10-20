@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.timetrialfactory.maestro.dto.UserDTO;
 import br.com.timetrialfactory.maestro.email.EmailSender;
-import br.com.timetrialfactory.maestro.models.User;
 import br.com.timetrialfactory.maestro.models.embeddables.Address;
 import br.com.timetrialfactory.maestro.services.UserService;
 import br.com.timetrialfactory.maestro.validation.AddressValidator;
@@ -40,7 +40,7 @@ public class VisitorController {
 	}
 
 	@RequestMapping(method = POST, value = "/form", name = "user")
-	public ModelAndView newUser(@Valid User user, BindingResult result, RedirectAttributes attr) {
+	public ModelAndView newUser(@Valid UserDTO user, BindingResult result, RedirectAttributes attr) {
 		if (result.hasErrors()) {
 			attr.addFlashAttribute("org.springframework.validation.BindingResult.user", result);
 			ModelAndView modelAndView = new ModelAndView("users/newUser");
@@ -66,7 +66,7 @@ public class VisitorController {
 		} else {
 			ModelAndView modelAndView = new ModelAndView("users/newUser");
 			modelAndView.addObject("country", address);
-			modelAndView.addObject("user", new User());
+			modelAndView.addObject("user", new UserDTO());
 			return modelAndView;
 		}
 	}
@@ -79,7 +79,7 @@ public class VisitorController {
 
 	@RequestMapping(method = GET)
 	public ModelAndView confirmAccount(@RequestParam Long confirmationCode, RedirectAttributes attr) {
-		User user = null;
+		UserDTO user = null;
 		if (confirmationCode != null) {
 			user = service.findByCode(confirmationCode);
 		}

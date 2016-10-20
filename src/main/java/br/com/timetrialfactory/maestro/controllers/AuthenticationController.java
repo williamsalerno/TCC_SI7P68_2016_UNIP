@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.timetrialfactory.maestro.assembler.LicenseAssembler;
+import br.com.timetrialfactory.maestro.dto.UserDTO;
 import br.com.timetrialfactory.maestro.models.LoggedUser;
-import br.com.timetrialfactory.maestro.models.User;
 import br.com.timetrialfactory.maestro.services.LicenseService;
 import br.com.timetrialfactory.maestro.services.UserService;
 
@@ -33,13 +33,13 @@ public class AuthenticationController {
 	@RequestMapping(method = GET, value = "/login")
 	public ModelAndView loginForm() {
 		ModelAndView modelAndView = new ModelAndView("users/login");
-		modelAndView.addObject("user", new User());
+		modelAndView.addObject("user", new UserDTO());
 		return modelAndView;
 	}
 
 	@RequestMapping(method = POST, value = "/login")
-	public ModelAndView login(@ModelAttribute("user") User user, HttpSession session) {
-		User userToVerify = service.loadUser(user.getLogin(), user.getPassword());
+	public ModelAndView login(@ModelAttribute("user") UserDTO user, HttpSession session) {
+		UserDTO userToVerify = service.loadUser(user.getLogin(), user.getPassword());
 		return this.verifyUserToLogin(userToVerify, session);
 	}
 
@@ -51,19 +51,19 @@ public class AuthenticationController {
 		return modelAndView;
 	}
 
-	private LoggedUser setLoggedUser(User user) {
+	private LoggedUser setLoggedUser(UserDTO userToVerify) {
 		LoggedUser loggedUser = new LoggedUser();
-		loggedUser.login(user);
+		loggedUser.login(userToVerify);
 		loggedUser.setLicenses(licenseAssembler.toObject(licenseService.listUserLicenses(loggedUser.getId())));
 		return loggedUser;
 	}
 	
-	private ModelAndView verifyUserToLogin(User userToVerify, HttpSession session){
+	private ModelAndView verifyUserToLogin(UserDTO userToVerify, HttpSession session){
 		if (userToVerify == null) {
 			ModelAndView modelAndView = new ModelAndView("users/login");
 			modelAndView.addObject("loginError", true);
 			return modelAndView;
-		} else if (!userToVerify.getActive()) {
+		} else if (!userToVerify.isActive()) {
 			ModelAndView modelAndView = new ModelAndView("users/login");
 			modelAndView.addObject("activationError", true);
 			return modelAndView;

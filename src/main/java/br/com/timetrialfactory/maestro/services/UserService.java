@@ -1,19 +1,19 @@
 package br.com.timetrialfactory.maestro.services;
 
-import br.com.timetrialfactory.maestro.models.User;
+import br.com.timetrialfactory.maestro.dto.UserDTO;
 
 public interface UserService {
 
-	User findById(Long id);
+	UserDTO findById(Long id);
 
-	boolean saveUser(User user);
+	boolean saveUser(UserDTO user);
 
-	void updateUser(User user);
+	void updateUser(UserDTO user);
 
-	User loadUser(String login, String password);
+	UserDTO loadUser(String login, String password);
 
-	User findByCode(Long code);
+	UserDTO findByCode(Long code);
 
-	User findByEmailAndUsername(String email, String login);
+	UserDTO findByEmailAndUsername(String email, String login);
 
 }
