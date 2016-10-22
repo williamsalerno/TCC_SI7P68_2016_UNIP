@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.com.timetrialfactory.maestro.assembler.UserAssembler;
 import br.com.timetrialfactory.maestro.dto.GameDTO;
 import br.com.timetrialfactory.maestro.dto.LicenseDTO;
 import br.com.timetrialfactory.maestro.models.LoggedUser;

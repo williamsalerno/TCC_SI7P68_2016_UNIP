@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.timetrialfactory.maestro.dto.UserDTO;
 import br.com.timetrialfactory.maestro.models.LoggedUser;
+import br.com.timetrialfactory.maestro.models.User;
 import br.com.timetrialfactory.maestro.services.LicenseService;
 import br.com.timetrialfactory.maestro.services.UserService;
 
@@ -29,7 +30,7 @@ public class AuthenticationController {
 	@RequestMapping(method = GET, value = "/login")
 	public ModelAndView loginForm() {
 		ModelAndView modelAndView = new ModelAndView("users/login");
-		modelAndView.addObject("user", new UserDTO());
+		modelAndView.addObject("user", new User());
 		return modelAndView;
 	}
 

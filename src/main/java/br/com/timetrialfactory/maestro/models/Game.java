@@ -10,6 +10,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name = "games", catalog = "names")
@@ -22,15 +28,22 @@ public class Game {
 	@Column(name = "id", updatable = false)
 	private Long id;
 
+	@NotBlank
+	@Length(min = 5)
 	@Column(name = "title", nullable = false, unique = true)
 	private String title;
 
+	@NotNull
+	@Min(value = 0)
+	@Digits(integer = 3, fraction = 2)
 	@Column(name = "price", nullable = false)
 	private BigDecimal price;
 
+	@NotBlank
 	@Column(name = "description", nullable = false)
 	private String description;
 
+	@NotNull
 	@Column(name = "downloadLink", nullable = false)
 	private String downloadLink = DOWNLOAD_DISRUPTION;
 

@@ -1,15 +1,11 @@
 package br.com.timetrialfactory.maestro.dto;
 
-import javax.validation.Valid;
-
 public class LicenseDTO {
 
 	private String code;
 
-	@Valid
 	private GameDTO game;
 
-	@Valid
 	private UserDTO user;
 
 	private boolean checkedCode;
