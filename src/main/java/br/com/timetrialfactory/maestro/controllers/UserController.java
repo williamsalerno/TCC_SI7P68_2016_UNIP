@@ -20,8 +20,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.com.timetrialfactory.maestro.assembler.UserAssembler;
 import br.com.timetrialfactory.maestro.dto.GameDTO;
 import br.com.timetrialfactory.maestro.dto.LicenseDTO;
-import br.com.timetrialfactory.maestro.dto.UserDTO;
 import br.com.timetrialfactory.maestro.models.LoggedUser;
+import br.com.timetrialfactory.maestro.models.User;
 import br.com.timetrialfactory.maestro.services.GameService;
 import br.com.timetrialfactory.maestro.services.UserService;
 
@@ -35,9 +35,6 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
-	
-	@Autowired
-	private UserAssembler assembler;
 
 	@RequestMapping(method = RequestMethod.GET, value = "/myProfile")
 	public ModelAndView loggedUser(HttpSession session) {
@@ -77,14 +74,14 @@ public class UserController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/myInfo/update")
-	public ModelAndView update(@Valid UserDTO user, BindingResult result, RedirectAttributes attr, HttpSession session) {
+	public ModelAndView update(@Valid User user, BindingResult result, RedirectAttributes attr, HttpSession session) {
 		if (result.hasErrors()) {
 			attr.addFlashAttribute("org.springframework.validation.BindingResult.user", result);
 			ModelAndView modelAndView = new ModelAndView("users/ownInfo");
 			modelAndView.addObject("settedCountry", user.getAddress().getCountry().getName());
 			return modelAndView;
 		} else {
-			userService.updateUser(assembler.toEntity(user));
+			userService.updateUser(user);
 			LoggedUser loggedUser = new LoggedUser();
 			loggedUser.login(userService.findById(user.getId()));
 			session.setAttribute("loggedUser", loggedUser);

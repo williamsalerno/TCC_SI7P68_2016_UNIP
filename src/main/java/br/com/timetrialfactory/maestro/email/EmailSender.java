@@ -5,7 +5,7 @@ import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Component;
 
-import br.com.timetrialfactory.maestro.dto.UserDTO;
+import br.com.timetrialfactory.maestro.models.User;
 
 @Component
 public class EmailSender {
@@ -13,7 +13,7 @@ public class EmailSender {
 	@Autowired
 	private MailSender mailer;
 
-	public void sendConfirmationEmail(UserDTO user) {
+	public void sendConfirmationEmail(User user) {
 		if (user != null) {
 			SimpleMailMessage email = new SimpleMailMessage();
 			email.setFrom("timetrial.fac@gmail.com");

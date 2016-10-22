@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.timetrialfactory.maestro.dto.GameDTO;
+import br.com.timetrialfactory.maestro.models.Game;
 import br.com.timetrialfactory.maestro.models.LoggedUser;
 import br.com.timetrialfactory.maestro.services.GameService;
 
@@ -38,7 +39,7 @@ public class GamesController {
 	// Método POST para salvar um novo jogo no bd.
 	@RequestMapping(method = POST, value = "/newGame")
 	@CacheEvict(value = "games", allEntries = true)
-	public ModelAndView save(@Validated GameDTO game, BindingResult result, RedirectAttributes attr,
+	public ModelAndView save(@Validated Game game, BindingResult result, RedirectAttributes attr,
 			HttpSession session) {
 		if (!isAdminLogged((LoggedUser) session.getAttribute("loggedUser"))) {
 			return new ModelAndView(REDIRECT_LOGOUT);
@@ -93,7 +94,7 @@ public class GamesController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/delete/{id}")
-	public ModelAndView delete(@ModelAttribute GameDTO game, HttpSession session) {
+	public ModelAndView delete(@ModelAttribute Game game, HttpSession session) {
 		if (!isAdminLogged((LoggedUser) session.getAttribute("loggedUser"))) {
 			return new ModelAndView(REDIRECT_LOGOUT);
 		} else {
@@ -103,7 +104,7 @@ public class GamesController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/{id}", name = "game")
-	public ModelAndView update(@Valid GameDTO game, BindingResult result, RedirectAttributes attr,
+	public ModelAndView update(@Valid Game game, BindingResult result, RedirectAttributes attr,
 			HttpSession session) {
 		if (!isAdminLogged((LoggedUser) session.getAttribute("loggedUser"))) {
 			return new ModelAndView(REDIRECT_LOGOUT);

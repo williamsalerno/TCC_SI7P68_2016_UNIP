@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.timetrialfactory.maestro.assembler.GameAssembler;
 import br.com.timetrialfactory.maestro.daos.GameDAO;
 import br.com.timetrialfactory.maestro.dto.GameDTO;
+import br.com.timetrialfactory.maestro.models.Game;
 
 @Service("gameService")
 @Transactional
@@ -39,25 +40,25 @@ public class GameServiceImpl implements GameService {
 	}
 
 	@Override
-	public void saveGame(GameDTO game) {
+	public void saveGame(Game game) {
 		if (game != null) {
-			dao.saveGame(assembler.toEntity(game));
+			dao.saveGame(game);
 			this.gamesList = null;
 		}
 	}
 
 	@Override
-	public void updateGame(GameDTO game) {
+	public void updateGame(Game game) {
 		if (game != null) {
-			dao.updateGame(assembler.toEntity(game));
+			dao.updateGame(game);
 			this.gamesList = null;
 		}
 	}
 
 	@Override
-	public void deleteGame(GameDTO game) {
+	public void deleteGame(Game game) {
 		if (game != null) {
-			dao.deleteGame(assembler.toEntity(game));
+			dao.deleteGame(game);
 			this.gamesList = null;
 		}
 	}

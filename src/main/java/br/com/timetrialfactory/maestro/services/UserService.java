@@ -7,7 +7,7 @@ public interface UserService {
 
 	UserDTO findById(Long id);
 
-	boolean saveUser(UserDTO user);
+	boolean saveUser(User user);
 
 	void updateUser(User user);
 

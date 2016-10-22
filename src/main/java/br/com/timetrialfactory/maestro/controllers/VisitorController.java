@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.timetrialfactory.maestro.assembler.UserAssembler;
 import br.com.timetrialfactory.maestro.dto.UserDTO;
+import br.com.timetrialfactory.maestro.models.User;
 import br.com.timetrialfactory.maestro.models.embeddables.Address;
 import br.com.timetrialfactory.maestro.services.UserService;
 import br.com.timetrialfactory.maestro.validation.AddressValidator;
@@ -40,14 +41,16 @@ public class VisitorController {
 	}
 
 	@RequestMapping(method = POST, value = "/form", name = "user")
-	public ModelAndView newUser(@Valid UserDTO user, BindingResult result, RedirectAttributes attr) {
+	public ModelAndView newUser(@Valid User user, BindingResult result, RedirectAttributes attr) {
 		if (result.hasErrors()) {
-			attr.addFlashAttribute("org.springframework.validation.BindingResult.user", result);
+			attr.addFlashAttribute("org.springframework.validation.BindingResult.userdto", result);
 			ModelAndView modelAndView = new ModelAndView("users/newUser");
+			modelAndView.addObject("user", user);
 			modelAndView.addObject("settedCountry", user.getAddress().getCountry().getName());
 			return modelAndView;
 		} else if (!service.saveUser(user)) {
 			ModelAndView modelAndView = new ModelAndView("users/newUser");
+			modelAndView.addObject("user", user);
 			modelAndView.addObject("error", true);
 			modelAndView.addObject("settedCountry", user.getAddress().getCountry().getName());
 			return modelAndView;

@@ -32,13 +32,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean saveUser(UserDTO user) {
+	public boolean saveUser(User user) {
 		if (user != null) {
-			if (dao.checkUser(assembler.toEntity(user))) {
-				user.setRole(GENERIC.name());
+			if (dao.checkUser(user)) {
+				user.setRole(GENERIC);
 				user.setActivationCode(randomUUID().getMostSignificantBits());
 				user.setActive(false);
-				dao.saveUser(assembler.toEntity(user));
+				dao.saveUser(user);
 				emailSender.sendConfirmationEmail(user);
 				return true;
 			} else {

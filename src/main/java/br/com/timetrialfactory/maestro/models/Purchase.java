@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import br.com.timetrialfactory.maestro.models.enums.PurchaseSituationType;
@@ -25,11 +26,13 @@ public class Purchase implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "game_id")
 	@Id
+	@Valid
 	private Game game;
 
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	@Id
+	@Valid
 	private User user;
 
 	@NotNull
