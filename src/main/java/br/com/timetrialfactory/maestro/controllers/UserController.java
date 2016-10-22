@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.timetrialfactory.maestro.assembler.UserAssembler;
 import br.com.timetrialfactory.maestro.dto.GameDTO;
 import br.com.timetrialfactory.maestro.dto.LicenseDTO;
 import br.com.timetrialfactory.maestro.dto.UserDTO;
@@ -34,6 +35,9 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private UserAssembler assembler;
 
 	@RequestMapping(method = RequestMethod.GET, value = "/myProfile")
 	public ModelAndView loggedUser(HttpSession session) {
@@ -80,7 +84,7 @@ public class UserController {
 			modelAndView.addObject("settedCountry", user.getAddress().getCountry().getName());
 			return modelAndView;
 		} else {
-			userService.updateUser(user);
+			userService.updateUser(assembler.toEntity(user));
 			LoggedUser loggedUser = new LoggedUser();
 			loggedUser.login(userService.findById(user.getId()));
 			session.setAttribute("loggedUser", loggedUser);
@@ -92,7 +96,7 @@ public class UserController {
 		Set<GameDTO> games = new HashSet<GameDTO>();
 		for (GameDTO game : gamesList) {
 			for (LicenseDTO gameToCompare : licenseList) {
-				if (gameToCompare.getGameId() == game.getId()) {
+				if (gameToCompare.getGame().getId() == game.getId()) {
 					games.add(game);
 				}
 			}

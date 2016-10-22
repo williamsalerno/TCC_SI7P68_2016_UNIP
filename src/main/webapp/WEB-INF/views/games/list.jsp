@@ -35,7 +35,7 @@
 									</c:if>
 								</c:forEach>
 								<c:forEach items="${loggedUser.licenses }" var="gameAcquired">
-									<c:if test="${gameAcquired.gameId eq game.id}">
+									<c:if test="${gameAcquired.game.id eq game.id}">
 										<c:set var="acquired" value="true" />
 									</c:if>
 								</c:forEach>
@@ -54,7 +54,7 @@
 											<c:otherwise>
 												<c:forEach items="${loggedUser.licenses }" var="gameAcquired2">
 													<c:set var="acquired" value="false" />
-													<c:if test="${gameAcquired2.gameId eq game.id }">
+													<c:if test="${gameAcquired2.game.id eq game.id }">
 														<button class="btn btn-default disabled">
 															<fmt:message key="btn.acquired" />
 														</button>
@@ -101,7 +101,7 @@
 							</c:if>
 							<c:if test="${!loggedUser.logged}">
 								<a href="<c:url value="/login"/>" class="btn btn-default"><fmt:message key="btn.login" /></a>
-								<a href="<c:url value= "/users/selectCountry"/>" class="btn btn-default" style="position: absolute; top: 0px; right: 110%;"><fmt:message key="btn.register" /></a>
+								<a href="<c:url value= "/newUser/selectCountry"/>" class="btn btn-default" style="position: absolute; top: 0px; right: 110%;"><fmt:message key="btn.register" /></a>
 							</c:if>
 						</div>
 						<div class="textGame">

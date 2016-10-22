@@ -16,7 +16,6 @@ public class UserDTO {
 	private static final int MIN_PASSWORD_LENGTH = 6;
 	private static final int MAX_LENGTH = 12;
 
-	@Null
 	private Long id;
 
 	@NotBlank

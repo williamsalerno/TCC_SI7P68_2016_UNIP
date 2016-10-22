@@ -8,11 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.timetrialfactory.maestro.assembler.GameAssembler;
-import br.com.timetrialfactory.maestro.assembler.UserAssembler;
+import br.com.timetrialfactory.maestro.assembler.PurchaseAssembler;
 import br.com.timetrialfactory.maestro.daos.PurchaseDAO;
+import br.com.timetrialfactory.maestro.dto.PurchaseDTO;
 import br.com.timetrialfactory.maestro.models.LoggedUser;
-import br.com.timetrialfactory.maestro.models.Purchase;
 import br.com.timetrialfactory.maestro.models.ShoppingCart;
 import br.com.timetrialfactory.maestro.models.ShoppingItem;
 import br.com.timetrialfactory.maestro.models.enums.PurchaseSituationType;
@@ -25,48 +24,43 @@ public class PurchaseServiceImpl implements PurchaseService {
 
 	@Autowired
 	private PurchaseDAO dao;
-
+	
 	@Autowired
-	private GameAssembler gameAssembler;
-
-	@Autowired
-	private UserAssembler userAssembler;
+	private PurchaseAssembler assembler;
 
 	@Override
 	public void savePurchase(ShoppingCart cart, LoggedUser userWeb) {
 		if (userWeb.isLogged() && cart != null) {
-			Purchase purchase = new Purchase();
+			PurchaseDTO purchase = new PurchaseDTO();
 			for (ShoppingItem items : cart.getItems()) {
-				purchase.setGame(gameAssembler.toEntity(items.getGame()));
+				purchase.setGame(items.getGame());
 				if (items.getGame() != null) {
 					purchase.setPrice(items.getGame().getPrice());
 				}
 				purchase.setPurchaseDate(now());
-				purchase.setUser(userAssembler.toEntity(userWeb.getLoggedUser()));
+				purchase.setUser(userWeb.getLoggedUser());
 				if (purchase.getPrice() != null) {
 					if (purchase.getPrice().equals(free)) {
-						purchase.setPurchaseSituation(PurchaseSituationType.CONFIRMADO);
+						purchase.setPurchaseSituation(PurchaseSituationType.CONFIRMADO.getSituacao());
 					} else {
-						purchase.setPurchaseSituation(PurchaseSituationType.PROCESSANDO);
+						purchase.setPurchaseSituation(PurchaseSituationType.PROCESSANDO.getSituacao());
 					}
 				}
-				dao.savePurchase(purchase);
+				dao.savePurchase(assembler.toEntity(purchase));
 			}
 		}
 	}
 
 	@Override
-	public void updatePurchase(Purchase purchase) {
+	public void updatePurchase(PurchaseDTO purchase) {
 		if (purchase != null) {
-			dao.updatePurchase(purchase);
+			dao.updatePurchase(assembler.toEntity(purchase));
 		}
 	}
 
 	@Override
-	public Purchase findById(Long id) {
-		Purchase purchase = new Purchase();
-		purchase = dao.findById(id);
-		return purchase;
+	public PurchaseDTO findById(Long id) {
+		return assembler.toObject(dao.findById(id));
 	}
 
 }

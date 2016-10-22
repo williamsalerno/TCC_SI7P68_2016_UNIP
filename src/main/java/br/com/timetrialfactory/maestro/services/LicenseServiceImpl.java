@@ -4,15 +4,15 @@ import static java.util.UUID.randomUUID;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.timetrialfactory.maestro.assembler.GameAssembler;
-import br.com.timetrialfactory.maestro.assembler.UserAssembler;
+import br.com.timetrialfactory.maestro.assembler.LicenseAssembler;
 import br.com.timetrialfactory.maestro.daos.LicenseDAO;
-import br.com.timetrialfactory.maestro.models.License;
+import br.com.timetrialfactory.maestro.dto.LicenseDTO;
 import br.com.timetrialfactory.maestro.models.LoggedUser;
 import br.com.timetrialfactory.maestro.models.ShoppingItem;
 
@@ -26,32 +26,29 @@ public class LicenseServiceImpl implements LicenseService {
 	private LicenseDAO dao;
 
 	@Autowired
-	private GameAssembler gameAssembler;
-
-	@Autowired
-	private UserAssembler userAssembler;
+	private LicenseAssembler assembler;
 
 	@Override
 	public void saveLicense(LoggedUser user, List<ShoppingItem> games) {
 		if (user != null && games != null) {
 			for (ShoppingItem gameInCart : games) {
-				License license = new License();
+				LicenseDTO license = new LicenseDTO();
 				license.setCode(new LicenseGenerator().generateLicense());
-				license.setUser(userAssembler.toEntity(user.getLoggedUser()));
-				license.setGame(gameAssembler.toEntity(gameInCart.getGame()));
+				license.setUser(user.getLoggedUser());
+				license.setGame(gameInCart.getGame());
 				if (gameInCart.getGame().getPrice().equals(free)) {
 					license.setCheckedCode(true);
 				} else {
 					license.setCheckedCode(false);
 				}
-				dao.saveLicense(license);
+				dao.saveLicense(assembler.toEntity(license));
 			}
 		}
 	}
 
 	@Override
-	public List<License> listUserLicenses(Long userId) {
-		return dao.listLicenses(userId);
+	public Set<LicenseDTO> listUserLicenses(Long userId) {
+		return assembler.toObjectList(dao.listLicenses(userId));
 	}
 
 	private final class LicenseGenerator {

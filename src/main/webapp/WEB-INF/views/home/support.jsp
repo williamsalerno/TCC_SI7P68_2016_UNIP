@@ -42,14 +42,14 @@
 							<a data-toggle="collapse" data-parent="#accordion" href="#forgotPassword"><fmt:message key="forgotPassword" /></a>
 						</h3>
 					</div>
-					<div id="forgotPassword" class="left collapse">
-						<form:form action="/support/forgotMyPassword/recover" commandName="user" class="form-horizontal" method="post">
+					<div id="forgotPassword" class="left collapse in">
+						<form action="/support/forgotMyPassword/recover" class="form-horizontal" method="post">
+							<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
 							<fmt:message var="phUsername" key="placeholder.username" />
-							<form:input type="text" class="form-support" path="login" placeholder="${phUsername }" required="required" />
+							<input type="text" class="form-support" name="login" placeholder="${phUsername }" required="required" />
 							<fmt:message var="phEmail" key="placeholder.email" />
-							<form:input type="text" class="form-support" path="email" placeholder="${phEmail }" required="required" />
-							<input name="submit" type="submit" class="btn btn-default" value="<fmt:message key="btn.recover" />" />
-						</form:form>
+							<input type="text" class="form-support" name="email" placeholder="${phEmail }" required="required" /> <input name="submit" type="submit" class="btn btn-default" value="<fmt:message key="btn.recover" />" />
+						</form>
 						<c:if test="${passwordRecover }">
 							<div class="alert alert-info infoRecoverPassword">
 								<fmt:message var="messageRecoverPassword" key="message.recoverPassword" />
@@ -75,7 +75,7 @@
 							<a data-toggle="collapse" data-parent="#accordion" href="#contact"><fmt:message key="contact" /></a>
 						</h3>
 					</div>
-					<div id="contact" class="center collapse">
+					<div id="contact" class="center collapse in">
 						<form:form action="/support/message" class="form-horizontal" method="post">
 							<fmt:message var="phSender" key="placeholder.sender" />
 							<input type="text" class="form-support" name="sender" placeholder="${phSender }" required="required" />

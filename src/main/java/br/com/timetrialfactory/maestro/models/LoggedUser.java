@@ -49,7 +49,7 @@ public class LoggedUser {
 	}
 
 	public boolean isAdmin() {
-		return logged != null && logged.getRole().equals(ADMIN);
+		return logged != null && logged.getRole().equals(ADMIN.name());
 	}
 
 	public void logout() {

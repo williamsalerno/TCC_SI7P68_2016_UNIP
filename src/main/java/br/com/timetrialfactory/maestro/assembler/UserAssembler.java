@@ -2,15 +2,19 @@ package br.com.timetrialfactory.maestro.assembler;
 
 import static br.com.timetrialfactory.maestro.models.enums.RoleType.valueOf;
 
+import org.springframework.stereotype.Component;
+
 import br.com.timetrialfactory.maestro.dto.UserDTO;
 import br.com.timetrialfactory.maestro.models.User;
 
+@Component
 public class UserAssembler implements Assembler<UserDTO, User> {
 
 	@Override
 	public UserDTO toObject(User entity) {
-		UserDTO object = new UserDTO();
+		UserDTO object = null;
 		if (entity != null) {
+			object = new UserDTO();
 			object.setId(entity.getId());
 			object.setFirstName(entity.getFirstName());
 			object.setLastName(entity.getLastName());
@@ -29,8 +33,9 @@ public class UserAssembler implements Assembler<UserDTO, User> {
 
 	@Override
 	public User toEntity(UserDTO object) {
-		User entity = new User();
+		User entity = null;
 		if (object != null) {
+			entity = new User();
 			entity.setId(object.getId());
 			entity.setFirstName(object.getFirstName());
 			entity.setLastName(object.getLastName());
@@ -41,8 +46,8 @@ public class UserAssembler implements Assembler<UserDTO, User> {
 			if (object.getRole() != null) {
 				entity.setRole(valueOf(object.getRole()));
 			}
-			object.setActive(entity.getActive());
-			object.setActivationCode(entity.getActivationCode());
+			entity.setActive(object.isActive());
+			entity.setActivationCode(object.getActivationCode());
 		}
 		return entity;
 	}

@@ -5,14 +5,12 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.timetrialfactory.maestro.dto.UserDTO;
 import br.com.timetrialfactory.maestro.email.EmailSender;
-import br.com.timetrialfactory.maestro.models.User;
 import br.com.timetrialfactory.maestro.services.UserService;
 
 @Controller
@@ -28,14 +26,13 @@ public class SupportController {
 	@RequestMapping(method = GET)
 	public ModelAndView support() {
 		ModelAndView modelAndView = new ModelAndView("home/support");
-		modelAndView.addObject("user", new User());
 		return modelAndView;
 	}
 
 	@RequestMapping(method = POST, value = "/forgotMyPassword/recover")
-	public ModelAndView recoverPassword(@ModelAttribute UserDTO user) {
+	public ModelAndView recoverPassword(@RequestParam String login, @RequestParam String email) {
 		ModelAndView modelAndView = new ModelAndView("home/support");
-		UserDTO userToFind = userService.findByEmailAndUsername(user.getEmail(), user.getLogin());
+		UserDTO userToFind = userService.findByEmailAndUsername(email, login);
 		if (userToFind == null) {
 			modelAndView.addObject("recoverError", true);
 			return modelAndView;
@@ -52,7 +49,7 @@ public class SupportController {
 			@RequestParam String message) {
 		ModelAndView modelAndView = new ModelAndView("home/support");
 		emailSender.sendMessage(sender, subject, message);
-		modelAndView.addObject("user", new User());
+		modelAndView.addObject("user", new UserDTO());
 		modelAndView.addObject("messageSuccess", true);
 		return modelAndView;
 	}

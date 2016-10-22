@@ -68,7 +68,7 @@ public class ShoppingCartController {
 			licenseService.saveLicense(loggedUser, shoppingCart.getItems());
 			for (ShoppingItem item : shoppingCart.getItems()) {
 				LicenseDTO dto = new LicenseDTO();
-				dto.setGameId(item.getGame().getId());
+				dto.setGame(item.getGame());
 				loggedUser.getLicenses().add(dto);
 			}
 			List<ShoppingItem> items = shoppingCart.getItems();

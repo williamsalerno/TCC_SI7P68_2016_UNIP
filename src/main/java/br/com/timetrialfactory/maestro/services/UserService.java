@@ -1,6 +1,7 @@
 package br.com.timetrialfactory.maestro.services;
 
 import br.com.timetrialfactory.maestro.dto.UserDTO;
+import br.com.timetrialfactory.maestro.models.User;
 
 public interface UserService {
 
@@ -8,7 +9,7 @@ public interface UserService {
 
 	boolean saveUser(UserDTO user);
 
-	void updateUser(UserDTO user);
+	void updateUser(User user);
 
 	UserDTO loadUser(String login, String password);
 

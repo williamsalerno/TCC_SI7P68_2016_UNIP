@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.timetrialfactory.maestro.assembler.UserAssembler;
 import br.com.timetrialfactory.maestro.dto.UserDTO;
-import br.com.timetrialfactory.maestro.email.EmailSender;
 import br.com.timetrialfactory.maestro.models.embeddables.Address;
 import br.com.timetrialfactory.maestro.services.UserService;
 import br.com.timetrialfactory.maestro.validation.AddressValidator;
@@ -32,7 +32,7 @@ public class VisitorController {
 	private UserService service;
 
 	@Autowired
-	private EmailSender emailSender;
+	private UserAssembler userAssembler;
 
 	@InitBinder("address")
 	protected void initAddressBinder(WebDataBinder binder) {
@@ -52,7 +52,6 @@ public class VisitorController {
 			modelAndView.addObject("settedCountry", user.getAddress().getCountry().getName());
 			return modelAndView;
 		} else {
-			emailSender.sendConfirmationEmail(user);
 			attr.addFlashAttribute("activate", true);
 			return new ModelAndView("redirect:/login");
 		}
@@ -85,7 +84,7 @@ public class VisitorController {
 		}
 		if (user != null) {
 			user.setActive(true);
-			service.updateUser(user);
+			service.updateUser(userAssembler.toEntity(user));
 			attr.addFlashAttribute("success", true);
 		}
 		return new ModelAndView("redirect:/login");

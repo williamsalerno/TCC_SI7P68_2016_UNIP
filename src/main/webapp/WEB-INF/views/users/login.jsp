@@ -7,16 +7,16 @@
 			<div class="escondido">
 				<h2>Login</h2>
 				<c:url var="login_url" value="/login" />
-				<form:form action="${login_url }" modelAttribute="user" class="form-horizontal" method="post">
+				<form:form action="${login_url }" class="form-horizontal" method="post">
 					<div class="input-group">
 						<fmt:message var="phUsername" key="placeholder.username" />
 						<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span></span>
-						<form:input type="text" class="form-control" path="login" placeholder="${phUsername }" required="required" />
+						<input type="text" class="form-control" name="login" placeholder="${phUsername }" required="required" />
 					</div>
 					<div class="input-group">
 						<fmt:message var="phPassword" key="placeholder.password" />
 						<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></span>
-						<form:input type="password" class="form-control" path="password" placeholder="${phPassword }" required="required" />
+						<input type="password" class="form-control" name="password" placeholder="${phPassword }" required="required" />
 					</div>
 					<div class="btnForm" style="padding-bottom: 30px;">
 						<input name="submit" type="submit" class="btn btn-default" value="<fmt:message key="btn.enter" />" />

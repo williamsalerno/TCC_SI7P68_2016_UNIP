@@ -1,12 +1,16 @@
 package br.com.timetrialfactory.maestro.dto;
 
+import javax.validation.Valid;
+
 public class LicenseDTO {
 
 	private String code;
 
-	private long userId;
+	@Valid
+	private GameDTO game;
 
-	private long gameId;
+	@Valid
+	private UserDTO user;
 
 	private boolean checkedCode;
 
@@ -18,23 +22,23 @@ public class LicenseDTO {
 		this.code = code;
 	}
 
-	public long getUserId() {
-		return userId;
+	public GameDTO getGame() {
+		return game;
 	}
 
-	public void setUserId(long userId) {
-		this.userId = userId;
+	public void setGame(GameDTO game) {
+		this.game = game;
 	}
 
-	public long getGameId() {
-		return gameId;
+	public UserDTO getUser() {
+		return user;
 	}
 
-	public void setGameId(long gameId) {
-		this.gameId = gameId;
+	public void setUser(UserDTO user) {
+		this.user = user;
 	}
 
-	public boolean isCheckedCode() {
+	public boolean getCheckedCode() {
 		return checkedCode;
 	}
 
