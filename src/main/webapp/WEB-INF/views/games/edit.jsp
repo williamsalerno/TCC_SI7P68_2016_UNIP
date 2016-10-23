@@ -2,34 +2,44 @@
 <%@ include file="/WEB-INF/jspf/header.jspf"%>
 <div id="container">
 	<div class="content">
-		<c:url var="editGame_url" value="/games/${game.id }" />
-		<c:url var="deleteGame_url" value="/games/delete/${game.id }" />
-		<form:form commandName="game" action="${editGame_url }" method="post">
-			<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
-			<img src="<c:url value="/games/${game.id }/image"/>" width="100" height="100"></img>
-			<div class="input-group">
-				<label for="title">Título:</label>
-				<form:input type="text" path="title" />
-				<strong><form:errors path="title" cssClass="message-error" /> </strong>
+		<section class="login">
+			<c:url var="editGame_url" value="/games/${game.id }" />
+			<c:url var="deleteGame_url" value="/games/delete/${game.id }" />
+			<form:form class="form-horizontal updateInfo" commandName="game" action="${editGame_url }" method="post">
+				<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
+				<img src="<c:url value="/games/${game.id }/image"/>" width="100" height="100"></img>
+				<div class="input-group">
+					<span><fmt:message key="title" /></span>
+					<form:input class="form-control" type="text" minlength="5" path="title" />
+					<strong> <form:errors path="title" cssClass="message-error" /></strong>
+				</div>
+				<div class="input-group">
+					<span><fmt:message key="price" /></span>
+					<form:input class="form-control" path="price" />
+					<strong> <form:errors path="price" cssClass="message-error" /></strong>
+				</div>
+				<div class="input-group">
+					<span><fmt:message key="description" /></span>
+					<form:textarea class="form-control" path="description" rows="5" cols="20" />
+					<strong> <form:errors path="description" cssClass="message-error" /></strong>
+				</div>
+				<div class="btnForm">
+					<button class="btn btn-default" type="submit">Alterar</button>
+				</div>
+			</form:form>
+			<div style="display: inline;">
+				<form:form action="${deleteGame_url }" commandName="game" method="post">
+					<div class="btnForm">
+						<button class="btnForm btn btn-default" type="submit">Apagar</button>
+					</div>
+				</form:form>
+				<form action="<c:url value="/games/list"/>" method="get">
+					<div class="btnForm">
+						<button class="btnForm btn btn-default" type="submit">Voltar</button>
+					</div>
+				</form>
 			</div>
-			<div class="input-group">
-				<label for="price">Preço:</label>
-				<form:input type="text" path="price" />
-				<strong><form:errors path="price" cssClass="message-error" /> </strong>
-			</div>
-			<div class="input-group">
-				<label for="description">Descrição:</label>
-				<form:textarea type="text" path="description" />
-				<strong><form:errors path="description" cssClass="message-error" /> </strong>
-			</div>
-			<button type="submit">Alterar</button>
-		</form:form>
-		<form:form action="${deleteGame_url }" commandName="game" method="post">
-			<button type="submit">Apagar</button>
-		</form:form>
-		<form action="<c:url value="/games/list"/>" method="get">
-			<button type="submit">Voltar</button>
-		</form>
+		</section>
 	</div>
 </div>
 <%@ include file="/WEB-INF/jspf/footer.jspf"%>
