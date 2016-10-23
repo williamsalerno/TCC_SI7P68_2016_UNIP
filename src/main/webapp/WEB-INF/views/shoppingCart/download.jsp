@@ -14,9 +14,11 @@
 					</p>
 				</div>
 				<div>
-					<c:forEach items="${downloadLinks }" var="links">
-						<div class="btnCart">
-							<a class="link btn btn-default" href="${links.game.downloadLink }">Download </a>
+					<c:forEach items="${myGames }" var="myGame">
+						<div class="myGames">
+							<img src="<c:url value="/img/uploaded/${myGame.game.id}_min.png"/>" width="100" height="100" />
+							<h4>${myGame.game.title }</h4>
+							<a class="link btn btn-default" href="${myGame.game.downloadLink }">Download </a>
 						</div>
 					</c:forEach>
 				</div>

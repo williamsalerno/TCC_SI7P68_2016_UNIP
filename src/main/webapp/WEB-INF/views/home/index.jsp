@@ -9,7 +9,7 @@
 						<img src="<c:url value="/img/uploaded/${game.id}_thumb.png"/>" width=410px height=410px alt="Disruption screen image" data-holder-rendered="true">
 						<div class="caption">
 							<h3>${game.title }</h3>
-							<p>${game.description }</p>
+							<p>Baseado em clássicos de terror como Resident Evil, Silent Hill e Alone in the Dark, Disruption foi feito por um e para todos os amantes de jogos de terror.</p>
 							<p>
 								<a id="moreDetails" href="/games/list?id=${game.id}" class="btn btn-primary" role="button"><fmt:message key="btn.details" /></a>
 							</p>

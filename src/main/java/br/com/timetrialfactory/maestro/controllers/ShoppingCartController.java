@@ -2,6 +2,7 @@ package br.com.timetrialfactory.maestro.controllers;
 
 import static org.springframework.web.context.WebApplicationContext.SCOPE_REQUEST;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -66,19 +67,28 @@ public class ShoppingCartController {
 			ModelAndView modelAndView = new ModelAndView("shoppingCart/download");
 			purchaseService.savePurchase(shoppingCart, loggedUser);
 			licenseService.saveLicense(loggedUser, shoppingCart.getItems());
-			for (ShoppingItem item : shoppingCart.getItems()) {
-				LicenseDTO dto = new LicenseDTO();
-				dto.setGame(item.getGame());
-				loggedUser.getLicenses().add(dto);
-			}
-			List<ShoppingItem> items = shoppingCart.getItems();
-			modelAndView.addObject("downloadLinks", items);
-			shoppingCart.getItems().clear();
+			modelAndView.addObject("myGames", this.purchasedGames(loggedUser, shoppingCart.getItems()));
+			this.cleanShoppingCart();
 			return modelAndView;
 		} else {
 			return new ModelAndView("redirect:/logout");
 		}
 
+	}
+
+	private List<ShoppingItem> purchasedGames(LoggedUser logged, List<ShoppingItem> itemList) {
+		List<ShoppingItem> items = new ArrayList<ShoppingItem>();
+		for (ShoppingItem item : itemList) {
+			LicenseDTO dto = new LicenseDTO();
+			dto.setGame(item.getGame());
+			logged.getLicenses().add(dto);
+			items.add(item);
+		}
+		return items;
+	}
+
+	private void cleanShoppingCart() {
+		shoppingCart.getItems().clear();
 	}
 
 	@RequestMapping(method = RequestMethod.POST)

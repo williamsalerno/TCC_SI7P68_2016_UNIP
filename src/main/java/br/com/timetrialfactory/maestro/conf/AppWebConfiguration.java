@@ -32,7 +32,6 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import com.google.common.cache.CacheBuilder;
 
-import br.com.timetrialfactory.maestro.apis.paypal.PayPalCall;
 import br.com.timetrialfactory.maestro.assembler.GameAssembler;
 import br.com.timetrialfactory.maestro.assembler.LicenseAssembler;
 import br.com.timetrialfactory.maestro.assembler.PurchaseAssembler;
@@ -56,7 +55,6 @@ import br.com.timetrialfactory.maestro.services.GameServiceImpl;
 import br.com.timetrialfactory.maestro.services.LicenseServiceImpl;
 import br.com.timetrialfactory.maestro.services.PurchaseServiceImpl;
 import br.com.timetrialfactory.maestro.services.UserServiceImpl;
-import br.com.timetrialfactory.maestro.validation.UserValidator;
 import br.com.timetrialfactory.maestro.viewresolver.JsonViewResolver;
 
 @Configuration
@@ -65,9 +63,9 @@ import br.com.timetrialfactory.maestro.viewresolver.JsonViewResolver;
 @ComponentScan(basePackageClasses = { HomeController.class, GameDAOImpl.class, GameServiceImpl.class,
 		GameAssembler.class, UserServiceImpl.class, UserDAOImpl.class, PurchaseDAOImpl.class, PurchaseServiceImpl.class,
 		LicenseDAOImpl.class, LicenseAssembler.class, LicenseServiceImpl.class, PurchaseAssembler.class,
-		ShoppingCart.class, ShoppingCartController.class, PayPalCall.class, LoggedUser.class, VisitorController.class,
-		UserValidator.class, UserAssembler.class, AuthenticationController.class, UserController.class,
-		GamesController.class, SupportController.class, EmailSender.class })
+		ShoppingCart.class, ShoppingCartController.class, LoggedUser.class, VisitorController.class,
+		UserAssembler.class, AuthenticationController.class, UserController.class, GamesController.class,
+		SupportController.class, EmailSender.class })
 @Import({ SecurityConfiguration.class })
 public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 

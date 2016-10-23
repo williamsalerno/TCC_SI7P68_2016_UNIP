@@ -14,7 +14,8 @@
 					<div class="myGames">
 						<img src="<c:url value="/img/uploaded/${gamesList.id}_min.png"/>" width="100" height="100" />
 						<h4>${gamesList.title }</h4>
-						<a class="link btn btn-default" href=https://s3.amazonaws.com/timetrialgames/Disruption/Disruption.rar>Download </a>
+						<h4>${gamesList.title }</h4>
+						<a class="link btn btn-default" href="${gamesList.downloadLink }">Download </a>
 					</div>
 				</c:forEach>
 				<div class="btnCart">

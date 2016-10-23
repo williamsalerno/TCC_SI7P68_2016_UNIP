@@ -19,7 +19,7 @@
 			</div>
 			<div class="input-group">
 				<label for="description">Descrição:</label>
-				<form:input type="text" path="description" />
+				<form:textarea type="text" path="description" />
 				<strong><form:errors path="description" cssClass="message-error" /> </strong>
 			</div>
 			<button type="submit">Alterar</button>

@@ -792,6 +792,7 @@ input:focus, select:focus {
 #thumbHome>.thumbnail {
 	display: inline-block;
 	margin: 10px;
+	max-width: 420px;
 }
 
 .list-group-item.active {
