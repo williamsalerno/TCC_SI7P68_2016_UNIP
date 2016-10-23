@@ -14,7 +14,6 @@
 					<div class="myGames">
 						<img src="<c:url value="/img/uploaded/${gamesList.id}_min.png"/>" width="100" height="100" />
 						<h4>${gamesList.title }</h4>
-						<h4>${gamesList.title }</h4>
 						<a class="link btn btn-default" href="${gamesList.downloadLink }">Download </a>
 					</div>
 				</c:forEach>

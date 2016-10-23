@@ -81,7 +81,7 @@ public class UserController {
 			return modelAndView;
 		} else {
 			userService.updateUser(user);
-			LoggedUser loggedUser = new LoggedUser();
+			LoggedUser loggedUser = (LoggedUser) session.getAttribute("loggedUser");
 			loggedUser.login(userService.findById(user.getId()));
 			session.setAttribute("loggedUser", loggedUser);
 			return new ModelAndView("redirect:/user/myProfile");
