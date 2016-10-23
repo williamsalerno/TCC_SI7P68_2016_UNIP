@@ -3,30 +3,32 @@
 <%@ include file="/WEB-INF/jspf/header.jspf"%>
 <div id="container">
 	<div class="content">
-		<section class="cartView">
-			<div class="panel panel-default">
-				<form:form action="newGame" commandName="game" method="post">
-					<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
-					<div class="input-group">
-						<span class=input-group-addon>Título:</span>
-						<form:input class="form-control" type="text" minlength="5" path="title" />
-						<strong> <form:errors path="title" cssClass="message-error" /></strong>
-					</div>
-					<div class="input-group">
-						<span class=input-group-addon>Preço:</span>
-						<form:input class="form-newgame" path="price" />
-						<strong> <form:errors path="price" cssClass="message-error" /></strong>
-					</div>
-					<div class="input-group">
-						<span class=input-group-addon>Descrição:</span>
-						<form:textarea class="form-newgame" path="description" rows="5" cols="20" />
-						<strong> <form:errors path="description" cssClass="message-error" /></strong>
-					</div>
-					<div class="btnForm">
-						<button class="btn btn-default" type="submit">Enviar</button>
-					</div>
-				</form:form>
-			</div>
+		<section class="login">
+			<form:form class="form-horizontal updateInfo" action="newGame" commandName="game" method="post">
+				<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
+				<h2 id="h2Form" style="text-align: center; color: #FFC277">
+					<fmt:message key="newGame" />
+					<br> <small style="font-size: 15px"></small>
+				</h2>
+				<div class="input-group">
+					<span><fmt:message key="title" /></span>
+					<form:input class="form-control" type="text" minlength="5" path="title" />
+					<strong> <form:errors path="title" cssClass="message-error" /></strong>
+				</div>
+				<div class="input-group">
+					<span><fmt:message key="price" /></span>
+					<form:input class="form-control" path="price" />
+					<strong> <form:errors path="price" cssClass="message-error" /></strong>
+				</div>
+				<div class="input-group">
+					<span><fmt:message key="description" /></span>
+					<form:textarea class="form-control" path="description" rows="5" cols="20" />
+					<strong> <form:errors path="description" cssClass="message-error" /></strong>
+				</div>
+				<div class="btnForm">
+					<button class="btn btn-default" type="submit">Enviar</button>
+				</div>
+			</form:form>
 		</section>
 	</div>
 </div>
