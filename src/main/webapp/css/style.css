@@ -1049,6 +1049,10 @@ a.list-group-item .list-group-item-heading, button.list-group-item .list-group-i
 	height: 140px;
 }
 
+#editGame .input-group {
+	display: block;
+}
+
 /** Ids **/
 #li-welcome {
 	padding-top: 14.5px;
