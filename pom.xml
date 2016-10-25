@@ -205,13 +205,6 @@
 			<version>2.0.1</version>
 		</dependency>
 
-		<!-- PayPal -->
-		<dependency>
-			<groupId>com.paypal.sdk</groupId>
-			<artifactId>rest-api-sdk</artifactId>
-			<version>LATEST</version>
-		</dependency>
-
 		<!-- Jackson -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
