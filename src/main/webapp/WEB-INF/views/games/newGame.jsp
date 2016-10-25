@@ -3,7 +3,7 @@
 <%@ include file="/WEB-INF/jspf/header.jspf"%>
 <div id="container">
 	<div class="content">
-		<section class="login">
+		<section class="login" id="editGame">
 			<form:form class="form-horizontal updateInfo" action="newGame" commandName="game" method="post">
 				<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
 				<h2 id="h2Form" style="text-align: center; color: #FFC277">
@@ -25,7 +25,9 @@
 					<form:textarea class="form-control" path="description" rows="5" cols="20" />
 					<strong> <form:errors path="description" cssClass="message-error" /></strong>
 				</div>
-				<div class="btnForm">
+				<div class="btnForm" style="margin-top: 130px;">
+					<a class="btn btn-default" href="<c:url value="/games/list"/>"> <fmt:message key="btn.back" />
+					</a>
 					<button class="btn btn-default" type="submit">Enviar</button>
 				</div>
 			</form:form>
