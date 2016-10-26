@@ -16,7 +16,7 @@ public class EmailSender {
 	public void sendConfirmationEmail(User user) {
 		if (user != null) {
 			SimpleMailMessage email = new SimpleMailMessage();
-			email.setFrom("timetrial.fac@gmail.com");
+			email.setFrom("timetrial.fac@yahoo.com");
 			email.setTo(user.getEmail());
 			email.setSubject("Confirmação de cadastro");
 			email.setText(new StringBuilder().append(user.getFirstName()).append(" ").append(user.getLastName())
@@ -33,7 +33,7 @@ public class EmailSender {
 	public void sendRecoveryPasswordEmail(String username, String emailUser, String password) {
 		if (username != null && emailUser != null && password != null) {
 			SimpleMailMessage email = new SimpleMailMessage();
-			email.setFrom("timetrial.fac@gmail.com");
+			email.setFrom("timetrial.fac@yahoo.com");
 			email.setTo(emailUser);
 			email.setSubject("Recuperação de Senha");
 			email.setText(new StringBuilder().append("Saudações!").append("\n\n")
@@ -47,7 +47,7 @@ public class EmailSender {
 		if (sender != null && subject != null && message != null) {
 			SimpleMailMessage email = new SimpleMailMessage();
 			email.setFrom(sender);
-			email.setTo("timetrial.fac@gmail.com");
+			email.setTo("timetrial.fac@yahoo.com");
 			email.setSubject(subject);
 			email.setText(message);
 			mailer.send(email);

@@ -128,10 +128,10 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 	@Bean
 	public MailSender mailSender() {
 		JavaMailSenderImpl javaMailSenderImpl = new JavaMailSenderImpl();
-		javaMailSenderImpl.setHost("smtp.gmail.com");
+		javaMailSenderImpl.setHost("smtp.mail.yahoo.com");
 		javaMailSenderImpl.setPassword("102938W!ll");
-		javaMailSenderImpl.setPort(587);
-		javaMailSenderImpl.setUsername("timetrial.fac@gmail.com");
+		javaMailSenderImpl.setPort(25);
+		javaMailSenderImpl.setUsername("timetrial.fac@yahoo.com");
 		Properties mailProperties = new Properties();
 		mailProperties.put("mail.smtp.auth", true);
 		mailProperties.put("mail.smtp.starttls.enable", true);
