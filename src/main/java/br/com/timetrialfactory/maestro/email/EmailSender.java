@@ -22,7 +22,7 @@ public class EmailSender {
 			email.setText(new StringBuilder().append(user.getFirstName()).append(" ").append(user.getLastName())
 					.append(", muito prazer!").append("\n\n")
 					.append("Você esta recebendo este e-mail para confirmar seu cadastro no site da TimeTrial Factory. Clique no link abaixo para efetivar a ativação de sua conta.")
-					.append("\n\n").append("http://localhost:8080/newUser?confirmationCode=")
+					.append("\n\n").append("http://http://54.196.184.120:8080/timetrialfactory/newUser?confirmationCode=")
 					.append(user.getActivationCode().toString()).append("\n\n")
 					.append("Esta é uma medida de segurança para garantirmos que o seu e-mail é autêntico. Obrigado e bom divertimento!")
 					.toString());
