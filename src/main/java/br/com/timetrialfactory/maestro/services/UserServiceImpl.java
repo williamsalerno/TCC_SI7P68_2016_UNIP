@@ -1,6 +1,7 @@
 package br.com.timetrialfactory.maestro.services;
 
 import static br.com.timetrialfactory.maestro.models.enums.RoleType.GENERIC;
+import static java.lang.Math.abs;
 import static java.util.UUID.randomUUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,7 @@ public class UserServiceImpl implements UserService {
 		if (user != null) {
 			if (dao.checkUser(user)) {
 				user.setRole(GENERIC);
-				user.setActivationCode(randomUUID().getMostSignificantBits());
+				user.setActivationCode(abs(randomUUID().getMostSignificantBits()));
 				user.setActive(false);
 				dao.saveUser(user);
 				emailSender.sendConfirmationEmail(user);
