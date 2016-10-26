@@ -11,7 +11,7 @@
 							<h3>${game.title }</h3>
 							<p>Baseado em clássicos de terror como Resident Evil, Silent Hill e Alone in the Dark, Disruption foi feito por um e para todos os amantes de jogos de terror.</p>
 							<p>
-								<a id="moreDetails" href="/games/list?id=${game.id}" class="btn btn-primary" role="button"><fmt:message key="btn.details" /></a>
+								<a id="moreDetails" href="<c:url value="/games/list?id=${game.id}"/>" class="btn btn-primary" role="button"><fmt:message key="btn.details" /></a>
 							</p>
 						</div>
 					</div>
