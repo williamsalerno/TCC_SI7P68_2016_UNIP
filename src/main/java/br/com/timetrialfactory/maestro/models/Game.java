@@ -21,7 +21,7 @@ import org.hibernate.validator.constraints.NotBlank;
 @Table(name = "games", catalog = "names")
 public class Game {
 
-	private static final String DOWNLOAD_DISRUPTION = "https://s3.amazonaws.com/timetrialgames/Disruption/Disruption.rar";
+	private static final String DOWNLOAD_DISRUPTION = "https://s3-sa-east-1.amazonaws.com/timetrial/Disruption/Disruption.rar";
 	private static final byte MIN_LENGTH = 5;
 	private static final short MAX_DESCRIPTION_LENGTH = 900;
 
