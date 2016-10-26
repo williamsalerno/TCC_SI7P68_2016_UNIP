@@ -9,14 +9,18 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "licenses", catalog = "licenses")
 public class License {
 
+	private static final byte CODE_LENGTH = 36;
+
 	@Id
-	@Column(name = "id", nullable = false, unique = true, updatable = false)
 	@NotNull
+	@Size(min = CODE_LENGTH, max = CODE_LENGTH)
+	@Column(name = "id", nullable = false, unique = true, updatable = false)
 	private String code;
 
 	@ManyToOne

@@ -8,6 +8,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -18,21 +19,24 @@ import br.com.timetrialfactory.maestro.models.enums.Country;
 @Embeddable
 public class Address {
 
+	private static final byte CEP_LENGTH = 8;
+
 	@Enumerated(EnumType.STRING)
 	@NotNull
 	@Column(name = "address_Country", nullable = false)
 	private Country country;
 
-	@Column(name = "address_State")
 	@Pattern(regexp = "[A-Za-zÀ-ú ]+")
+	@Column(name = "address_State")
 	private String state;
 
-	@Column(name = "address_City")
 	@Pattern(regexp = "[A-Za-zÀ-ú ]+")
+	@Column(name = "address_City")
 	private String city;
 
-	@Column(name = "address_Cep")
 	@Pattern(regexp = "\\d{8,8}")
+	@Size(min = CEP_LENGTH, max = CEP_LENGTH)
+	@Column(name = "address_Cep")
 	private String cep;
 
 	public Country getCountry() {

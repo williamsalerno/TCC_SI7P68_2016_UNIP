@@ -13,7 +13,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.Valid;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import br.com.timetrialfactory.maestro.models.enums.PurchaseSituationType;
 
@@ -22,7 +25,7 @@ import br.com.timetrialfactory.maestro.models.enums.PurchaseSituationType;
 public class Purchase implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	
 	@ManyToOne
 	@JoinColumn(name = "game_id")
 	@Id
@@ -36,6 +39,8 @@ public class Purchase implements Serializable {
 	private User user;
 
 	@NotNull
+	@Min(value = 0)
+	@Digits(integer = 3, fraction = 2)
 	@Column(name = "game_price", nullable = false)
 	private BigDecimal price;
 

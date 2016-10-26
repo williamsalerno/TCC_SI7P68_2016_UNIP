@@ -29,9 +29,10 @@ import br.com.timetrialfactory.maestro.models.enums.RoleType;
 @Table(name = "users", catalog = "users")
 public class User {
 
-	private static final int MIN_LOGIN_LENGTH = 3;
-	private static final int MIN_PASSWORD_LENGTH = 6;
-	private static final int MAX_LENGTH = 12;
+	private static final byte MIN_LOGIN_LENGTH = 3;
+	private static final byte MIN_PASSWORD_LENGTH = 6;
+	private static final byte MAX_LENGTH = 12;
+	private static final byte MAX_EMAIL_LENGTH = 100;
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
@@ -62,6 +63,7 @@ public class User {
 
 	@NotBlank
 	@Email(regexp = "^((?!_)(?!\\.))[a-z0-9._]+[a-z0-9]+@{1}\\w+\\.com{1}(\\.br)*$")
+	@Size(max = MAX_EMAIL_LENGTH)
 	@Column(name = "email", nullable = false, unique = true)
 	private String email;
 
@@ -76,7 +78,7 @@ public class User {
 	@Column(name = "active", nullable = false)
 	private Boolean active = FALSE;
 
-	@Column(name = "activationCode")
+	@Column(name = "activationCode", nullable = false)
 	private Long activationCode;
 
 	public Long getId() {

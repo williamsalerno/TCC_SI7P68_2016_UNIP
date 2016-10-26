@@ -13,8 +13,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
@@ -22,6 +22,8 @@ import org.hibernate.validator.constraints.NotBlank;
 public class Game {
 
 	private static final String DOWNLOAD_DISRUPTION = "https://s3.amazonaws.com/timetrialgames/Disruption/Disruption.rar";
+	private static final byte MIN_LENGTH = 5;
+	private static final short MAX_DESCRIPTION_LENGTH = 900;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,7 +31,7 @@ public class Game {
 	private Long id;
 
 	@NotBlank
-	@Length(min = 5)
+	@Size(min = MIN_LENGTH)
 	@Column(name = "title", nullable = false, unique = true)
 	private String title;
 
@@ -40,6 +42,7 @@ public class Game {
 	private BigDecimal price;
 
 	@NotBlank
+	@Size(min = MIN_LENGTH, max = MAX_DESCRIPTION_LENGTH)
 	@Column(name = "description", nullable = false)
 	private String description;
 
