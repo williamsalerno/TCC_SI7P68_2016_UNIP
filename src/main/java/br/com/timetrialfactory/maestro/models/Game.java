@@ -89,5 +89,5 @@ public class Game {
 	public void setDownloadLink(String downloadLink) {
 		this.downloadLink = downloadLink;
 	}
-
+	
 }

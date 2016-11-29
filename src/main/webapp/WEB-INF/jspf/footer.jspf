@@ -15,11 +15,11 @@
 						</a>
 					</div>
 					<div class="col-xs-4 col-md-4">
-						<a href="#"> <img class="imgFooter" src="<c:url value="/img/facebook.png"/>" alt="facebook/timetrialfac">
+						<a href="https://www.facebook.com/TimeTrialFactory/"> <img class="imgFooter" src="<c:url value="/img/facebook.png"/>" alt="facebook/timetrialfac">
 						</a>
 					</div>
 					<div class="col-xs-4 col-md-4">
-						<a href="#"> <img class="imgFooter" src="<c:url value="/img/twitter.png"/>" alt="twitter/timetrialfac">
+						<a href="https://twitter.com/TimeTrialFac"> <img class="imgFooter" src="<c:url value="/img/twitter.png"/>" alt="twitter/timetrialfac">
 						</a>
 					</div>
 				</div>
